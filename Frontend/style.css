@@ -30,7 +30,7 @@ header {
   padding: 5px 10px;
   position: relative;
   overflow: hidden;
-  margin-right: 20px
+  margin-right: 20px;
 }
 
 /* Shining animation using a pseudo-element */
@@ -85,7 +85,22 @@ header {
 /* Hover effect */
 .nav-links a:hover {
   color: #000;
-  font-weight:800;
+  /* avoid changing font-weight here to prevent layout shifts */
+}
+
+/* Prevent nav items from wrapping and avoid layout shifts on click/focus
+   These rules are intentionally specific so they override other page CSS files */
+header nav .nav-links {
+  flex-wrap: nowrap;
+}
+
+header nav .nav-links li {
+  white-space: nowrap;
+}
+
+header nav .nav-links a {
+  /* set a stable weight so hover/focus doesn't change element width */
+  font-weight: 600;
 }
 
 /* ---- Responsive design ---- */
@@ -268,7 +283,7 @@ header {
   font-size: 35px;
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
-  color: darkblack /* Copper tone */
+  color: #000; /* Copper tone replaced with black fallback */
   margin-bottom: 50px;
   letter-spacing: 4px;
   text-shadow: 0 0 0px rgba(184, 115, 51, 0.3);
@@ -411,10 +426,10 @@ header {
 
 .review-text {
   font-size: 23px;
-  font-style: ;
+  font-style: normal;
   margin-bottom: 10px;
-  color:black;
-  font-weight:500;
+  color: #000;
+  font-weight: 500;
 }
 
 .review-author {
