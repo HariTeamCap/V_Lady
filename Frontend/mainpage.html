@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>V Lady</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="logo">V LADY</div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Cart</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="welcome-banner">
+  <p>WELCOME TO OUR NEWLY LAUNCHED ONLINE STORE!</p>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>V Lady</title>
+    <!-- Keep original stylesheet plus product/contact specific stylesheets -->
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="products.css" />
+    <link rel="stylesheet" href="contact.css" />
+  </head>
+  <body>
+    <!-- Unified header with anchor navigation -->
+    <header>
+      <div class="logo">V LADY</div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#featured">Featured</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Home / Banner Section -->
+    <main id="home">
+      <div class="welcome-banner">
+        <p>WELCOME TO OUR NEWLY LAUNCHED ONLINE STORE!</p>
+      </div>
+
+      <section class="banner">
+        <img src="https://images.unsplash.com/photo-1593032457861-d6d113c789b0?auto=format&fit=crop&w=1200&q=80" alt="Banner Image" />
+        <button class="shop-now-btn" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Shop Now</button>
+      </section>
+
+      <!-- Category bar -->
+      <section class="category-bar">
+        <div class="category-item">
+          <img src="https://img.icons8.com/ios-filled/100/000000/handbag.png" alt="Handbag" />
+          <p>Handbags</p>
+        </div>
+        <div class="category-item">
+          <img src="https://img.icons8.com/ios-filled/100/000000/clutch-bag.png" alt="Clutch" />
+          <p>Clutches</p>
+        </div>
+        <div class="category-item">
+          <img src="https://img.icons8.com/ios-filled/100/000000/sling-bag.png" alt="Sling" />
+          <p>Candy Bags</p>
+        </div>
+        <div class="category-item">
+          <img src="https://img.icons8.com/ios-filled/100/000000/tote-bag.png" alt="Tote" />
+          <p>Pie Bags</p>
+        </div>
+        <div class="category-item">
+          <img src="https://img.icons8.com/ios-filled/100/000000/backpack.png" alt="Backpack" />
+          <p>All Bags</p>
+        </div>
+      </section>
+
+      <!-- Featured products (kept id for anchor) -->
+      <section class="featured-products" id="featured">
+        <h2>FEATURED PRODUCTS</h2>
+        <div class="product-container">
+          <div class="product-card">
+            <a href="product1.html"><img src="https://via.placeholder.com/300x300?text=Bag+1" alt="Bag 1" /></a>
+            <h3>Elegant Leather Bag</h3>
+            <p>₹999</p>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+
+          <div class="product-card">
+            <a href="product2.html"><img src="https://via.placeholder.com/300x300?text=Bag+2" alt="Bag 2" /></a>
+            <h3>Royal Clutch</h3>
+            <p>₹3120</p>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+
+          <div class="product-card">
+            <a href="product3.html"><img src="https://via.placeholder.com/300x300?text=Bag+3" alt="Bag 3" /></a>
+            <h3>Luxury Handbag</h3>
+            <p>₹4140</p>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+
+          <div class="product-card">
+            <a href="product4.html"><img src="https://via.placeholder.com/300x300?text=Bag+4" alt="Bag 4" /></a>
+            <h3>Classic Purse</h3>
+            <p>₹5110</p>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+      </section>
+
+      <div class="separator-line"></div>
+
+      <!-- Reviews -->
+      <section class="reviews-section">
+        <h2 class="reviews-heading">TRUSTED BY OUR CUSTOMERS</h2>
+        <div class="reviews-slider">
+          <div class="review-box">
+            <p class="review-text">“Absolutely love my Candy Bag! The shine and finish are just perfect.”</p>
+            <h4 class="review-author">- Priya S. <br> ⭐⭐⭐⭐⭐</h4>
+          </div>
+          <div class="review-box">
+            <p class="review-text">“The quality is beyond expectations. Looks like a luxury brand!”</p>
+            <h4 class="review-author">- Ananya K.<br> ⭐⭐⭐⭐⭐</h4>
+          </div>
+          <div class="review-box">
+            <p class="review-text">“Fast delivery and the packaging was stunning. Worth every penny!”</p>
+            <h4 class="review-author">- Rhea M.<br> ⭐⭐⭐⭐⭐</h4>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Products (detailed) section copied from bagcatogories.html -->
+    <section id="products" class="product-showcase">
+      <h2>All Bags</h2>
+
+      <!-- Product Blocks -->
+      <div class="product-block">
+        <div class="product-images">
+          <img src="https://via.placeholder.com/600x600?text=Bag+1+Image+1" class="main-img" alt="Bag 1" />
+          <div class="thumbnails">
+            <img src="https://via.placeholder.com/100x100?text=Bag+1+Image+1" onclick="changeMainImage(this)" />
+            <img src="https://via.placeholder.com/100x100?text=Bag+1+Image+2" onclick="changeMainImage(this)" />
+            <img src="https://via.placeholder.com/100x100?text=Bag+1+Image+3" onclick="changeMainImage(this)" />
+          </div>
+        </div>
+        <div class="product-details">
+          <h3>Bag 1</h3>
+          <p>Premium leather bag perfect for everyday use.</p>
+          <p class="price">99</p>
+          <button class="add-to-cart" onclick="addToCart('Bag 1', 99, 'https://via.placeholder.com/600x600?text=Bag+1+Image+1')">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-block">
+        <div class="product-images">
+          <img src="https://via.placeholder.com/600x600?text=Bag+2+Image+1" class="main-img" alt="Bag 2" />
+          <div class="thumbnails">
+            <img src="https://via.placeholder.com/100x100?text=Bag+2+Image+1" onclick="changeMainImage(this)" />
+            <img src="https://via.placeholder.com/100x100?text=Bag+2+Image+2" onclick="changeMainImage(this)" />
+            <img src="https://via.placeholder.com/100x100?text=Bag+2+Image+3" onclick="changeMainImage(this)" />
+          </div>
+        </div>
+        <div class="product-details">
+          <h3>Bag 2</h3>
+          <p>Elegant and spacious bag for stylish outings.</p>
+          <p class="price">120</p>
+          <button class="add-to-cart" onclick="addToCart('Bag 2', 120, 'https://via.placeholder.com/600x600?text=Bag+2+Image+1')">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-block">
+        <div class="product-images">
+          <img src="https://via.placeholder.com/600x600?text=Bag+3+Image+1" class="main-img" alt="Bag 3" />
+          <div class="thumbnails">
+            <img src="https://via.placeholder.com/100x100?text=Bag+3+Image+1" onclick="changeMainImage(this)" />
+            <img src="https://via.placeholder.com/100x100?text=Bag+3+Image+2" onclick="changeMainImage(this)" />
+            <img src="https://via.placeholder.com/100x100?text=Bag+3+Image+3" onclick="changeMainImage(this)" />
+          </div>
+        </div>
+        <div class="product-details">
+          <h3>Bag 3</h3>
+          <p>Stylish handbag suitable for any occasion.</p>
+          <p class="price">110</p>
+          <button class="add-to-cart" onclick="addToCart('Bag 3', 110, 'https://via.placeholder.com/600x600?text=Bag+3+Image+1')">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-block">
+        <div class="product-images">
+          <img src="https://via.placeholder.com/600x600?text=Bag+4+Image+1" class="main-img" alt="Bag 4" />
+          <div class="thumbnails">
+            <img src="https://via.placeholder.com/100x100?text=Bag+4+Image+1" onclick="changeMainImage(this)" />
+            <img src="https://via.placeholder.com/100x100?text=Bag+4+Image+2" onclick="changeMainImage(this)" />
+            <img src="https://via.placeholder.com/100x100?text=Bag+4+Image+3" onclick="changeMainImage(this)" />
+          </div>
+        </div>
+        <div class="product-details">
+          <h3>Bag 4</h3>
+          <p>Compact and trendy bag for daily use.</p>
+          <p class="price">95</p>
+          <button class="add-to-cart" onclick="addToCart('Bag 4', 95, 'https://via.placeholder.com/600x600?text=Bag+4+Image+1')">Add to Cart</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact section copied from contact.html -->
+    <section id="contact" class="contact-us">
+      <h2>CONTACT US</h2>
+      <p>We would love to hear from you. Please fill out the form below.</p>
+
+      <form action="https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse" method="POST" target="_blank">
+        <input type="text" name="entry.1111111111" placeholder="Your Name" required />
+        <input type="tel" name="entry.2222222222" placeholder="Mobile Number" required />
+        <input type="email" name="entry.3333333333" placeholder="Gmail ID" required />
+        <textarea name="entry.4444444444" placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <p>© 2025 V Lady. All rights reserved.</p>
+    </footer>
+
+    <!-- Scripts: keep original scripts and product helpers if present -->
+    <script src="script.js"></script>
+    <script src="products.js"></script>
+  </body>
+</html>

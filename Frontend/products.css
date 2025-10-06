@@ -1,0 +1,227 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #FFFFFF, #F5F5F5, #EDEDED);
+}
+
+/* Header styling */
+header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between; /* Logo left, nav right */
+  align-items: center;
+  padding: 15px 30px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: linear-gradient(135deg, #FFFFFF, #F5F5F5, #EDEDED); /* Same as page background */
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+/* Logo styling with shining effect */
+.logo {
+  font-size: 26px;
+  font-weight: bold;
+  color: #000;
+  letter-spacing: 2px;
+  font-family: 'Montserrat', sans-serif; 
+  padding: 5px 10px;
+  position: relative;
+  overflow: hidden;
+  margin-right: 20px
+}
+
+/* Shining animation using a pseudo-element */
+.logo::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    140deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  animation: shine 4s infinite;
+}
+
+/* Keyframes for shining */
+@keyframes shine {
+  0% {
+    left: -75%;
+  }
+  50% {
+    left: 125%;
+  }
+  100% {
+    left: 125%;
+  }
+}
+
+/* Navbar styling */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #111;
+  font-size: 15px;
+  font-family: 'Montserrat', sans-serif; 
+  transition: 0.3s ease;
+  font-weight:500;
+}
+
+/* Hover effect */
+.nav-links a:hover {
+  color: #000;
+  font-weight:800;
+}
+
+/* ---- Responsive design ---- */
+@media (max-width: 600px) {
+  header {
+    padding: 12px 20px;
+  }
+
+  .logo {
+    font-size: 30px;
+  }
+
+  .nav-links {
+    gap: 17px;
+  }
+
+  .nav-links a {
+    font-size: 14x;
+  }
+}
+
+/* Product Showcase */
+.product-showcase {
+  margin-top: 120px;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+}
+
+.product-showcase h2 {
+  text-align: center;
+  font-size: 34px;
+  font-weight:700;
+  margin-bottom: 40px;
+}
+
+/* Product block (full width per product) */
+.product-block {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 40px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+/* Product Images */
+.product-images {
+  flex: 1;
+  min-width: 250px;
+}
+
+.product-images .main-img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+.thumbnails {
+  display: flex;
+  gap: 10px;
+}
+
+.thumbnails img {
+  width: 60px;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 2px solid transparent;
+}
+
+.thumbnails img:hover {
+  border-color: #f5a623;
+}
+
+/* Product Details */
+.product-details {
+  flex: 1;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.product-details h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.product-details p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.product-details .price {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.add-to-cart {
+  background-color: black;
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 20px;
+  letter-spacing:0.5px;
+  font-weight:500;
+  cursor: pointer;
+}
+
+.add-to-cart:hover {
+  background-color: darkblack;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .product-block {
+    flex-direction: column;
+  }
+}
+footer {
+  background-color: darkgreen;/* green color */
+  color: #fff;
+  text-align: center;
+  padding: 15px 0;
+  font-size: 16px;
+  margin-top: 600px;
+  position: relative;
+  width: 100%;
+}
+
+footer p {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+}

@@ -1,0 +1,210 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #FFFFFF, #F5F5F5, #EDEDED);
+}
+
+
+/* Header styling */
+header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between; /* Logo left, nav right */
+  align-items: center;
+  padding: 15px 30px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: linear-gradient(135deg, #FFFFFF, #F5F5F5, #EDEDED); /* Same as page background */
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+/* Logo styling with shining effect */
+.logo {
+  font-size: 26px;
+  font-weight: bold;
+  color: #000;
+  letter-spacing: 2px;
+  font-family: 'Montserrat', sans-serif; 
+  padding: 5px 10px;
+  position: relative;
+  overflow: hidden;
+  margin-right: 20px
+}
+
+/* Shining animation using a pseudo-element */
+.logo::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    140deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  animation: shine 4s infinite;
+}
+
+/* Keyframes for shining */
+@keyframes shine {
+  0% {
+    left: -75%;
+  }
+  50% {
+    left: 125%;
+  }
+  100% {
+    left: 125%;
+  }
+}
+
+/* Navbar styling */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #111;
+  font-size: 15px;
+  font-family: 'Montserrat', sans-serif; 
+  transition: 0.3s ease;
+  font-weight:500;
+}
+
+/* Hover effect */
+.nav-links a:hover {
+  color: #000;
+  font-weight:800;
+}
+
+/* ---- Responsive design ---- */
+@media (max-width: 600px) {
+  header {
+    padding: 12px 20px;
+  }
+
+  .logo {
+    font-size: 30px;
+  }
+
+  .nav-links {
+    gap: 17px;
+  }
+
+  .nav-links a {
+    font-size: 14x;
+  }
+}
+/* Contact Us Section */
+.contact-us {
+  max-width: 600px;
+  margin: 150px auto 50px; /* margin-top to avoid fixed header */
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.contact-us h2 {
+  font-size: 38px;
+  margin-bottom: 15px;
+  font-weight:1000
+  letter-spacing:1px;;
+  color: #000;
+}
+
+.contact-us p {
+  font-size: 20px;
+  margin-bottom: 25px;
+  color: #555;
+  font-weight:700;
+  letter-spacing:0.2px;
+}
+
+.contact-us form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contact-us input,
+.contact-us textarea {
+  padding: 12px 15px;
+  font-size: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: 0.3s ease;
+}
+
+.contact-us input:focus,
+.contact-us textarea:focus {
+  border-color: #f5a623;
+  box-shadow: 0 0 5px #f5a623;
+}
+
+.contact-us button {
+  padding: 12px;
+  font-size: 20px;
+  font-weight:400;
+  letter-spacing:0.7px;
+  background-color: black;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.contact-us button:hover {
+  background-color:darkblack;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .contact-us {
+    margin: 120px 20px 50px;
+    padding: 20px;
+  }
+
+  .contact-us h2 {
+    font-size: 24px;
+  }
+}
+.site-footer {
+  background-color: darkgreen; /* green */
+  color: #fff;
+  text-align: center;
+  padding: 10px 1px;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.site-footer p {
+  margin: 1;
+  font-size:16px;
+  line-height:0;
+}
+
+@media screen and (max-width: 590px) {
+  .site-footer {
+    font-size: 19px;
+    height:24px;
+    margin-top:30%;
+    margin-bottom:0px;
+    padding: 12px 10px;
+  }
+}
