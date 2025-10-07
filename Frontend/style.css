@@ -1,222 +1,102 @@
-/* General page styling */
-body {
-  margin: 0;
-  font-family: 'Montserrat', sans-serif; ;
-  background: linear-gradient(135deg, #FFFFFF, #F5F5F5, #EDEDED);; /* Creamish background */
+/* Full stylesheet (cleaned) */
+
+:root{
+  --header-height: 70px;
+  --thin-banner-height: 56px; /* controls marquee height */
 }
 
-/* Header styling */
+/* Complete, cleaned stylesheet for V Lady */
+
+:root {
+  --header-height: 70px;
+  --thin-banner-height: 56px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(135deg, #FFFFFF, #F5F5F5, #EDEDED);
+  color: #111;
+}
+
+/* Header */
 header {
-  width: 100%;
-  display: flex;
-  justify-content: space-between; /* Logo left, nav right */
-  align-items: center;
-  padding: 15px 30px;
+  height: var(--header-height);
   position: fixed;
   top: 0;
   left: 0;
-  background: linear-gradient(135deg, #FFFFFF, #F5F5F5, #EDEDED);; /* Same as page background */
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  background: linear-gradient(135deg, #FFFFFF, #F5F5F5, #EDEDED);
   z-index: 1000;
-  box-sizing: border-box;
 }
 
-/* Logo styling with shining effect */
-.logo {
-  font-size: 26px;
-  font-weight: bold;
-  color: #000;
-  letter-spacing: 2px;
-  font-family: 'Montserrat', sans-serif; 
-  padding: 5px 10px;
-  position: relative;
-  overflow: hidden;
-  margin-right: 20px;
-}
+.logo { font-size: 26px; font-weight: 700; letter-spacing: 2px; padding: 6px 8px; position: relative; }
+.logo .tagline { font-size:12px; font-weight:400; opacity:0.85; margin-top:2px; }
+.logo::after { content: ''; position:absolute; top:0; left:-75%; width:50%; height:100%; background:linear-gradient(140deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%); transform:skewX(-25deg); animation: logo-shine 4s infinite; }
+@keyframes logo-shine { 0% { left:-75%; } 50% { left:125%; } 100% { left:125%; } }
 
-/* Shining animation using a pseudo-element */
-.logo::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -75%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(
-    140deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.6) 50%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  transform: skewX(-25deg);
-  animation: shine 4s infinite;
-}
+.nav-links { list-style:none; display:flex; gap:24px; margin:0; padding:0; }
+.nav-links a { text-decoration:none; color:#111; font-weight:600; }
 
-/* Keyframes for shining */
-@keyframes shine {
-  0% {
-    left: -75%;
-  }
-  50% {
-    left: 125%;
-  }
-  100% {
-    left: 125%;
-  }
-}
+@media (max-width:600px) { .logo { font-size:20px } .nav-links { gap:12px } .nav-links a { font-size:14px } }
 
-/* Navbar styling */
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 25px;
-  margin: 0;
-  padding: 0;
-}
+/* Thin marquee banner */
+.thin-banner { position: fixed; top: var(--header-height); left:0; right:0; height: var(--thin-banner-height); background:#d63384; display:flex; align-items:center; overflow:hidden; z-index:999; }
+.thin-banner .marquee { display:flex; align-items:center; white-space:nowrap; animation: marquee-left 18s linear infinite; padding-left:12px; }
+.thin-banner .marquee span { color:#fff; font-weight:700; font-size:20px; line-height:var(--thin-banner-height); padding: 0 48px; }
+@keyframes marquee-left { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+.thin-banner .marquee:hover { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .thin-banner .marquee { animation: none } }
+@media (max-width:480px) { .thin-banner { height:46px } .thin-banner .marquee span { font-size:15px; padding:0 22px; line-height:46px } }
 
-.nav-links a {
-  text-decoration: none;
-  color: #111;
-  font-size: 15px;
-  font-family: 'Montserrat', sans-serif; 
-  transition: 0.3s ease;
-  font-weight:500;
-}
+/* Welcome banner placed below header + thin-banner */
+.welcome-banner { margin-top: calc(var(--header-height) + var(--thin-banner-height) + 10px); width:100%; background:#000; padding:10px 0; overflow:hidden }
+.welcome-banner p { color:#fff; font-weight:700; font-size:22px; white-space:nowrap; display:inline-block; animation: slide 8s linear infinite }
+@keyframes slide { 0% { transform: translateX(100%) } 100% { transform: translateX(-100%) } }
 
-/* Hover effect */
-.nav-links a:hover {
-  color: #000;
-  /* avoid changing font-weight here to prevent layout shifts */
-}
+/* Hero banner */
+.banner { margin-top: calc(var(--header-height) + var(--thin-banner-height) + 20px); width:100%; height:400px; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg, #FFFFFF, #F5F5F5, #EDEDED); overflow:hidden }
+.banner img { width:100%; height:100%; object-fit:cover }
+.shop-now-btn { position:relative; z-index:1; padding:12px 18px; background:#000; color:#fff; border-radius:6px; border:none; font-weight:700; cursor:pointer }
+.shop-now-btn:hover { background:#111 }
 
-/* Prevent nav items from wrapping and avoid layout shifts on click/focus
-   These rules are intentionally specific so they override other page CSS files */
-header nav .nav-links {
-  flex-wrap: nowrap;
-}
+@media (max-width:600px) { .banner { height:70vh } .shop-now-btn { padding:10px 14px; font-size:16px } }
 
-header nav .nav-links li {
-  white-space: nowrap;
-}
+/* Category bar */
+.category-bar { display:flex; gap:25px; padding:25px 15px; justify-content:center; align-items:center; overflow-x:auto; }
+.category-item { display:flex; flex-direction:column; align-items:center; min-width:90px }
+.category-item img { width:50px; height:50px; object-fit:contain; margin-bottom:6px }
+.category-item p { margin:0; font-size:14px; font-weight:500 }
+@media (max-width:600px) { .category-bar { justify-content:flex-start; gap:18px; padding:18px } .category-item img{ width:44px; height:44px } }
 
-header nav .nav-links a {
-  /* set a stable weight so hover/focus doesn't change element width */
-  font-weight: 600;
-}
+/* Featured products */
+.featured-products { text-align:center; padding:60px 40px }
+.product-container { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:28px }
+.product-card { background:#E0E0E0; border-radius:8px; padding:18px; box-shadow:0 6px 15px rgba(0,0,0,0.12); overflow:hidden }
+.product-card img{ width:100%; border-radius:10px }
+.product-card h3 { margin:12px 0 6px }
+.product-card p { margin:0 0 12px; font-weight:600 }
+.add-to-cart { background:#000; color:#fff; border:none; padding:10px 18px; border-radius:6px; cursor:pointer }
+.add-to-cart:hover { background:#111 }
 
-/* ---- Responsive design ---- */
-@media (max-width: 600px) {
-  header {
-    padding: 12px 20px;
-  }
+/* Reviews & footer */
+.reviews-section { padding:24px 20px }
+.reviews-heading { font-size:28px; letter-spacing:3px; text-transform:uppercase }
+.site-footer { background:#044d1a; color:#fff; padding:18px 10px; text-align:center }
 
-  .logo {
-    font-size: 30px;
-  }
+/* small responsive tweaks */
+@media (max-width:480px) { .thin-banner .marquee span { font-size:14px } .welcome-banner p{ font-size:18px } }
 
-  .nav-links {
-    gap: 17px;
-  }
-
-  .nav-links a {
-    font-size: 14x;
-  }
-}
-.welcome-banner {
-  width: 100%;
-  overflow: hidden;
-  background:black; /* same as page background */
-  padding: 0px 0px;
-  margin-top: 70px; /* space below fixed header */
-}
-
-.welcome-banner p {
-  display: inline-block;
-  white-space: nowrap;
-  font-size: 28px;
-  font-weight: 700;
-  color: white;
-  animation: slide 8s linear infinite;
-}
-
-/* Animation for flowing text from left to right */
-@keyframes slide {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-}
-/* Banner section */
-.banner {
-  position: relative;
-  width: 100%;
-  height: 400px; /* adjust banner height as needed */
-  display: flex;
-  justify-content: center; /* horizontal center */
-  align-items: center;     /* vertical center */
-  overflow: hidden;
-  background: linear-gradient(135deg, #FFFFFF, #F5F5F5, #EDEDED); /* fallback background color */
-}
-
-.banner-img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
-}
-
-.shop-now-btn {
-  position: relative;
-  z-index: 1; /* make sure button is on top of image */
-  padding: 15px 15px;
-  background-color: Black;
-  color: #fff;
-  text-decoration: none;
-  font-size:20px;
-  font-weight: bold;
-  border-radius: 5px;
-  transition: background 0.3s, transform 0.3s;
-}
-
-.shop-now-btn:hover {
-  background-color: darkblack;
-  transform: scale(1.05);
-}
-
-/* Responsive adjustments */
-@media (max-width: 600px) {
-  .banner {
-    height: 70vh;
-  }
-
-  .shop-now-btn {
-  display: inline-block;
-  padding: 12px 25px;
-  background-color: Black;
-  color: #fff;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 20px;
-  transition: background 0.3s, transform 0.3s;
-}
-
-.shop-now-btn:hover {
-  background-color: darkblack;
-  transform: scale(1.05);
-}
-}
 /* Category bar section */
 .category-bar {
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 25px;
   padding: 25px 15px;
   background: linear-gradient(135deg, #FFFFFF, #F5F5F5, #EDEDED);
   overflow-x: auto;
@@ -322,10 +202,10 @@ header nav .nav-links a {
     rgba(255,255,255,0) 60%
   );
   transform: rotate(25deg);
-  animation: shine 3s infinite;
+  animation: card-shine 3s infinite;
 }
 
-@keyframes shine {
+@keyframes card-shine {
   0% { left: -50%; }
   50% { left: 50%; }
   100% { left: 150%; }
@@ -346,22 +226,22 @@ header nav .nav-links a {
 /* Product details */
 .product-card h3 {
   font-size: 1.1em;
-  color: darkblack;
+  color: #000000;
   margin: 12px 0 5px;
   font-family: 'Poppins', sans-serif;
 }
 
 .product-card p {
-  color: darkblack;
-  font-weight: 1000;
-  font-size:20px;
-  margin-bottom: 15px;
+  color: #000000;
+  font-weight: 600;
+  font-size:18px;
+  margin-bottom: 12px;
 }
 
 /* Add to Cart button */
 .add-to-cart {
-  background:black;
-  color: white;
+  background: #000000;
+  color: #fff;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
@@ -371,7 +251,7 @@ header nav .nav-links a {
 }
 
 .add-to-cart:hover {
-  background: darkblack;
+  background: #111111;
   color: #fff;
   transform: scale(1.05);
 }
@@ -394,7 +274,7 @@ header nav .nav-links a {
 .reviews-heading {
   font-size: 28px;
   letter-spacing: 3px;
-  color:darkblack;
+  color: #000000;
   font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
   margin-bottom: 50px;
@@ -434,7 +314,7 @@ header nav .nav-links a {
 
 .review-author {
   font-weight: 600;
-  color:darkblack;
+  color: #000000;
   font-size: 16px;
   letter-spacing:2px;
 }
@@ -448,7 +328,7 @@ header nav .nav-links a {
 
 
 .site-footer {
-  background-color: darkgreen; /* green */
+  background-color: #044d1a; /* dark green */
   color: #fff;
   text-align: center;
   padding: 20px 10px;

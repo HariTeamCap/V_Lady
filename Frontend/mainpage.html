@@ -11,22 +11,37 @@
   </head>
   <body>
     <header>
-      <div class="logo">V LADY</div>
+      <div class="logo">
+        V LADY
+        <div class="tagline">Versatile Lady</div>
+      </div>
       <nav>
         <ul class="nav-links">
           <li><a href="#home" aria-label="Go to Home section">Home</a></li>
-          <li><a href="#products" aria-label="Go to Products section">Products</a></li>
-          <li><a href="#featured" aria-label="Go to Featured Products section">Features</a></li>
-          <li><a href="accessories.html" aria-label="Go to Accessories page">Accessories</a></li>
+          <li><a href="#about" aria-label="Go to About section">About</a></li>
+          <li><a href="#cart" aria-label="Go to Cart">Cart</a></li>
           <li><a href="#contact" aria-label="Go to Contact Us section">Contact Us</a></li>
         </ul>
       </nav>
     </header>
 
-    <main id="home">
-      <div class="welcome-banner">
-        <p>WELCOME TO OUR NEWLY LAUNCHED ONLINE STORE!</p>
+    <!-- thin moving banner — place immediately after </header> -->
+    <div class="thin-banner" aria-hidden="true">
+      <div class="marquee">
+
+
+        
+        <span>V lady - the lady who leads</span>
+        
+        <!--duplicate for smooth loop-->
       </div>
+    </div>
+
+    <div class="welcome-banner">
+      <p>GET 50% OFF ON YOUR FIRST ORDER!</p>
+    </div>
+
+    <main id="home">
 
       <section class="banner">
         <img src="https://images.unsplash.com/photo-1593032457861-d6d113c789b0?auto=format&fit=crop&w=1200&q=80" alt="V Lady store banner showcasing a stylish bag" />
@@ -200,6 +215,5 @@
     </footer>
 
     <script src="script.js"></script>
-    <script src="products.js"></script>
   </body>
 </html>
