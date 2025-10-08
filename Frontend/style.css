@@ -179,9 +179,9 @@ header {
 
 /* Product Card */
 .product-card {
-  background:  #E0E0E0;
-  border-radius: 6px;
-  padding: 20px;
+  background:  #F1F5F9;
+  border-radius: 16px;
+  padding: 100px;
   box-shadow: 0 6px 15px rgba(0,0,0,0.15);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
   position: relative;
@@ -194,7 +194,7 @@ header {
   top: -50%;
   left: -50%;
   width: 200%;
-  height: 200%;
+  height: 170%;
   background: linear-gradient(
     120deg,
     rgba(255,255,255,0.3) 0%,
