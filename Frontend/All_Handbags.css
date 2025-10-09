@@ -233,7 +233,7 @@ header {
 .product-buttons {
   display: flex;
   justify-content: space-evenly;
-  padding: 10px 0 20px;
+  padding: 20px 0 20px;
 }
 button {
   padding: 8px 14px;
@@ -345,6 +345,14 @@ button {
 
 .view-btn.active svg {
   transform: scale(1.1);
+}
+
+.product-price {
+  font-size: 24px;
+  font-weight: 700;
+  color: #000;
+  margin: 5px 0;
+  text-align: center;
 }
 
 .site-footer {
