@@ -42,9 +42,25 @@ header {
 @keyframes logo-shine { 0% { left:-75%; } 50% { left:125%; } 100% { left:125%; } }
 
 .nav-links { list-style:none; display:flex; gap:24px; margin:0; padding:0; }
-.nav-links a { text-decoration:none; color:#111; font-weight:600; }
+/* Force black icons across all states */
+.nav-links a,
+.nav-links a:visited,
+.nav-links a:active {
+  color: #000 !important;   /* black always */
+  text-decoration: none;
+  font-size: 20px;
+  transition: 0.3s ease;
+  position: relative;
+}
 
-@media (max-width:600px) { .logo { font-size:20px } .nav-links { gap:12px } .nav-links a { font-size:14px } }
+/* Gold glow on hover */
+.nav-links a:hover {
+  color: #000 !important;   /* stay black */
+  filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.7))
+          /*drop-shadow(0 0 10px rgba(255, 215, 0, 0.4)); /* gold glow */
+  transform: scale(1.2);
+}
+@media (max-width:600px) { .logo { font-size:20px } .nav-links { gap:27px } .nav-links a { font-size:17px } }
 
 /* Thin marquee banner */
 .thin-banner { position: fixed; top: var(--header-height); left:0; right:0; height: var(--thin-banner-height); background:#d63384; display:flex; align-items:center; overflow:hidden; z-index:999; }
