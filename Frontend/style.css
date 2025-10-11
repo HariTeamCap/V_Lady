@@ -56,8 +56,8 @@ header {
 /* Gold glow on hover */
 .nav-links a:hover {
   color: #000 !important;   /* stay black */
-  filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.7))
-          /*drop-shadow(0 0 10px rgba(255, 215, 0, 0.4)); /* gold glow */
+  /* gold glow composed of two drop-shadows */
+  filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.7)) drop-shadow(0 0 10px rgba(255, 215, 0, 0.4));
   transform: scale(1.2);
 }
 @media (max-width:600px) { .logo { font-size:20px } .nav-links { gap:27px } .nav-links a { font-size:17px } }
@@ -353,7 +353,7 @@ header {
 .bags-under-999-title {
   font-size: 32.6px;
   font-weight: 600;
-  color: darkblack;
+  color: #000;
   margin-bottom: 40px;
   letter-spacing: 3px;
 }
@@ -417,7 +417,7 @@ header {
 }
 
 .bags-under-999-btn:hover {
-  background-color: darkblack;
+  background-color: #000;
   transform: scale(1.05);
 }
 

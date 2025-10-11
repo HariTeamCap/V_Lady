@@ -115,8 +115,9 @@ header {
   }
 
   .nav-links a {
-    font-size: 14x;
+    font-size: 14px;
   }
+}
 
 /* thin moving banner (dark pink with silver text) */
 .thin-banner {
@@ -173,14 +174,13 @@ header {
 .bag-section {
   padding-top: 140px; /* space for fixed header & banner */
   text-align: center;
-  
 }
+
 .bag-section h2 {
-  font-size: 302;
+  font-size: 32px;
   margin-bottom: 30px;
   color: #111;
   letter-spacing: 3px;
-  
 }
 
 /* ===== PRODUCT GRID ===== */
@@ -189,10 +189,9 @@ header {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 80px;
   padding: 60px 40px 60px;
-  justify-items: center
-  height:1000px;
-  margin right:20;
-  margin-right:20;
+  justify-items: center;
+  height: 1000px;
+  margin-right: 20px;
 }
 
 /* ===== PRODUCT CARD ===== */
@@ -204,9 +203,9 @@ header {
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   width: 350px;
-  height:800;
-  gap:200px;
-  margin-right:40;
+    height: 800px;
+    gap: 200px;
+    margin-right: 40px;
 }
 .product-card:hover {
   transform: translateY(-5px);

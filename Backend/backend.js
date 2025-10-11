@@ -20,8 +20,8 @@ app.use(express.static(path.join(__dirname, 'public'))); // Serve static files f
 const transporter = nodemailer.createTransport({
   service: 'gmail', // Or use SMTP for other services
   auth: {
-    user: 'your-email@gmail.com', // Replace with your email
-    pass: 'your-app-password' // Use app password if 2FA enabled
+    user: 'harikrishnay09@gmail.com', // Replace with your email
+    pass: '34442' // Use app password if 2FA enabled
   }
 });
 
@@ -111,7 +111,7 @@ app.post('/contact', (req, res) => {
   // Send email notification
   const mailOptions = {
     from: 'your-email@gmail.com',
-    to: 'admin@vlady.com', // Replace with admin email
+    to: 'studenthari7@gmail.com', // Replace with admin email
     subject: 'New Contact Form Submission',
     text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`
   };
