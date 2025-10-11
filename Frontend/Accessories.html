@@ -4,7 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>V LADY | Bags Collection</title>
-  <link rel="stylesheet" href="Accessories.css" />
+  <link rel="stylesheet" href="accessories.css" />
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 </head>
 <body>
 
@@ -13,20 +18,20 @@
     V LADY
     <div class="tagline">Versatile Lady</div>
   </div>
-  <nav>
+ <nav>
     <ul class="nav-links">
-      <li><a href="#">Home</a></li>
-     <li><a href="#">About</a></li>
-      <li><a href="#">Cart</a></li>
-      <li><a href="#">Contact Us</a></li>
-    </ul>
+  <li><a href="#"><i class="fa fa-house-chimney"></i></a></li>     <!-- Home -->
+  <li><a href="#"><i class="fa fa-circle-info"></i></a></li>
+  <li><a href="#"><i class="fa-solid fa-cart-shopping"></i></a></li>      <!-- Cart -->
+  <li><a href="#"><i class="fa fa-envelope"></i></a></li>          <!-- Contact -->
+</ul>
   </nav>
 </header>
 
 <!-- thin moving banner — place immediately after </header> -->
 <div class="thin-banner" aria-hidden="true">
   <div class="marquee">
-    
+
     <span>V lady - the lady who leads</span>
 <span>                            </span> <!-- add a few non-breaking spaces -->
 <span> V lady - the lady who leads </span>
@@ -36,93 +41,201 @@
   <!-- ====== MAIN SECTION: PRODUCTS ====== -->
   <main class="bag-section">
     <h2>ACCESSORIES</h2>
-      <!-- === VIEW TOGGLE BUTTONS WITH ICONS === -->
-  <div class="view-toggle">
-    <button class="view-btn" data-columns="1" title="1 per row">
-      <!-- 1-column icon -->
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <rect x="3" y="3" width="18" height="18" rx="2" />
-      </svg>
-    </button>
-    <button class="view-btn" data-columns="2" title="2 per row">
-      <!-- 2-column icon -->
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <rect x="3" y="3" width="8" height="18" rx="2" />
-        <rect x="13" y="3" width="8" height="18" rx="2" />
-      </svg>
-    </button>
-    <button class="view-btn" data-columns="4" title="4 per row">
-  <!-- window-like grid icon -->
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-       stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <rect x="3" y="3" width="18" height="18" rx="2" />
-    <line x1="3" y1="12" x2="21" y2="12" />
-    <line x1="12" y1="3" x2="12" y2="21" />
-  </svg>
-</button>
-    <div class="product-grid">
+          <!-- === VIEW TOGGLE BUTTONS WITH ICONS === -->
+<div class="view-toggle">
+  <button class="view-btn" data-columns="1" title="1 per row">
+    <!-- 1-column icon -->
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="3" y="3" width="18" height="18" rx="2" />
+    </svg>
+  </button>
 
-  <!-- Product 1 -->
-  <div class="product-card">
-    <a href="#"><img src="https://via.placeholder.com/250" alt="Beige Handbag" /></a>
-    <h3>Beige Classic Bag</h3>
-    <p>Elegant and soft-touch handbag perfect for daily wear.</p>
-    
-    <!-- Price container added -->
-    <div class="product-price">₹999</div>
-    
-    <div class="product-buttons">
-      <button class="add-cart">Add to Cart</button>
-      <button class="buy-now">Buy Now</button>
-    </div>
-  </div>
+  <button class="view-btn" data-columns="2" title="2 per row">
+    <!-- 2-column icon -->
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="3" y="3" width="8" height="18" rx="2" />
+      <rect x="13" y="3" width="8" height="18" rx="2" />
+    </svg>
+  </button>
 
-  <!-- Product 2 -->
-  <div class="product-card">
-    <a href="#"><img src="https://via.placeholder.com/250" alt="Pink Purse" /></a>
-    <h3>Pink Heart Purse</h3>
-    <p>Trendy heart-shaped purse with a shiny finish.</p>
-    
-    <!-- Price container added -->
-    <div class="product-price">₹799</div>
-    
-    <div class="product-buttons">
-      <button class="add-cart">Add to Cart</button>
-      <button class="buy-now">Buy Now</button>
-    </div>
-  </div>
+  <button class="view-btn" data-columns="4" title="4 per row">
+    <!-- window-like grid icon -->
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="3" width="18" height="18" rx="2" />
+      <line x1="3" y1="12" x2="21" y2="12" />
+      <line x1="12" y1="3" x2="12" y2="21" />
+    </svg>
+  </button>
 
-  <!-- Product 3 -->
-  <div class="product-card">
-    <a href="#"><img src="https://via.placeholder.com/250" alt="White Clutch" /></a>
-    <h3>White Clutch</h3>
-    <p>Minimal clutch perfect for special occasions.</p>
-    
-    <!-- Price container added -->
-    <div class="product-price">₹1,120</div>
-    
-    <div class="product-buttons">
-      <button class="add-cart">Add to Cart</button>
-      <button class="buy-now">Buy Now</button>
-    </div>
-  </div>
-
-  <!-- Product 4 -->
-  <div class="product-card">
-    <a href="#"><img src="https://via.placeholder.com/250" alt="Sky Blue Purse" /></a>
-    <h3>Sky Blue Purse</h3>
-    <p>Soft pastel purse to complement your stylish look.</p>
-    
-    <!-- Price container added -->
-    <div class="product-price">₹899</div>
-    
-    <div class="product-buttons">
-      <button class="add-cart">Add to Cart</button>
-      <button class="buy-now">Buy Now</button>
-    </div>
-  </div>
-
+  <!-- Wishlist Button (Heart Emoji) -->
+  <button class="view-btn wishlist-btn-toggle" title="View Wishlist" 
+          onclick="window.location.href='wishlist.html'" 
+          style="font-size:22px; color:#ff4d6d;">
+    ❤️
+  </button>
 </div>
+    <div class="product-container">
+  <!-- Product Card 1 -->
+  <div class="wrapper" data-product-id="chair001">
+    <div class="wishlist-btn">
+      <i class="material-icons">favorite_border</i>
+    </div>
+    <div class="container">
+      <div class="top">
+        <a href="productdetails.html">
+          <img src="https://s-media-cache-ak0.pinimg.com/736x/49/80/6f/49806f3f1c7483093855ebca1b8ae2c4.jpg" alt="Chair" />
+        </a>
+      </div>
+      <div class="bottom">
+        <div class="left">
+          <div class="details">
+            <h1>Bags</h1>
+            <p>₹950</p>
+          </div>
+          <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
+          <div class="buy-now">BUY<br>NOW</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Card 2 -->
+  <div class="wrapper" data-product-id="chair002">
+    <div class="wishlist-btn">
+      <i class="material-icons">favorite_border</i>
+    </div>
+    <div class="container">
+      <div class="top">
+        <a href="productdetails.html">
+          <img src="https://s-media-cache-ak0.pinimg.com/736x/49/80/6f/49806f3f1c7483093855ebca1b8ae2c4.jpg" alt="Chair" />
+        </a>
+      </div>
+      <div class="bottom">
+        <div class="left">
+          <div class="details">
+            <h1>Bags</h1>
+            <p>₹950</p>
+          </div>
+          <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
+          <div class="buy-now">BUY<br>NOW</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Card 3 -->
+  <div class="wrapper" data-product-id="chair003">
+    <div class="wishlist-btn">
+      <i class="material-icons">favorite_border</i>
+    </div>
+    <div class="container">
+      <div class="top">
+        <a href="productdetails.html">
+          <img src="https://s-media-cache-ak0.pinimg.com/736x/49/80/6f/49806f3f1c7483093855ebca1b8ae2c4.jpg" alt="Chair" />
+        </a>
+      </div>
+      <div class="bottom">
+        <div class="left">
+          <div class="details">
+            <h1>Bags</h1>
+            <p>₹950</p>
+          </div>
+          <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
+          <div class="buy-now">BUY<br>NOW</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Card 4 -->
+  <div class="wrapper" data-product-id="chair004">
+    <div class="wishlist-btn">
+      <i class="material-icons">favorite_border</i>
+    </div>
+    <div class="container">
+      <div class="top">
+        <a href="productdetails.html">
+          <img src="https://s-media-cache-ak0.pinimg.com/736x/49/80/6f/49806f3f1c7483093855ebca1b8ae2c4.jpg" alt="Chair" />
+        </a>
+      </div>
+      <div class="bottom">
+        <div class="left">
+          <div class="details">
+            <h1>Bags</h1>
+            <p>₹950</p>
+          </div>
+          <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
+          <div class="buy-now">BUY<br>NOW</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Card 5 -->
+  <div class="wrapper" data-product-id="chair005">
+    <div class="wishlist-btn">
+      <i class="material-icons">favorite_border</i>
+    </div>
+    <div class="container">
+      <div class="top">
+        <a href="productdetails.html">
+          <img src="https://s-media-cache-ak0.pinimg.com/736x/49/80/6f/49806f3f1c7483093855ebca1b8ae2c4.jpg" alt="Chair" />
+        </a>
+      </div>
+      <div class="bottom">
+        <div class="left">
+          <div class="details">
+            <h1>Bags</h1>
+            <p>₹950</p>
+          </div>
+          <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
+          <div class="buy-now">BUY<br>NOW</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const wishlistBtn = document.querySelector(".wishlist-btn i");
+    const productCard = document.querySelector(".wrapper");
+    const productId = productCard.dataset.productId;
+
+    // Load wishlist from localStorage
+    const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+    // Set active state if product already in wishlist
+    if (wishlist.includes(productId)) {
+      wishlistBtn.textContent = "favorite";
+      wishlistBtn.classList.add("active");
+      wishlistBtn.style.color = "#ff4d6d";
+    }
+
+    wishlistBtn.addEventListener("click", () => {
+      let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+      if (wishlist.includes(productId)) {
+        // Remove from wishlist
+        wishlist = wishlist.filter(id => id !== productId);
+        wishlistBtn.textContent = "favorite_border";
+        wishlistBtn.classList.remove("active");
+        wishlistBtn.style.color = "white";
+      } else {
+        // Add to wishlist
+        wishlist.push(productId);
+        wishlistBtn.textContent = "favorite";
+        wishlistBtn.classList.add("active");
+        wishlistBtn.style.color = "#ff4d6d";
+      }
+
+      localStorage.setItem("wishlist", JSON.stringify(wishlist));
+      alert("Wishlist updated! Check your Wishlist page."); // optional alert
+    });
+  });
+</script>
+
 <!-- Footer Section -->
 <footer class="site-footer">
   <p>© 2025 V Lady. All rights reserved. </p>
