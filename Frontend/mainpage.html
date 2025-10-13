@@ -1,195 +1,278 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>V Lady</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="products.css" />
-    <link rel="stylesheet" href="accessories.css" />
-    <link rel="stylesheet" href="contact.css" />
-<!--navbar_icons-->
-  <link rel="stylesheet" href="style.css" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>V Lady</title>
+  <link rel="stylesheet" href="temp_mainpage.css" />
   <link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-/>
-  </head>
-  <body>
-    <header>
-      <div class="logo">
-        V LADY
-        <div class="tagline">Versatile Lady</div>
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+  />
+  <link
+    href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+  />
+</head>
+<body>
+  <header>
+    <div class="logo">
+      V LADY
+      <div class="tagline">Versatile Lady</div>
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="temp_mainpage.html"><i class="fa fa-house-chimney"></i></a></li>
+        <li><a href="about.html"><i class="fa fa-circle-info"></i></a></li>
+        <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+        <li><a href="#"><i class="fa fa-envelope"></i></a></li>
+      </ul>
+    </nav>
+  </header>
+<!-- Pink Banner -->
+<div class="pink-banner">
+  <div class="scrolling-text">
+    THE LADY WHO LEADS
+  </div>
+</div>
+<!-- Black Welcome Banner -->
+<div class="black-banner">
+  <div class="scrolling-text-black">
+    GET 50% OFF ON YOUR FIRST ORDER
+  </div>
+</div>
+<!-- Photo Banner Section -->
+<section class="photo-banner">
+  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/portrait.jpg"><alt="Banner Image" class="banner-img" />
+  <a href="#" class="shop-now-btn">SHOP NOW</a>
+</section>
+<!-- 👜 New Product Category Navbar -->
+<section class="product-category-bar">
+  <a href="All_Handbags.html" class="category-item">
+    <i class="bi bi-handbag-fill"></i>
+    <p>All Handbags</p>
+  </a>
+
+  <a href="Candy_Bags.html" class="category-item">
+    <i class="bi bi-bag-fill"></i>
+    <p>Candy Bags</p>
+  </a>
+
+  <a href="Pie_Bags.html" class="category-item">
+    <i class="bi bi-bag-heart-fill"></i>
+    <p>Pie Bags</p>
+  </a>
+
+  <a href="Clutches.html" class="category-item">
+    <i class="bi bi-bag-plus-fill"></i>
+    <p>Clutches</p>
+  </a>
+
+  <a href="accessories.html" class="category-item">
+    <i class="bi bi-plus-circle"></i>
+    <p>Accessories</p>
+  </a>
+
+  <a href="wishlist.html" class="category-item">
+    <i class="bi bi-heart-fill"></i>
+    <p>Wishlist</p>
+  </a>
+
+  <a href="New_Arrivals.html" class="category-item">
+    <i class="bi bi-instagram"></i>
+    <p>Follow Us</p>
+  </a>
+</section>
+<!-- Photo Banner Section -->
+<section class="photo-banner1">
+  <img src="https://1.bp.blogspot.com/-b-2SgNUrFHg/WVSvmewWqgI/AAAAAAAAAK0/1K4YCcbYjhokHwV_IgiVJN9mEnQoWunIwCPcBGAYYCw/s1600/fashion-portrait-nicole-6347.jpg"><alt="Banner Image" class="banner-img1" />
+  <a href="#" class="shop-now-btn1">LATEST</a>
+</section>
+
+<!-- 🛍 New Product Section -->
+<section class="new-products">
+  <h2>FEATURED PRODUCTS</h2>
+  <div class="product-container">
+
+    <!-- Product Card -->
+    <div class="wrapper" data-product-id="product001">
+      <div class="wishlist-btn">
+        <i class="material-icons">favorite_border</i>
       </div>
-      <nav>
-    <ul class="nav-links">
-  <li><a href="#"><i class="fa fa-house-chimney"></i></a></li>     <!-- Home -->
-  <li><a href="#"><i class="fa fa-circle-info"></i></a></li>
-  <li><a href="#"><i class="fa fa-bag-shopping"></i></a></li>      <!-- Cart -->
-  <li><a href="#"><i class="fa fa-envelope"></i></a></li>          <!-- Contact -->
-</ul>
-  </nav>
-    </header>
-
-    <!-- thin moving banner — place immediately after </header> -->
-    <div class="thin-banner" aria-hidden="true">
-      <div class="marquee">
-
-
-        
-        <span>V Lady - The Lady Who Leads</span>
-        
-        <!--duplicate for smooth loop-->
+      <div class="container">
+        <div class="top">
+          <a href="productdetails.html">
+            <img src="https://images.pexels.com/photos/20086704/pexels-photo-20086704.jpeg" alt="Product1"/>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="left">
+            <div class="details">
+              <h1>Pie Supreme</h1>
+              <p>₹1950</p>
+            </div>
+            <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="welcome-banner">
-      <p>GET 50% OFF ON YOUR FIRST ORDER!</p>
+    <!-- Duplicate Product Cards -->
+    <div class="wrapper" data-product-id="product002">
+      <div class="wishlist-btn">
+        <i class="material-icons">favorite_border</i>
+      </div>
+      <div class="container">
+        <div class="top">
+          <a href="productdetails.html">
+            <img src="https://images.pexels.com/photos/27046146/pexels-photo-27046146.jpeg" alt="Product 2" />
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="left">
+            <div class="details">
+              <h1>Pie Supreme</h1>
+              <p>₹1950</p>
+            </div>
+            <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <main id="home">
-
-      <section class="banner">
-        <img src="https://images.unsplash.com/photo-1593032457861-d6d113c789b0?auto=format&fit=crop&w=1200&q=80" alt="V Lady store banner showcasing a stylish bag" />
-        <button class="shop-now-btn" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})" aria-label="Scroll to Products section">Shop Now</button>
-      </section>
-
-      <section class="category-bar">
-        <div class="category-item">
-          <img src="https://img.icons8.com/ios-filled/100/000000/handbag.png" alt="Handbag category icon" />
-          <p>All Handbags</p>
+    <div class="wrapper" data-product-id="product003">
+      <div class="wishlist-btn">
+        <i class="material-icons">favorite_border</i>
+      </div>
+      <div class="container">
+        <div class="top">
+          <a href="productdetails.html">
+            <img src="https://images.pexels.com/photos/22432994/pexels-photo-22432994.jpeg" alt="Product 3" />
+          </a>
         </div>
-        <div class="category-item">
-          <img src="https://img.icons8.com/ios-filled/100/000000/clutch-bag.png" alt="Clutch category icon" />
-          <p>Candy Bags</p>
-        </div>
-        <div class="category-item">
-          <img src="https://img.icons8.com/ios-filled/100/000000/sling-bag.png" alt="Candy Bags category icon" />
-          <p>Pie Bags</p>
-        </div>
-        <div class="category-item">
-          <img src="https://img.icons8.com/ios-filled/100/000000/tote-bag.png" alt="Pie Bags category icon" />
-          <p>Clutches</p>
-        </div>
-        <div class="category-item">
-          <img src="https://img.icons8.com/ios-filled/100/000000/backpack.png" alt="All Bags category icon" />
-          <p>Accessories</p>
-        </div>
-      </section>
-
-      <section class="featured-products" id="featured">
-        <h2>FEATURED PRODUCTS</h2>
-        <div class="product-container">
-          <div class="product-card">
-            <a href="product1.html"><img src="https://via.placeholder.com/300x300?text=Bag+1" alt="Elegant Leather Bag" /></a>
-            <h3>Elegant Leather Bag</h3>
-            <p>₹999</p>
-            <button class="add-to-cart" aria-label="Add Elegant Leather Bag to cart">Add to Cart</button>
-          </div>
-
-          <div class="product-card">
-            <a href="product2.html"><img src="https://via.placeholder.com/300x300?text=Bag+2" alt="Royal Clutch" /></a>
-            <h3>Royal Clutch</h3>
-            <p>₹3120</p>
-            <button class="add-to-cart" aria-label="Add Royal Clutch to cart">Add to Cart</button>
-          </div>
-
-          <div class="product-card">
-            <a href="product3.html"><img src="https://via.placeholder.com/300x300?text=Bag+3" alt="Luxury Handbag" /></a>
-            <h3>Luxury Handbag</h3>
-            <p>₹4140</p>
-            <button class="add-to-cart" aria-label="Add Luxury Handbag to cart">Add to Cart</button>
-          </div>
-
-          <div class="product-card">
-            <a href="product4.html"><img src="https://via.placeholder.com/300x300?text=Bag+4" alt="Classic Purse" /></a>
-            <h3>Classic Purse</h3>
-            <p>₹5110</p>
-            <button class="add-to-cart" aria-label="Add Classic Purse to cart">Add to Cart</button>
+        <div class="bottom">
+          <div class="left">
+            <div class="details">
+              <h1>Pie Supreme</h1>
+              <p>₹1950</p>
+            </div>
+            <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
           </div>
         </div>
-      </section>
-
-      <div class="separator-line"></div>
-
-      <section class="reviews-section">
-        <h2 class="reviews-heading">TRUSTED BY OUR CUSTOMERS</h2>
-        <div class="reviews-slider">
-          <div class="review-box">
-            <p class="review-text">“Absolutely love my Candy Bag! The shine and finish are just perfect.”</p>
-            <h4 class="review-author">- Priya S. <br> ⭐⭐⭐⭐⭐</h4>
-          </div>
-          <div class="review-box">
-            <p class="review-text">“The quality is beyond expectations. Looks like a luxury brand!”</p>
-            <h4 class="review-author">- Ananya K.<br> ⭐⭐⭐⭐⭐</h4>
-          </div>
-          <div class="review-box">
-            <p class="review-text">“Fast delivery and the packaging was stunning. Worth every penny!”</p>
-            <h4 class="review-author">- Rhea M.<br> ⭐⭐⭐⭐⭐</h4>
-          </div>
-        </div>
-      </section>
-    </main>
-    <!--bags999-->
-    <section class="bags-under-999-section">
-  <h2 class="bags-under-999-title">BAGS UNDER ₹999/-</h2>
-
-  <div class="bags-under-999-container">
-
-    <div class="bags-under-999-card">
-      <a href="product1.html" class="bags-under-999-link">
-        <img src="bag1.jpg" alt="Trendy Tote Bag" class="bags-under-999-image">
-      </a>
-      <p class="bags-under-999-desc">Elegant Tote Bag - ₹899</p>
-      <button class="bags-under-999-btn">Add to Cart</button>
-    </div>
-
-    <div class="bags-under-999-card">
-      <a href="product2.html" class="bags-under-999-link">
-        <img src="bag2.jpg" alt="Classic Sling Bag" class="bags-under-999-image">
-      </a>
-      <p class="bags-under-999-desc">Classic Sling Bag - ₹799</p>
-      <button class="bags-under-999-btn">Add to Cart</button>
-    </div>
-
-    <div class="bags-under-999-card">
-      <a href="product3.html" class="bags-under-999-link">
-        <img src="bag3.jpg" alt="Leather Handbag" class="bags-under-999-image">
-      </a>
-      <p class="bags-under-999-desc">Leather Handbag - ₹999</p>
-      <button class="bags-under-999-btn">Add to Cart</button>
-    </div>
-
-    <div class="bags-under-999-card">
-      <a href="product4.html" class="bags-under-999-link">
-        <img src="bag4.jpg" alt="Compact Shoulder Bag" class="bags-under-999-image">
-      </a>
-      <p class="bags-under-999-desc">Compact Shoulder Bag - ₹699</p>
-      <button class="bags-under-999-btn">Add to Cart</button>
+      </div>
     </div>
 
   </div>
 </section>
+<!-- === 3 Photo Gallery Section === -->
+<section class="photo-gallery">
+  <div class="gallery-item">
+    <img src="https://images.pexels.com/photos/18458794/pexels-photo-18458794.jpeg" alt="Fashion Look 1">
+  </div>
+  <div class="gallery-item">
+    <img src="https://images.pexels.com/photos/22432982/pexels-photo-22432982.jpeg" alt="Fashion Look 2">
+  </div>
+  <div class="gallery-item">
+    <img src="https://images.pexels.com/photos/7953286/pexels-photo-7953286.jpeg" alt="Fashion Look 3">
+  </div>
+</section>
+<!-- 🎥 Thin Video Section -->
+<section class="video-section">
+  <video autoplay muted loop playsinline>
+    <source src="videos/elegant-navy-blue-handbag.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+</section>
+<!-- 💸 UNDER 999 Section -->
+<section class="under-999-section">
+  <h2 class="section-title">UNDER ₹999/-</h2>
+  <div class="product-container">
 
-      
+    <!-- Product Card -->
+    <div class="wrapper" data-product-id="product001">
+      <div class="wishlist-btn">
+        <i class="material-icons">favorite_border</i>
+      </div>
+      <div class="container">
+        <div class="top">
+          <a href="productdetails.html">
+            <img src="https://images.pexels.com/photos/20086704/pexels-photo-20086704.jpeg" alt="Product 1" />
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="left">
+            <div class="details">
+              <h1>Pie Supreme</h1>
+              <p>₹950</p>
+            </div>
+            <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <section id="contact" class="contact-us">
-      <h2>CONTACT US</h2>
-      <p>We would love to hear from you. Please fill out the form below.</p>
+    <!-- Duplicate Product Cards -->
+    <div class="wrapper" data-product-id="product002">
+      <div class="wishlist-btn">
+        <i class="material-icons">favorite_border</i>
+      </div>
+      <div class="container">
+        <div class="top">
+          <a href="productdetails.html">
+            <img src="https://images.pexels.com/photos/20086704/pexels-photo-20086704.jpeg" alt="Product 2" />
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="left">
+            <div class="details">
+              <h1>Pie Supreme</h1>
+              <p>₹950</p>
+            </div>
+            <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-      <form action="/submit-contact" method="POST">
-        <input type="text" name="name" placeholder="Your Name" required aria-label="Your Name" />
-        <input type="tel" name="phone" placeholder="Mobile Number" required aria-label="Mobile Number" />
-        <input type="email" name="email" placeholder="Gmail ID" required aria-label="Email Address" />
-        <textarea name="message" placeholder="Your Message" rows="5" required aria-label="Your Message"></textarea>
-        <button type="submit" aria-label="Submit Contact Form">Submit</button>
-      </form>
-    </section>
+    <div class="wrapper" data-product-id="product003">
+      <div class="wishlist-btn">
+        <i class="material-icons">favorite_border</i>
+      </div>
+      <div class="container">
+        <div class="top">
+          <a href="productdetails.html">
+            <img src="https://images.pexels.com/photos/20086704/pexels-photo-20086704.jpeg" alt="Product 3" />
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="left">
+            <div class="details">
+              <h1>Pie Supreme</h1>
+              <p>₹950</p>
+            </div>
+            <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <footer class="site-footer">
-      <p>© 2025 V Lady. All rights reserved.</p>
-    </footer>
+  </div>
+</section>
+  <section class="contact-us">
+    <h2>CONTACT US</h2>
+    <p>We would love to hear from you. Please fill out the form below.</p>
 
-    <script src="script.js"></script>
-  </body>
+    <form action="https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse" method="POST" target="_blank">
+      <input type="text" name="entry.1111111111" placeholder="Your Name" required>
+      <input type="tel" name="entry.2222222222" placeholder="Mobile Number" required>
+      <input type="email" name="entry.3333333333" placeholder="Gmail ID" required>
+      <textarea name="entry.4444444444" placeholder="Your Message" rows="5" required></textarea>
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+</body>
 </html>
