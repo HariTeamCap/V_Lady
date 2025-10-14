@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>V Lady</title>
+  <link rel="stylesheet" href="productdetails.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+  />
+  <link
+    href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+  />
+</head>
+<body>
+  <header>
+    <div class="logo">
+      V LADY
+      <div class="tagline">Versatile Lady</div>
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="mainpage.html"><i class="fa fa-house-chimney"></i></a></li>
+        <li><a href="about.html"><i class="fa fa-circle-info"></i></a></li>
+        <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+        <li><a href="mainpage.html"><i class="fa fa-envelope"></i></a></li>
+      </ul>
+    </nav>
+  </header>
+<!-- Pink Banner -->
+<div class="pink-banner">
+  <div class="scrolling-text">
+    THE LADY WHO LEADS
+  </div>
+</div>
+
+  <div class="product-page">
+    <!-- Product Gallery -->
+    <div class="gallery">
+      <div class="main-image">
+        <img id="main-img" src="https://images.pexels.com/photos/18458794/pexels-photo-18458794.jpeg" alt="Bag">
+      </div>
+      <div class="thumbnail-container">
+        <img class="thumbnail active" src="https://images.pexels.com/photos/18458794/pexels-photo-18458794.jpeg" alt="Bag 1">
+        <img class="thumbnail" src="https://images.pexels.com/photos/20086704/pexels-photo-20086704.jpeg" alt="Bag 2">
+        <img class="thumbnail" src="https://images.pexels.com/photos/20086704/pexels-photo-20086704.jpeg" alt="Bag 3">
+        <img class="thumbnail" src="https://images.pexels.com/photos/20086704/pexels-photo-20086704.jpeg" alt="Bag 4">
+      </div>
+    </div>
+
+    <!-- Product Details -->
+    <div class="details">
+      <h1 class="product-title">Elegant Leather Handbag</h1>
+      <p class="price">₹2,499</p>
+      <p class="description">
+        This elegant leather handbag is perfect for any occasion — stylish, durable, and spacious. 
+        Crafted from high-quality faux leather with premium stitching, it features multiple compartments 
+        and a soft inner lining for your essentials. Perfect for both daily use and travel.
+      </p>
+
+      <div class="btn-group">
+        <button class="btn add-cart">Add to Cart</button>
+        <button class="btn buy-now">Buy Now</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Thumbnail image click functionality
+    const thumbnails = document.querySelectorAll(".thumbnail");
+    const mainImg = document.getElementById("main-img");
+
+    thumbnails.forEach(thumbnail => {
+      thumbnail.addEventListener("click", () => {
+        document.querySelector(".thumbnail.active").classList.remove("active");
+        thumbnail.classList.add("active");
+        mainImg.src = thumbnail.src;
+      });
+    });
+  </script>
+
+</body>
+</html>
