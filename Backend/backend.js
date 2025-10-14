@@ -7,6 +7,7 @@ const nodemailer = require('nodemailer');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const cors = require('cors');
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -23,7 +24,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 app.use(session({
-  secret: 'your-secret-key', // Replace with a secure secret
+  secret: process.env.SESSION_SECRET || 'your-secret-key',
   resave: false,
   saveUninitialized: true,
   cookie: { secure: false } // Set to true with HTTPS in production
@@ -33,8 +34,8 @@ app.use(session({
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: process.env.EMAIL_USER || 'your-email@gmail.com',
-    pass: process.env.EMAIL_PASS || 'your-app-password'
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
   }
 });
 
@@ -59,15 +60,21 @@ const cartSchema = new mongoose.Schema({
   userId: { type: String, required: true },
   items: [{
     productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
-    quantity: { type: Number, default: 1, max: 20 }, // Enforce max quantity of 20
+    quantity: { type: Number, default: 1, max: 20 },
     totalPrice: { type: Number }
   }],
   total: { type: Number, default: 0 }
 });
 
+const wishlistSchema = new mongoose.Schema({
+  userId: { type: String, required: true },
+  items: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }]
+});
+
 const Product = mongoose.model('Product', productSchema);
 const Contact = mongoose.model('Contact', contactSchema);
 const Cart = mongoose.model('Cart', cartSchema);
+const Wishlist = mongoose.model('Wishlist', wishlistSchema);
 
 // Routes
 
@@ -107,58 +114,27 @@ app.get('/contact', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'contact.html'));
 });
 
-// Cart page
-app.get('/cart', async (req, res) => {
-  const userId = req.session.id;
-  const cart = await Cart.findOne({ userId }).populate('items.productId');
-  const cartHtml = `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Cart - V LADY</title>
-      <link rel="stylesheet" href="/style.css">
-    </head>
-    <body>
-      <header>
-        <div class="logo">V LADY <div class="tagline">Versatile Lady</div></div>
-        <nav>
-          <ul class="nav-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="/cart">Cart</a></li>
-            <li><a href="/contact">Contact Us</a></li>
-          </ul>
-        </nav>
-      </header>
-      <section class="cart-section">
-        <h2>Your Cart</h2>
-        ${cart && cart.items.length > 0 ?
-          `<ul>${cart.items.map(item => `
-            <li>
-              ${item.productId.name} - ₹${item.totalPrice} (Qty: ${item.quantity})
-              <button onclick="removeFromCart('${item.productId._id}')">Remove</button>
-            </li>`).join('')}</ul>
-            <p>Total: ₹${cart.total}</p>
-            <button onclick="window.location.href='/checkout'">Proceed to Checkout</button>`
-          : '<p>Your cart is empty.</p>'}
-      </section>
-      <footer class="site-footer">
-        <p>© 2025 V Lady. All rights reserved.</p>
-      </footer>
-      <script>
-        async function removeFromCart(productId) {
-          await fetch('/api/cart/remove/' + productId, { method: 'DELETE' });
-          window.location.reload();
-        }
-      </script>
-    </body>
-    </html>
-  `;
-  res.send(cartHtml);
+// Product details page
+app.get('/productdetails', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'productdetails.html'));
 });
 
-// Contact form submission
+// Wishlist page
+app.get('/wishlist', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'wishlist.html'));
+});
+
+// About page
+app.get('/about', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'about.html'));
+});
+
+// Cart page
+app.get('/cart', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'cart.html'));
+});
+
+// Handle contact form submission
 app.post('/contact', async (req, res) => {
   const { name, phone, email, message } = req.body;
 
@@ -191,7 +167,7 @@ app.get('/api/products', async (req, res) => {
   res.json(products);
 });
 
-// Add product (for admin; add authentication in production)
+// Add product (admin; secure in production)
 app.post('/api/products', async (req, res) => {
   const { name, description, price, image, category } = req.body;
   try {
@@ -199,12 +175,11 @@ app.post('/api/products', async (req, res) => {
     await newProduct.save();
     res.json(newProduct);
   } catch (error) {
-    console.error('Error adding product:', error);
     res.status(500).json({ error: 'Server error' });
   }
 });
 
-// Add to cart (adapted from script.js with quantity limit)
+// Add to cart
 app.post('/api/cart/add', async (req, res) => {
   const { productId, quantity = 1 } = req.body;
   const userId = req.session.id;
@@ -221,28 +196,18 @@ app.post('/api/cart/add', async (req, res) => {
     const itemIndex = cart.items.findIndex(item => item.productId.toString() === productId);
     if (itemIndex > -1) {
       const newQuantity = cart.items[itemIndex].quantity + quantity;
-      if (newQuantity > 20) {
-        return res.status(400).json({ error: 'Maximum quantity of 20 reached' });
-      }
+      if (newQuantity > 20) return res.status(400).json({ error: 'Max quantity 20' });
       cart.items[itemIndex].quantity = newQuantity;
       cart.items[itemIndex].totalPrice = newQuantity * product.price;
     } else {
-      if (quantity > 20) {
-        return res.status(400).json({ error: 'Maximum quantity of 20 allowed' });
-      }
-      cart.items.push({
-        productId,
-        quantity,
-        totalPrice: quantity * product.price
-      });
+      if (quantity > 20) return res.status(400).json({ error: 'Max quantity 20' });
+      cart.items.push({ productId, quantity, totalPrice: quantity * product.price });
     }
 
     cart.total = cart.items.reduce((sum, item) => sum + item.totalPrice, 0);
     await cart.save();
-
     res.json(cart);
   } catch (error) {
-    console.error('Error adding to cart:', error);
     res.status(500).json({ error: 'Server error' });
   }
 });
@@ -266,46 +231,54 @@ app.delete('/api/cart/remove/:productId', async (req, res) => {
     cart.items = cart.items.filter(item => item.productId.toString() !== productId);
     cart.total = cart.items.reduce((sum, item) => sum + item.totalPrice, 0);
     await cart.save();
-
     res.json(cart);
   } catch (error) {
-    console.error('Error removing from cart:', error);
     res.status(500).json({ error: 'Server error' });
   }
 });
 
-// Placeholder for checkout (extend as needed)
-app.get('/checkout', (req, res) => {
-  res.send(`
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Checkout - V LADY</title>
-      <link rel="stylesheet" href="/style.css">
-    </head>
-    <body>
-      <header>
-        <div class="logo">V LADY <div class="tagline">Versatile Lady</div></div>
-        <nav>
-          <ul class="nav-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="/cart">Cart</a></li>
-            <li><a href="/contact">Contact Us</a></li>
-          </ul>
-        </nav>
-      </header>
-      <section>
-        <h2>Checkout</h2>
-        <p>Checkout functionality to be implemented (e.g., payment integration).</p>
-      </section>
-      <footer class="site-footer">
-        <p>© 2025 V Lady. All rights reserved.</p>
-      </footer>
-    </body>
-    </html>
-  `);
+// Wishlist APIs
+app.post('/api/wishlist/add', async (req, res) => {
+  const { productId } = req.body;
+  const userId = req.session.id;
+
+  try {
+    let wishlist = await Wishlist.findOne({ userId });
+    if (!wishlist) {
+      wishlist = new Wishlist({ userId, items: [] });
+    }
+
+    if (!wishlist.items.some(id => id.toString() === productId)) {
+      wishlist.items.push(productId);
+    }
+
+    await wishlist.save();
+    res.json(wishlist);
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+app.get('/api/wishlist', async (req, res) => {
+  const userId = req.session.id;
+  const wishlist = await Wishlist.findOne({ userId }).populate('items');
+  res.json(wishlist || { items: [] });
+});
+
+app.delete('/api/wishlist/remove/:productId', async (req, res) => {
+  const { productId } = req.params;
+  const userId = req.session.id;
+
+  try {
+    const wishlist = await Wishlist.findOne({ userId });
+    if (!wishlist) return res.status(404).json({ error: 'Wishlist not found' });
+
+    wishlist.items = wishlist.items.filter(id => id.toString() !== productId);
+    await wishlist.save();
+    res.json(wishlist);
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
+  }
 });
 
 // 404 Handler
@@ -334,7 +307,9 @@ app.listen(PORT, () => {
       { name: 'Bag 1', description: 'Premium leather bag perfect for everyday use.', price: 99, image: 'https://via.placeholder.com/600x600?text=Bag+1+Image+1', category: 'handbag' },
       { name: 'Bag 2', description: 'Elegant and spacious bag for stylish outings.', price: 120, image: 'https://via.placeholder.com/600x600?text=Bag+2+Image+1', category: 'handbag' },
       { name: 'Bag 3', description: 'Stylish handbag suitable for any occasion.', price: 110, image: 'https://via.placeholder.com/600x600?text=Bag+3+Image+1', category: 'handbag' },
-      { name: 'Bag 4', description: 'Compact and trendy bag for daily use.', price: 95, image: 'https://via.placeholder.com/600x600?text=Bag+4+Image+1', category: 'handbag' }
+      { name: 'Bag 4', description: 'Compact and trendy bag for daily use.', price: 95, image: 'https://via.placeholder.com/600x600?text=Bag+4+Image+1', category: 'handbag' },
+      { name: 'Elegant Leather Handbag', description: 'This elegant leather handbag is perfect for any occasion.', price: 2499, image: 'https://images.pexels.com/photos/18458794/pexels-photo-18458794.jpeg', category: 'handbag' },
+      { name: 'Pie Supreme', description: 'Stylish pie bag.', price: 950, image: 'https://images.pexels.com/photos/20086704/pexels-photo-20086704.jpeg', category: 'piebag' }
     ];
     await Product.insertMany(initialProducts);
     console.log('Initial products seeded');
