@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>V LADY | Bags Collection</title>
-  <link rel="stylesheet" href="Candy_Bags.css" />
+  <link rel="stylesheet" href="product_category.css" />
   <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -20,24 +20,20 @@
   </div>
  <nav>
     <ul class="nav-links">
-  <li><a href="#"><i class="fa fa-house-chimney"></i></a></li>     <!-- Home -->
-  <li><a href="#"><i class="fa fa-circle-info"></i></a></li>
-  <li><a href="#"><i class="fa-solid fa-cart-shopping"></i></a></li>      <!-- Cart -->
-  <li><a href="#"><i class="fa fa-envelope"></i></a></li>          <!-- Contact -->
+  <li><a href="mainpage.html"><i class="fa fa-house-chimney"></i></a></li>     <!-- Home -->
+  <li><a href="about.html"><i class="fa fa-circle-info"></i></a></li>
+  <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>      <!-- Cart -->
+  <li><a href="mainpage.html"><i class="fa fa-envelope"></i></a></li>          <!-- Contact -->
 </ul>
   </nav>
 </header>
-
-<!-- thin moving banner — place immediately after </header> -->
-<div class="thin-banner" aria-hidden="true">
-  <div class="marquee">
-
-    <span>V lady - the lady who leads</span>
-<span>                            </span> <!-- add a few non-breaking spaces -->
-<span> V lady - the lady who leads </span>
-    <!-- duplicate for smooth loop -->
+<!-- Pink Banner -->
+<div class="pink-banner">
+  <div class="scrolling-text">
+    THE LADY WHO LEADS
   </div>
 </div>
+
   <!-- ====== MAIN SECTION: PRODUCTS ====== -->
   <main class="bag-section">
     <h2>CANDY BAGS</h2>
@@ -196,7 +192,7 @@
     </div>
   </div>
 </div>
-  
+
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const wishlistBtn = document.querySelector(".wishlist-btn i");
