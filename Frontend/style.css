@@ -133,7 +133,7 @@ header {
   justify-content: center;
   z-index: 999;
   font-family: 'Montserrat', sans-serif;
-  border-bottom: 1px solid #e5e7eb; /* optional subtle divider */
+  border-bottom: 0px solid #e5e7eb; /* optional subtle divider */
 }
 
 /* Banner Text */
@@ -141,6 +141,8 @@ header {
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 3px;
+  margin-bottom:4px;
+  
   text-transform: uppercase;
 }
 
@@ -162,12 +164,13 @@ header {
   .scrolling-text {
     font-size: 12.5px;
     letter-spacing: 2px;
+    margin-top:4;
   }
 }
 /* Black welcome banner styling */
 .black-banner {
   position: fixed;
-  top: 102px; /* below pink banner (pink banner ~30px) */
+  top: 99px; /* below pink banner (pink banner ~30px) */
   left: 0;
   width: 100%;
   background-color: #000; /* black */
