@@ -167,7 +167,7 @@ header {
 /* Black welcome banner styling */
 .black-banner {
   position: fixed;
-  top: 97px; /* below pink banner (pink banner ~30px) */
+  top: 102px; /* below pink banner (pink banner ~30px) */
   left: 0;
   width: 100%;
   background-color: #000; /* black */
