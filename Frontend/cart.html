@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>V Lady</title>
+  <link rel="stylesheet" href="cart.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+  />
+  <link
+    href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+  />
+</head>
+<body>
+  <header>
+    <div class="logo">
+      V LADY
+      <div class="tagline">Versatile Lady</div>
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="mainpage.html"><i class="fa fa-house-chimney"></i></a></li>
+        <li><a href="about.html"><i class="fa fa-circle-info"></i></a></li>
+        <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+        <li><a href="mainpage.html"><i class="fa fa-envelope"></i></a></li>
+      </ul>
+    </nav>
+  </header>
+<!-- Pink Banner -->
+<div class="pink-banner">
+  <div class="scrolling-text">
+    THE LADY WHO LEADS
+  </div>
+</div>
+
+  <section class="cart-section">
+    <h2>🛒 YOUR SHOPPING CART</h2>
+
+    <div class="cart-item">
+      <img src="https://images.pexels.com/photos/20086704/pexels-photo-20086704.jpeg" alt="Product" />
+      <div class="item-details">
+        <h3>Leather Handbag</h3>
+        <p class="price">₹1500</p>
+      </div>
+      <div class="item-controls">
+        <button class="qty-btn minus">−</button>
+        <span class="quantity">1</span>
+        <button class="qty-btn plus">+</button>
+        <button class="delete-btn">🗑</button>
+      </div>
+    </div>
+
+    <div class="cart-item">
+      <img src="https://images.pexels.com/photos/20086704/pexels-photo-20086704.jpeg" alt="Product" />
+      <div class="item-details">
+        <h3>Stylish Clutch</h3>
+        <p class="price">₹999</p>
+      </div>
+      <div class="item-controls">
+        <button class="qty-btn minus">−</button>
+        <span class="quantity">2</span>
+        <button class="qty-btn plus">+</button>
+        <button class="delete-btn">🗑</button>
+      </div>
+    </div>
+
+    <div class="cart-summary">
+      <p>Total: <span id="cart-total">₹3498</span></p>
+      <button class="pay-btn">Pay Now</button>
+      <button class="btn shop-more">Shop More</button>
+    </div>
+  </section>
+
+  <script>
+    // === CART FUNCTIONALITY ===
+    document.querySelectorAll('.cart-item').forEach(item => {
+      const minus = item.querySelector('.minus');
+      const plus = item.querySelector('.plus');
+      const qty = item.querySelector('.quantity');
+      const price = parseInt(item.querySelector('.price').textContent.replace('₹', ''));
+      const deleteBtn = item.querySelector('.delete-btn');
+
+      minus.addEventListener('click', () => {
+        let q = parseInt(qty.textContent);
+        if (q > 1) qty.textContent = q - 1;
+        updateTotal();
+      });
+
+      plus.addEventListener('click', () => {
+        let q = parseInt(qty.textContent);
+        qty.textContent = q + 1;
+        updateTotal();
+      });
+
+      deleteBtn.addEventListener('click', () => {
+        item.remove();
+        updateTotal();
+      });
+    });
+
+    function updateTotal() {
+      let total = 0;
+      document.querySelectorAll('.cart-item').forEach(item => {
+        const price = parseInt(item.querySelector('.price').textContent.replace('₹', ''));
+        const qty = parseInt(item.querySelector('.quantity').textContent);
+        total += price * qty;
+      });
+      document.getElementById('cart-total').textContent = `₹${total}`;
+    }
+  </script>
+</body>
+</html>
