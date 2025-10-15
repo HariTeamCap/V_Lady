@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>V LADY | Bags Collection</title>
-  <link rel="stylesheet" href="product_category.css" />
+  <link rel="stylesheet" href="accessories.css" />
   <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -192,46 +192,80 @@
     </div>
   </div>
 </div>
-
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const wishlistBtn = document.querySelector(".wishlist-btn i");
-    const productCard = document.querySelector(".wrapper");
-    const productId = productCard.dataset.productId;
+document.addEventListener("DOMContentLoaded", () => {
+  const productWrappers = document.querySelectorAll(".wrapper");
 
-    // Load wishlist from localStorage
-    const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+  productWrappers.forEach(wrapper => {
+    const productId = wrapper.dataset.productId;
+    const productName = wrapper.querySelector(".details h1").textContent;
+    const productPrice = wrapper.querySelector(".details p").textContent;
+    const productImage = wrapper.querySelector(".top img").src;
 
-    // Set active state if product already in wishlist
-    if (wishlist.includes(productId)) {
+    const product = {
+      id: productId,
+      name: productName,
+      price: productPrice,
+      image: productImage,
+      quantity: 1
+    };
+
+    // ====== Wishlist ======
+    const wishlistBtn = wrapper.querySelector(".wishlist-btn i");
+    let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+    // If already in wishlist, mark active
+    if (wishlist.find(p => p.id === productId)) {
       wishlistBtn.textContent = "favorite";
-      wishlistBtn.classList.add("active");
       wishlistBtn.style.color = "#ff4d6d";
     }
 
     wishlistBtn.addEventListener("click", () => {
       let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+      const exists = wishlist.find(p => p.id === productId);
 
-      if (wishlist.includes(productId)) {
-        // Remove from wishlist
-        wishlist = wishlist.filter(id => id !== productId);
+      if (exists) {
+        wishlist = wishlist.filter(p => p.id !== productId);
         wishlistBtn.textContent = "favorite_border";
-        wishlistBtn.classList.remove("active");
         wishlistBtn.style.color = "white";
       } else {
-        // Add to wishlist
-        wishlist.push(productId);
+        wishlist.push({ ...product });
         wishlistBtn.textContent = "favorite";
-        wishlistBtn.classList.add("active");
         wishlistBtn.style.color = "#ff4d6d";
       }
 
       localStorage.setItem("wishlist", JSON.stringify(wishlist));
-      alert("Wishlist updated! Check your Wishlist page."); // optional alert
+      alert("Wishlist updated! Check your Wishlist page.");
+    });
+
+    // ====== Add to Cart ======
+    const addToCartBtn = wrapper.querySelector(".buy i");
+    addToCartBtn.addEventListener("click", () => {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const existing = cart.find(p => p.id === productId);
+
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({ ...product });
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(`${productName} added to cart 🛒`);
+    });
+
+    // ====== Buy Now ======
+    const buyNowBtn = wrapper.querySelector(".buy-now");
+    buyNowBtn.addEventListener("click", () => {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const existing = cart.find(p => p.id === productId);
+      if (!existing) cart.push({ ...product });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      window.location.href = "cart.html";
     });
   });
+});
 </script>
-
 <!-- Footer Section -->
 <footer class="site-footer">
   <p>© 2025 V Lady. All rights reserved. </p>
