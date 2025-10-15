@@ -3,30 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>V LADY | Bags Collection</title>
-  <link rel="stylesheet" href="product_category.css" />
-  <link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-/>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <title>V LADY | Wishlist</title>
+  <link rel="stylesheet" href="accessories.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 </head>
 <body>
 
-  <header>
+<header>
   <div class="logo">
     V LADY
     <div class="tagline">Versatile Lady</div>
   </div>
- <nav>
+  <nav>
     <ul class="nav-links">
-  <li><a href="mainpage.html"><i class="fa fa-house-chimney"></i></a></li>     <!-- Home -->
-  <li><a href="about.html"><i class="fa fa-circle-info"></i></a></li>
-  <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>      <!-- Cart -->
-  <li><a href="mainpage.html"><i class="fa fa-envelope"></i></a></li>          <!-- Contact -->
-</ul>
+      <li><a href="mainpage.html"><i class="fa fa-house-chimney"></i></a></li>
+      <li><a href="about.html"><i class="fa fa-circle-info"></i></a></li>
+      <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+      <li><a href="mainpage.html"><i class="fa fa-envelope"></i></a></li>
+    </ul>
   </nav>
 </header>
+
 <!-- Pink Banner -->
 <div class="pink-banner">
   <div class="scrolling-text">
@@ -34,10 +32,9 @@
   </div>
 </div>
 
-  <!-- ====== MAIN SECTION: PRODUCTS ====== -->
-  <main class="bag-section">
-    <h2>MY WISHLIST❤️</h2>
-          <!-- === VIEW TOGGLE BUTTONS WITH ICONS === -->
+<main class="bag-section">
+  <h2>MY WISHLIST ❤️</h2>
+  <!-- === VIEW TOGGLE BUTTONS WITH ICONS === -->
 <div class="view-toggle">
   <button class="view-btn" data-columns="1" title="1 per row">
     <!-- 1-column icon -->
@@ -64,178 +61,101 @@
     </svg>
   </button>
 
-  <!-- Wishlist Button (Heart Emoji) 
+  <!-- Wishlist Button (Heart Emoji) -->
   <button class="view-btn wishlist-btn-toggle" title="View Wishlist" 
           onclick="window.location.href='wishlist.html'" 
           style="font-size:22px; color:#ff4d6d;">
     ❤️
-  </button>-->
+  </button>
 </div>
-    <div class="product-container">
-  <!-- Product Card 1 -->
-  <div class="wrapper" data-product-id="chair001">
-    <div class="wishlist-btn">
-      <i class="material-icons">favorite_border</i>
-    </div>
-    <div class="container">
-      <div class="top">
-        <a href="productdetails.html">
-          <img src="https://s-media-cache-ak0.pinimg.com/736x/49/80/6f/49806f3f1c7483093855ebca1b8ae2c4.jpg" alt="Chair" />
-        </a>
-      </div>
-      <div class="bottom">
-        <div class="left">
-          <div class="details">
-            <h1>Bags</h1>
-            <p>₹950</p>
-          </div>
-          <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
-          <div class="buy-now">BUY<br>NOW</div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- Product Card 2 -->
-  <div class="wrapper" data-product-id="chair002">
-    <div class="wishlist-btn">
-      <i class="material-icons">favorite_border</i>
-    </div>
-    <div class="container">
-      <div class="top">
-        <a href="productdetails.html">
-          <img src="https://s-media-cache-ak0.pinimg.com/736x/49/80/6f/49806f3f1c7483093855ebca1b8ae2c4.jpg" alt="Chair" />
-        </a>
-      </div>
-      <div class="bottom">
-        <div class="left">
-          <div class="details">
-            <h1>Bags</h1>
-            <p>₹950</p>
-          </div>
-          <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
-          <div class="buy-now">BUY<br>NOW</div>
-        </div>
-      </div>
-    </div>
+  <div class="product-container">
+    <!-- Wishlist products will be injected here -->
   </div>
-
-  <!-- Product Card 3 -->
-  <div class="wrapper" data-product-id="chair003">
-    <div class="wishlist-btn">
-      <i class="material-icons">favorite_border</i>
-    </div>
-    <div class="container">
-      <div class="top">
-        <a href="productdetails.html">
-          <img src="https://s-media-cache-ak0.pinimg.com/736x/49/80/6f/49806f3f1c7483093855ebca1b8ae2c4.jpg" alt="Chair" />
-        </a>
-      </div>
-      <div class="bottom">
-        <div class="left">
-          <div class="details">
-            <h1>Bags</h1>
-            <p>₹950</p>
-          </div>
-          <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
-          <div class="buy-now">BUY<br>NOW</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Product Card 4 -->
-  <div class="wrapper" data-product-id="chair004">
-    <div class="wishlist-btn">
-      <i class="material-icons">favorite_border</i>
-    </div>
-    <div class="container">
-      <div class="top">
-        <a href="productdetails.html">
-          <img src="https://s-media-cache-ak0.pinimg.com/736x/49/80/6f/49806f3f1c7483093855ebca1b8ae2c4.jpg" alt="Chair" />
-        </a>
-      </div>
-      <div class="bottom">
-        <div class="left">
-          <div class="details">
-            <h1>Bags</h1>
-            <p>₹950</p>
-          </div>
-          <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
-          <div class="buy-now">BUY<br>NOW</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Product Card 5 -->
-  <div class="wrapper" data-product-id="chair005">
-    <div class="wishlist-btn">
-      <i class="material-icons">favorite_border</i>
-    </div>
-    <div class="container">
-      <div class="top">
-        <a href="productdetails.html">
-          <img src="https://s-media-cache-ak0.pinimg.com/736x/49/80/6f/49806f3f1c7483093855ebca1b8ae2c4.jpg" alt="Chair" />
-        </a>
-      </div>
-      <div class="bottom">
-        <div class="left">
-          <div class="details">
-            <h1>Bags</h1>
-            <p>₹950</p>
-          </div>
-          <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
-          <div class="buy-now">BUY<br>NOW</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+</main>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const wishlistBtn = document.querySelector(".wishlist-btn i");
-    const productCard = document.querySelector(".wrapper");
-    const productId = productCard.dataset.productId;
+document.addEventListener("DOMContentLoaded", () => {
+  const wishlistContainer = document.querySelector(".product-container");
 
-    // Load wishlist from localStorage
-    const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+  // Load wishlist from localStorage
+  let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
 
-    // Set active state if product already in wishlist
-    if (wishlist.includes(productId)) {
-      wishlistBtn.textContent = "favorite";
-      wishlistBtn.classList.add("active");
-      wishlistBtn.style.color = "#ff4d6d";
-    }
+  if (wishlist.length === 0) {
+    wishlistContainer.innerHTML = "<p>Your wishlist is empty ❤️</p>";
+    return;
+  }
 
-    wishlistBtn.addEventListener("click", () => {
-      let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+  wishlistContainer.innerHTML = ""; // Clear container
 
-      if (wishlist.includes(productId)) {
-        // Remove from wishlist
-        wishlist = wishlist.filter(id => id !== productId);
-        wishlistBtn.textContent = "favorite_border";
-        wishlistBtn.classList.remove("active");
-        wishlistBtn.style.color = "white";
-      } else {
-        // Add to wishlist
-        wishlist.push(productId);
-        wishlistBtn.textContent = "favorite";
-        wishlistBtn.classList.add("active");
-        wishlistBtn.style.color = "#ff4d6d";
-      }
+  wishlist.forEach(product => {
+    const wrapper = document.createElement("div");
+    wrapper.classList.add("wrapper");
+    wrapper.dataset.productId = product.id;
 
+    wrapper.innerHTML = `
+      <div class="wishlist-btn">
+        <i class="material-icons" style="color:#ff4d6d;">favorite</i>
+      </div>
+      <div class="container">
+        <div class="top">
+          <a href="productdetails.html">
+            <img src="${product.image}" alt="${product.name}" />
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="left">
+            <div class="details">
+              <h1>${product.name}</h1>
+              <p>${product.price}</p>
+            </div>
+            <div class="buy">
+              <i class="material-icons">add_shopping_cart</i>
+            </div>
+            <div class="buy-now">
+              <button class="buy-now-btn">BUY NOW</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    // Remove from wishlist
+    wrapper.querySelector(".wishlist-btn i").addEventListener("click", () => {
+      wishlist = wishlist.filter(p => p.id !== product.id);
       localStorage.setItem("wishlist", JSON.stringify(wishlist));
-      alert("Wishlist updated! Check your Wishlist page."); // optional alert
+      wrapper.remove();
+      if (wishlist.length === 0) wishlistContainer.innerHTML = "<p>Your wishlist is empty ❤️</p>";
     });
+
+    // Add to cart
+    wrapper.querySelector(".buy i").addEventListener("click", () => {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const existing = cart.find(p => p.id === product.id);
+      if (existing) existing.quantity += 1;
+      else cart.push({ ...product, quantity: 1 });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(`${product.name} added to cart 🛒`);
+    });
+
+    // Buy Now -> add to cart + go to cart page
+    wrapper.querySelector(".buy-now-btn").addEventListener("click", () => {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const existing = cart.find(p => p.id === product.id);
+      if (existing) existing.quantity += 1;
+      else cart.push({ ...product, quantity: 1 });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      window.location.href = "cart.html";
+    });
+
+    wishlistContainer.appendChild(wrapper);
   });
+});
 </script>
 
-<!-- Footer Section -->
 <footer class="site-footer">
-  <p>© 2025 V Lady. All rights reserved. </p>
+  <p>© 2025 V Lady. All rights reserved.</p>
 </footer>
 
-
+</body>
 </html>
