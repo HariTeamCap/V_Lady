@@ -21,7 +21,8 @@ mongoose.connect(MONGO_URI)
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'public')));
+// Serve the static frontend files from the sibling Frontend directory
+app.use(express.static(path.join(__dirname, '..', 'Frontend')));
 app.use(cors());
 app.use(session({
   secret: process.env.SESSION_SECRET || 'your-secret-key',
@@ -78,60 +79,60 @@ const Wishlist = mongoose.model('Wishlist', wishlistSchema);
 
 // Routes
 
-// Home page
+// Home page -> serve Frontend/mainpage.html
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'mainpage.html'));
+  res.sendFile(path.join(__dirname, '..', 'Frontend', 'mainpage.html'));
 });
 
 // Bag categories page
 app.get('/bagcategories', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'bagcatogories.html'));
+  res.sendFile(path.join(__dirname, '..', 'Frontend', 'bagcatogories.html'));
 });
 
 // Category pages
 app.get('/accessories', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'Accessories.html'));
+  res.sendFile(path.join(__dirname, '..', 'Frontend', 'accessories.html'));
 });
 
 app.get('/clutches', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'Clutches.html'));
+  res.sendFile(path.join(__dirname, '..', 'Frontend', 'Clutches.html'));
 });
 
 app.get('/candybags', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'Candy_Bags.html'));
+  res.sendFile(path.join(__dirname, '..', 'Frontend', 'Candy_Bags.html'));
 });
 
 app.get('/piebags', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'Pie_Bags.html'));
+  res.sendFile(path.join(__dirname, '..', 'Frontend', 'Pie_Bags.html'));
 });
 
 app.get('/allhandbags', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'All_Handbags.html'));
+  res.sendFile(path.join(__dirname, '..', 'Frontend', 'All_Handbags.html'));
 });
 
 // Contact page
 app.get('/contact', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'contact.html'));
+  res.sendFile(path.join(__dirname, '..', 'Frontend', 'contact.html'));
 });
 
 // Product details page
 app.get('/productdetails', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'productdetails.html'));
+  res.sendFile(path.join(__dirname, '..', 'Frontend', 'productdetails.html'));
 });
 
 // Wishlist page
 app.get('/wishlist', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'wishlist.html'));
+  res.sendFile(path.join(__dirname, '..', 'Frontend', 'wishlist.html'));
 });
 
 // About page
 app.get('/about', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'about.html'));
+  res.sendFile(path.join(__dirname, '..', 'Frontend', 'about.html'));
 });
 
 // Cart page
 app.get('/cart', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'cart.html'));
+  res.sendFile(path.join(__dirname, '..', 'Frontend', 'cart.html'));
 });
 
 // Handle contact form submission
@@ -283,7 +284,11 @@ app.delete('/api/wishlist/remove/:productId', async (req, res) => {
 
 // 404 Handler
 app.use((req, res) => {
-  res.status(404).send('Page not found');
+  // For unknown non-API routes, serve the frontend index (SPA-friendly). For API routes, return 404.
+  if (req.originalUrl.startsWith('/api/')) {
+    return res.status(404).json({ error: 'API endpoint not found' });
+  }
+  res.status(404).sendFile(path.join(__dirname, '..', 'Frontend', 'mainpage.html'));
 });
 
 // Start server
