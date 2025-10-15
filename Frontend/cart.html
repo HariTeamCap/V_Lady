@@ -3,36 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>V Lady</title>
+  <title>V Lady | Cart</title>
   <link rel="stylesheet" href="cart.css" />
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-  />
-  <link
-    href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    rel="stylesheet"
-  />
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
-  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
 </head>
 <body>
-  <header>
-    <div class="logo">
-      V LADY
-      <div class="tagline">Versatile Lady</div>
-    </div>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="mainpage.html"><i class="fa fa-house-chimney"></i></a></li>
-        <li><a href="about.html"><i class="fa fa-circle-info"></i></a></li>
-        <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
-        <li><a href="mainpage.html"><i class="fa fa-envelope"></i></a></li>
-      </ul>
-    </nav>
-  </header>
+
+<header>
+  <div class="logo">
+    V LADY
+    <div class="tagline">Versatile Lady</div>
+  </div>
+  <nav>
+    <ul class="nav-links">
+      <li><a href="mainpage.html"><i class="fa fa-house-chimney"></i></a></li>
+      <li><a href="about.html"><i class="fa fa-circle-info"></i></a></li>
+      <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+      <li><a href="mainpage.html"><i class="fa fa-envelope"></i></a></li>
+    </ul>
+  </nav>
+</header>
+
 <!-- Pink Banner -->
 <div class="pink-banner">
   <div class="scrolling-text">
@@ -40,80 +33,167 @@
   </div>
 </div>
 
-  <section class="cart-section">
-    <h2>🛒 YOUR SHOPPING CART</h2>
+<section class="cart-section">
+  <h2>🛒 YOUR SHOPPING CART</h2>
+  <div class="cart-items">
+    <!-- Cart items will be dynamically injected here -->
+  </div>
 
-    <div class="cart-item">
-      <img src="https://images.pexels.com/photos/20086704/pexels-photo-20086704.jpeg" alt="Product" />
-      <div class="item-details">
-        <h3>Leather Handbag</h3>
-        <p class="price">₹1500</p>
-      </div>
-      <div class="item-controls">
-        <button class="qty-btn minus">−</button>
-        <span class="quantity">1</span>
-        <button class="qty-btn plus">+</button>
-        <button class="delete-btn">🗑</button>
-      </div>
+  <div class="cart-summary">
+    <p>Total: <span id="cart-total">₹0</span></p>
+
+    <!-- Address Section -->
+    <div class="address-section">
+      <h3>Shipping Address</h3>
+      <input type="text" id="name" placeholder="Full Name" required />
+      <input type="text" id="phone" placeholder="Phone Number" required />
+      <input type="text" id="house" placeholder="House/Flat Number" required />
+      <input type="text" id="locality" placeholder="Locality" required />
+      <input type="text" id="city" placeholder="City" required />
+      <input type="text" id="pincode" placeholder="Pincode" required />
+      <input type="text" id="area" placeholder="Area (Optional)" />
+      <input type="text" id="landmark" placeholder="Landmark (Optional)" />
     </div>
 
-    <div class="cart-item">
-      <img src="https://images.pexels.com/photos/20086704/pexels-photo-20086704.jpeg" alt="Product" />
-      <div class="item-details">
-        <h3>Stylish Clutch</h3>
-        <p class="price">₹999</p>
-      </div>
-      <div class="item-controls">
-        <button class="qty-btn minus">−</button>
-        <span class="quantity">2</span>
-        <button class="qty-btn plus">+</button>
-        <button class="delete-btn">🗑</button>
-      </div>
+    <!-- Coupon Section -->
+    <div class="coupon-section">
+      <input type="text" id="coupon-code" placeholder="Enter coupon code" />
+      <button id="apply-coupon">Apply Now</button>
     </div>
 
-    <div class="cart-summary">
-      <p>Total: <span id="cart-total">₹3498</span></p>
-      <button class="pay-btn">Pay Now</button>
-      <button class="btn shop-more">Shop More</button>
-    </div>
-  </section>
+    <!-- Pay and Shop Buttons -->
+    <button class="pay-btn">Pay Now</button>
+    <button class="btn shop-more" onclick="window.location.href='mainpage.html'">Shop More</button>
+  </div>
+</section>
 
-  <script>
-    // === CART FUNCTIONALITY ===
-    document.querySelectorAll('.cart-item').forEach(item => {
-      const minus = item.querySelector('.minus');
-      const plus = item.querySelector('.plus');
-      const qty = item.querySelector('.quantity');
-      const price = parseInt(item.querySelector('.price').textContent.replace('₹', ''));
-      const deleteBtn = item.querySelector('.delete-btn');
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const cartContainer = document.querySelector(".cart-section");
+  const cartItemsDiv = cartContainer.querySelector(".cart-items");
+  const totalSpan = document.getElementById("cart-total");
+  const payBtn = document.querySelector(".pay-btn");
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-      minus.addEventListener('click', () => {
-        let q = parseInt(qty.textContent);
-        if (q > 1) qty.textContent = q - 1;
+  let discountApplied = false;
+
+  // Render cart items
+  function renderCart() {
+    cartItemsDiv.innerHTML = "";
+    if (cart.length === 0) {
+      cartContainer.innerHTML = "<p>Your cart is empty 🛒</p>";
+      return;
+    }
+
+    cart.forEach(product => {
+      const itemDiv = document.createElement("div");
+      itemDiv.classList.add("cart-item");
+      itemDiv.dataset.productId = product.id;
+
+      itemDiv.innerHTML = `
+        <img src="${product.image}" alt="${product.name}" />
+        <div class="item-details">
+          <h3>${product.name}</h3>
+          <p class="price">${product.price}</p>
+        </div>
+        <div class="item-controls">
+          <button class="qty-btn minus">−</button>
+          <span class="quantity">${product.quantity || 1}</span>
+          <button class="qty-btn plus">+</button>
+          <button class="delete-btn">🗑</button>
+        </div>
+      `;
+
+      const qtySpan = itemDiv.querySelector(".quantity");
+
+      // Minus button
+      itemDiv.querySelector(".minus").addEventListener("click", () => {
+        if (product.quantity > 1) {
+          product.quantity--;
+          qtySpan.textContent = product.quantity;
+          localStorage.setItem("cart", JSON.stringify(cart));
+          updateTotal();
+        }
+      });
+
+      // Plus button
+      itemDiv.querySelector(".plus").addEventListener("click", () => {
+        product.quantity++;
+        qtySpan.textContent = product.quantity;
+        localStorage.setItem("cart", JSON.stringify(cart));
         updateTotal();
       });
 
-      plus.addEventListener('click', () => {
-        let q = parseInt(qty.textContent);
-        qty.textContent = q + 1;
-        updateTotal();
+      // Delete button
+      itemDiv.querySelector(".delete-btn").addEventListener("click", () => {
+        cart = cart.filter(p => p.id !== product.id);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        renderCart();
       });
 
-      deleteBtn.addEventListener('click', () => {
-        item.remove();
-        updateTotal();
-      });
+      cartItemsDiv.appendChild(itemDiv);
     });
 
-    function updateTotal() {
-      let total = 0;
-      document.querySelectorAll('.cart-item').forEach(item => {
-        const price = parseInt(item.querySelector('.price').textContent.replace('₹', ''));
-        const qty = parseInt(item.querySelector('.quantity').textContent);
-        total += price * qty;
-      });
-      document.getElementById('cart-total').textContent = `₹${total}`;
+    updateTotal();
+  }
+
+  // Total calculation
+  function updateTotal() {
+    let total = 0;
+    cart.forEach(product => {
+      const priceNum = parseInt(product.price.replace('₹',''));
+      const qty = product.quantity || 1;
+      total += priceNum * qty;
+    });
+
+    if(discountApplied) total = Math.round(total / 2);
+    totalSpan.textContent = `₹${total}`;
+  }
+
+  // ===== Coupon Code =====
+  const couponInput = document.getElementById("coupon-code");
+  const applyBtn = document.getElementById("apply-coupon");
+
+  applyBtn.addEventListener("click", () => {
+    const code = couponInput.value.trim().toUpperCase();
+    if(code === "WELCOME50") {
+      if(!discountApplied){
+        discountApplied = true;
+        updateTotal();
+        alert("🎉 Congratulations! You have applied 50% discount successfully!");
+      } else {
+        alert("Coupon already applied!");
+      }
+    } else {
+      alert("❌ Incorrect code applied. Only 'WELCOME50' is valid.");
     }
-  </script>
+  });
+
+  // ===== Pay Now Button Validation =====
+  payBtn.addEventListener("click", () => {
+    const name = document.getElementById("name").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const house = document.getElementById("house").value.trim();
+    const locality = document.getElementById("locality").value.trim();
+    const city = document.getElementById("city").value.trim();
+    const pincode = document.getElementById("pincode").value.trim();
+
+    if(!name || !phone || !house || !locality || !city || !pincode){
+      alert("❌ Please fill in all required address details before proceeding!");
+      return;
+    }
+
+    if(cart.length === 0){
+      alert("Cart is empty!");
+      return;
+    }
+
+    alert("✅ Address verified! Proceeding to payment...");
+  });
+
+  renderCart();
+});
+</script>
+
 </body>
 </html>
