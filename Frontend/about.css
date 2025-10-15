@@ -18,9 +18,6 @@ a {
   color: inherit;
 }
 
-/* ===========================
-   HEADER
-=========================== */
 /* Header styling */
 header {
   width: 100%;
@@ -131,10 +128,10 @@ header {
 /* 🌸 Static Thin Banner */
 .pink-banner {
   position: fixed;
-  top: 75px; /* adjust based on your header height */
+  top: 77px; /* adjust based on your header height */
   left: 0;
   width: 100%;
-  background-color: #F1F5F9; /* soft gray-blue tone */
+  background-color: #ff9fcf; /* soft gray-blue tone */
   color: #000000; /* black text */
   height: 20px; /* thin height */
   display: flex;
@@ -166,14 +163,13 @@ header {
 /* Mobile adjustments */
 @media (max-width: 768px) {
   .pink-banner {
-    height: 18px;
+    height: 22px;
   }
   .scrolling-text {
     font-size: 12.5px;
     letter-spacing: 2px;
   }
 }
-
 
 /* ===== ABOUT PAGE STYLING ===== */
 .about-section {
