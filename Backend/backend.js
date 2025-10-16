@@ -14,10 +14,9 @@ const PORT = process.env.PORT || 3000;
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/vlady';
 
 // Connect to MongoDB
-mongoose.connect(MONGO_URI)
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.error('MongoDB connection error:', err));
-
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => app.listen(PORT, () => console.log(`Server running on port ${PORT}`)))
+  .catch(err => console.log(err));
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -136,8 +135,13 @@ app.get('/cart', (req, res) => {
 });
 
 // Handle contact form submission
+// Accept frontend form field names (Google Forms style)
 app.post('/contact', async (req, res) => {
-  const { name, phone, email, message } = req.body;
+  // Map frontend field names to backend schema
+  const name = req.body['entry.1111111111'] || req.body.name;
+  const phone = req.body['entry.2222222222'] || req.body.phone;
+  const email = req.body['entry.3333333333'] || req.body.email;
+  const message = req.body['entry.4444444444'] || req.body.message;
 
   try {
     const newContact = new Contact({ name, phone, email, message });
@@ -151,10 +155,19 @@ app.post('/contact', async (req, res) => {
     };
     await transporter.sendMail(mailOptions);
 
-    res.redirect('/contact?success=true');
+    // If AJAX, send JSON; if form, redirect
+    if (req.headers.accept && req.headers.accept.includes('application/json')) {
+      res.json({ success: true });
+    } else {
+      res.redirect('/contact?success=true');
+    }
   } catch (error) {
     console.error('Error handling contact:', error);
-    res.status(500).send('Error sending message');
+    if (req.headers.accept && req.headers.accept.includes('application/json')) {
+      res.status(500).json({ error: 'Error sending message' });
+    } else {
+      res.status(500).send('Error sending message');
+    }
   }
 });
 
