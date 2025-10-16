@@ -139,7 +139,7 @@ header {
   justify-content: center;
   z-index: 999;
   font-family: 'Montserrat', sans-serif;
-  border-bottom: 1px solid #e5e7eb; /* optional subtle divider */
+  border-bottom: 0px solid #e5e7eb; /* optional subtle divider */
 }
 
 /* Banner Text */
@@ -164,6 +164,7 @@ header {
 @media (max-width: 768px) {
   .pink-banner {
     height: 22px;
+    top:76px;
   }
   .scrolling-text {
     font-size: 12.5px;
