@@ -139,7 +139,7 @@ header {
   justify-content: center;
   z-index: 999;
   font-family: 'Montserrat', sans-serif;
-  border-bottom: 1px solid #e5e7eb; /* optional subtle divider */
+  border-bottom: 0px solid #e5e7eb; /* optional subtle divider */
 }
 
 /* Banner Text */
@@ -164,6 +164,7 @@ header {
 @media (max-width: 768px) {
   .pink-banner {
     height: 22px;
+    top:76px;
   }
   .scrolling-text {
     font-size: 12.5px;
@@ -325,6 +326,17 @@ header {
   color: #254053;
   margin-top: 5px;
 }
+.left .details .mrp {
+  font-size: 14px;
+  font-weight: 500;
+  color:	#880808;
+  text-decoration: line-through; /* cross out MRP */
+  margin-top: 3px;
+}
+
+.left .details .mrp span {
+  color:black;
+}
 
 /* BUTTONS */
 .left .buy,
@@ -455,5 +467,9 @@ header {
     height: 100px;
     font-size: 18px;
     margin-right:-10px;
+  }
+  .bag-section h2 {
+    font-size: 24px;
+    letter-spacing:10px;
   }
 }
