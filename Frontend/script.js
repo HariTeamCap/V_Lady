@@ -4,13 +4,15 @@ document.addEventListener("DOMContentLoaded", () => {
   productWrappers.forEach(wrapper => {
     const productId = wrapper.dataset.productId;
     const productName = wrapper.querySelector(".details h1").textContent;
-    const productPrice = wrapper.querySelector(".details p").textContent;
+    const productPrice = wrapper.querySelector(".details .discounted-price").textContent;
+    const productMrp = wrapper.querySelector(".details .mrp span").textContent;
     const productImage = wrapper.querySelector(".top img").src;
 
     const product = {
       id: productId,
       name: productName,
       price: productPrice,
+      mrp: productMrp,
       image: productImage,
       quantity: 1
     };
