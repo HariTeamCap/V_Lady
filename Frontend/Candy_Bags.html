@@ -83,8 +83,10 @@
           <div class="left">
             <div class="details">
               <h1>Candy Bag 1</h1>
-              <p>₹950</p>
-            </div>
+         <p class="discounted-price">₹1250</p>
+    <p class="mrp">MRP: <span>₹2200</span></p>
+    </div>
+          
             <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
             <div class="buy-now">BUY<br>NOW</div>
           </div>
@@ -107,8 +109,10 @@
           <div class="left">
             <div class="details">
               <h1>Candy Bag 2</h1>
-              <p>₹1050</p>
-            </div>
+              <p class="discounted-price">₹1250</p>
+    <p class="mrp">MRP: <span>₹2200</span></p>
+    </div>
+            
             <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
             <div class="buy-now">BUY<br>NOW</div>
           </div>
@@ -127,13 +131,16 @@ document.addEventListener("DOMContentLoaded", () => {
   productWrappers.forEach(wrapper => {
     const productId = wrapper.dataset.productId;
     const productName = wrapper.querySelector(".details h1").textContent;
-    const productPrice = wrapper.querySelector(".details p").textContent;
+    const productPrice = wrapper.querySelector(".details .discounted-price").textContent;
+    const productMRPElement = wrapper.querySelector(".details .mrp span");
+    const productMRP = productMRPElement ? productMRPElement.textContent : "";
     const productImage = wrapper.querySelector(".top img").src;
 
     const product = {
       id: productId,
       name: productName,
       price: productPrice,
+      mrp: productMRP,
       image: productImage,
       quantity: 1
     };
@@ -142,6 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const wishlistBtn = wrapper.querySelector(".wishlist-btn i");
     let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
 
+    // If already in wishlist, mark active
     if (wishlist.find(p => p.id === productId)) {
       wishlistBtn.textContent = "favorite";
       wishlistBtn.style.color = "#ff4d6d";
@@ -156,10 +164,11 @@ document.addEventListener("DOMContentLoaded", () => {
         wishlistBtn.textContent = "favorite_border";
         wishlistBtn.style.color = "white";
       } else {
-        wishlist.push(product);
+        wishlist.push({ ...product });
         wishlistBtn.textContent = "favorite";
         wishlistBtn.style.color = "#ff4d6d";
       }
+
       localStorage.setItem("wishlist", JSON.stringify(wishlist));
       alert(`${productName} updated in Wishlist!`);
     });
