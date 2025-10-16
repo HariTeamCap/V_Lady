@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>V LADY | Wishlist</title>
-  <link rel="stylesheet" href="accessories.css" />
+  <link rel="stylesheet" href="wishlist.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 </head>
@@ -27,58 +27,43 @@
 
 <!-- Pink Banner -->
 <div class="pink-banner">
-  <div class="scrolling-text">
-    THE LADY WHO LEADS
-  </div>
+  <div class="scrolling-text">THE LADY WHO LEADS</div>
 </div>
 
 <main class="bag-section">
   <h2>MY WISHLIST ❤️</h2>
-  <!-- === VIEW TOGGLE BUTTONS WITH ICONS === -->
-<div class="view-toggle">
-  <button class="view-btn" data-columns="1" title="1 per row">
-    <!-- 1-column icon -->
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <rect x="3" y="3" width="18" height="18" rx="2" />
-    </svg>
-  </button>
 
-  <button class="view-btn" data-columns="2" title="2 per row">
-    <!-- 2-column icon -->
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <rect x="3" y="3" width="8" height="18" rx="2" />
-      <rect x="13" y="3" width="8" height="18" rx="2" />
-    </svg>
-  </button>
+  <!-- View buttons -->
+  <div class="view-toggle">
+    <button class="view-btn" data-columns="1" title="1 per row">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="3" width="18" height="18" rx="2" />
+      </svg>
+    </button>
 
-  <button class="view-btn" data-columns="4" title="4 per row">
-    <!-- window-like grid icon -->
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="3" y="3" width="18" height="18" rx="2" />
-      <line x1="3" y1="12" x2="21" y2="12" />
-      <line x1="12" y1="3" x2="12" y2="21" />
-    </svg>
-  </button>
+    <button class="view-btn" data-columns="2" title="2 per row">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="3" width="8" height="18" rx="2" />
+        <rect x="13" y="3" width="8" height="18" rx="2" />
+      </svg>
+    </button>
 
-  <!-- Wishlist Button (Heart Emoji) -->
-  <button class="view-btn wishlist-btn-toggle" title="View Wishlist" 
-          onclick="window.location.href='wishlist.html'" 
-          style="font-size:22px; color:#ff4d6d;">
-    ❤️
-  </button>
-</div>
-
-  <div class="product-container">
-    <!-- Wishlist products will be injected here -->
+    <button class="view-btn" data-columns="4" title="4 per row">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2" />
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="12" y1="3" x2="12" y2="21" />
+      </svg>
+    </button>
   </div>
+
+  <div class="product-container"></div>
 </main>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const wishlistContainer = document.querySelector(".product-container");
-
-  // Load wishlist from localStorage
   let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
 
   if (wishlist.length === 0) {
@@ -86,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  wishlistContainer.innerHTML = ""; // Clear container
+  wishlistContainer.innerHTML = "";
 
   wishlist.forEach(product => {
     const wrapper = document.createElement("div");
@@ -99,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
       <div class="container">
         <div class="top">
-          <a href="productdetails.html">
+          <a href="productdetails.html?id=${product.id}">
             <img src="${product.image}" alt="${product.name}" />
           </a>
         </div>
@@ -107,14 +92,15 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="left">
             <div class="details">
               <h1>${product.name}</h1>
-              <p>${product.price}</p>
+              <p>
+                <span class="discounted-price">${product.price}</span><br>
+                <span class="mrp">MRP: ${product.mrp}</span>
+              </p>
             </div>
             <div class="buy">
               <i class="material-icons">add_shopping_cart</i>
             </div>
-            <div class="buy-now">
-              <button class="buy-now-btn">BUY NOW</button>
-            </div>
+            <div class="buy-now">BUY<br> NOW</div>
           </div>
         </div>
       </div>
@@ -138,8 +124,8 @@ document.addEventListener("DOMContentLoaded", () => {
       alert(`${product.name} added to cart 🛒`);
     });
 
-    // Buy Now -> add to cart + go to cart page
-    wrapper.querySelector(".buy-now-btn").addEventListener("click", () => {
+    // Buy Now
+    wrapper.querySelector(".buy-now").addEventListener("click", () => {
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
       const existing = cart.find(p => p.id === product.id);
       if (existing) existing.quantity += 1;
