@@ -3,10 +3,7 @@
   "version": "1.0.0",
   "description": "V Lady Frontend",
   "scripts": {
-    "start": "npx http-server . -p 8080 -c-1",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "npx http-server . -p 8080 -c-1"
     },
   "dependencies": {
     "http-server": "^14.1.1"
