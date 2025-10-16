@@ -78,8 +78,10 @@
           <div class="left">
             <div class="details">
               <h1>Pie Bag 1</h1>
-              <p>₹899</p>
-            </div>
+              <p class="discounted-price">₹1250</p>
+    <p class="mrp">MRP: <span>₹2200</span></p>
+    </div>
+            
             <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
             <div class="buy-now">BUY<br>NOW</div>
           </div>
@@ -102,8 +104,11 @@
           <div class="left">
             <div class="details">
               <h1>Pie Bag 2</h1>
-              <p>₹1099</p>
-            </div>
+              <p class="discounted-price">₹1250</p>
+    <p class="mrp">MRP: <span>₹2200</span></p>
+    </div>
+
+
             <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
             <div class="buy-now">BUY<br>NOW</div>
           </div>
@@ -126,8 +131,10 @@
           <div class="left">
             <div class="details">
               <h1>Pie Bag 3</h1>
-              <p>₹999</p>
-            </div>
+              <p class="discounted-price">₹1250</p>
+    <p class="mrp">MRP: <span>₹2200</span></p>
+    </div>
+          
             <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
             <div class="buy-now">BUY<br>NOW</div>
           </div>
@@ -138,6 +145,7 @@
   </div>
 </main>
 
+
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const productWrappers = document.querySelectorAll(".wrapper");
@@ -145,21 +153,25 @@ document.addEventListener("DOMContentLoaded", () => {
   productWrappers.forEach(wrapper => {
     const productId = wrapper.dataset.productId;
     const productName = wrapper.querySelector(".details h1").textContent;
-    const productPrice = wrapper.querySelector(".details p").textContent;
+    const productPrice = wrapper.querySelector(".details .discounted-price").textContent;
+    const productMRPElement = wrapper.querySelector(".details .mrp span");
+    const productMRP = productMRPElement ? productMRPElement.textContent : "";
     const productImage = wrapper.querySelector(".top img").src;
 
     const product = {
       id: productId,
       name: productName,
       price: productPrice,
+      mrp: productMRP,
       image: productImage,
       quantity: 1
     };
 
-    // ===== Wishlist =====
+    // ====== Wishlist ======
     const wishlistBtn = wrapper.querySelector(".wishlist-btn i");
     let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
 
+    // If already in wishlist, mark active
     if (wishlist.find(p => p.id === productId)) {
       wishlistBtn.textContent = "favorite";
       wishlistBtn.style.color = "#ff4d6d";
@@ -174,15 +186,16 @@ document.addEventListener("DOMContentLoaded", () => {
         wishlistBtn.textContent = "favorite_border";
         wishlistBtn.style.color = "white";
       } else {
-        wishlist.push(product);
+        wishlist.push({ ...product });
         wishlistBtn.textContent = "favorite";
         wishlistBtn.style.color = "#ff4d6d";
       }
+
       localStorage.setItem("wishlist", JSON.stringify(wishlist));
       alert(`${productName} updated in Wishlist!`);
     });
 
-    // ===== Add to Cart =====
+    // ====== Add to Cart ======
     const addToCartBtn = wrapper.querySelector(".buy i");
     addToCartBtn.addEventListener("click", () => {
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -197,7 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
       alert(`${productName} added to Cart 🛒`);
     });
 
-    // ===== Buy Now =====
+    // ====== Buy Now ======
     const buyNowBtn = wrapper.querySelector(".buy-now");
     buyNowBtn.addEventListener("click", () => {
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
