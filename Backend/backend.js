@@ -10,6 +10,8 @@ const cors = require('cors');
 const bcrypt = require('bcryptjs');
 require('dotenv').config();
 
+const { registerSchema, loginSchema, productSchema: productValidationSchema, contactSchema: contactValidationSchema, cartSchema: cartValidationSchema, orderSchema: orderValidationSchema } = require('./validators');
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/vlady';
@@ -177,6 +179,9 @@ app.get('/cart', (req, res) => {
 // Handle contact form submission
 // Accept frontend form field names (Google Forms style)
 app.post('/contact', async (req, res) => {
+  const { error } = contactSchema.validate(req.body);
+  if (error) return res.status(400).json({ error: error.details[0].message });
+
   // Map frontend field names to backend schema
   const name = req.body['entry.1111111111'] || req.body.name;
   const phone = req.body['entry.2222222222'] || req.body.phone;
@@ -215,6 +220,9 @@ app.post('/contact', async (req, res) => {
 
 // User Authentication Routes
 app.post('/api/register', async (req, res) => {
+  const { error } = registerSchema.validate(req.body);
+  if (error) return res.status(400).json({ error: error.details[0].message });
+
   const { username, password } = req.body;
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -227,6 +235,9 @@ app.post('/api/register', async (req, res) => {
 });
 
 app.post('/api/login', async (req, res) => {
+  const { error } = loginSchema.validate(req.body);
+  if (error) return res.status(400).json({ error: error.details[0].message });
+
   const { username, password } = req.body;
   try {
     const user = await User.findOne({ username });
@@ -267,8 +278,24 @@ app.get('/api/products', async (req, res) => {
   res.json(products);
 });
 
+// Get a single product by ID
+app.get('/api/products/:id', async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    if (!product) {
+      return res.status(404).json({ error: 'Product not found' });
+    }
+    res.json(product);
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 // Add product (admin only)
 app.post('/api/products', isAuthenticated, isAdmin, async (req, res) => {
+  const { error } = productSchema.validate(req.body);
+  if (error) return res.status(400).json({ error: error.details[0].message });
+
   const { name, description, price, image, category } = req.body;
   try {
     const newProduct = new Product({ name, description, price, image, category });
@@ -279,8 +306,36 @@ app.post('/api/products', isAuthenticated, isAdmin, async (req, res) => {
   }
 });
 
+// Update product (admin only)
+app.put('/api/products/:id', isAuthenticated, isAdmin, async (req, res) => {
+    const { error } = productSchema.validate(req.body);
+    if (error) return res.status(400).json({ error: error.details[0].message });
+
+    try {
+        const product = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!product) return res.status(404).json({ error: 'Product not found' });
+        res.json(product);
+    } catch (error) {
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
+// Delete product (admin only)
+app.delete('/api/products/:id', isAuthenticated, isAdmin, async (req, res) => {
+    try {
+        const product = await Product.findByIdAndDelete(req.params.id);
+        if (!product) return res.status(404).json({ error: 'Product not found' });
+        res.json({ message: 'Product deleted' });
+    } catch (error) {
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
 // Add to cart
 app.post('/api/cart/add', isAuthenticated, async (req, res) => {
+  const { error } = cartSchema.validate(req.body);
+  if (error) return res.status(400).json({ error: error.details[0].message });
+
   const { productId, quantity = 1 } = req.body;
   const userId = req.session.userId;
 
@@ -310,6 +365,36 @@ app.post('/api/cart/add', isAuthenticated, async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: 'Server error' });
   }
+});
+
+// Update cart item quantity
+app.put('/api/cart/update', isAuthenticated, async (req, res) => {
+    const { error } = cartSchema.validate(req.body);
+    if (error) return res.status(400).json({ error: error.details[0].message });
+
+    const { productId, quantity } = req.body;
+    const userId = req.session.userId;
+
+    try {
+        let cart = await Cart.findOne({ userId });
+        if (!cart) return res.status(404).json({ error: 'Cart not found' });
+
+        const product = await Product.findById(productId);
+        if (!product) return res.status(404).json({ error: 'Product not found' });
+
+        const itemIndex = cart.items.findIndex(item => item.productId.toString() === productId);
+        if (itemIndex > -1) {
+            cart.items[itemIndex].quantity = quantity;
+            cart.items[itemIndex].totalPrice = quantity * product.price;
+            cart.total = cart.items.reduce((sum, item) => sum + item.totalPrice, 0);
+            await cart.save();
+            res.json(cart);
+        } else {
+            res.status(404).json({ error: 'Item not in cart' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Server error' });
+    }
 });
 
 // Get cart
@@ -383,6 +468,9 @@ app.delete('/api/wishlist/remove/:productId', isAuthenticated, async (req, res) 
 
 // Order APIs
 app.post('/api/orders', isAuthenticated, async (req, res) => {
+  const { error } = orderSchema.validate(req.body);
+  if (error) return res.status(400).json({ error: error.details[0].message });
+
   const { shippingAddress } = req.body;
   const userId = req.session.userId;
 
