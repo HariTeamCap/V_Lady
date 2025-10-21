@@ -169,74 +169,15 @@ header {
   }
 }
 
-/* Black welcome banner styling */
-.black-banner {
-  position: fixed;
-  top: 97px; /* below pink banner (pink banner ~30px) */
-  left: 0;
-  width: 100%;
-  background-color: #000; /* black */
-  overflow: hidden;
-  white-space: nowrap;
-  z-index: 999;
-  height: 60px; /* double the pink banner height */
-  display: flex;
-  align-items: center;
-}
 
-/* Scrolling text animation for black banner */
-.scrolling-text-black {
-  display: inline-block;
-  padding-left: 100%; /* start outside right */
-  animation: scroll-left-black 8s linear infinite;
-  font-weight: 200;
-  letter-spacing: 5px;
-  font-size: 55px;
-  color: #fff; /* white text */
-}
-
-/* Keyframes for moving text */
-@keyframes scroll-left-black {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-}
-
-/* Desktop tweaks */
-@media (min-width: 1024px) {
-  .black-banner {
-    height: 70px;
-    top:97;
-  }
-  .scrolling-text-black {
-    font-size: 50px;
-    font-weight:200;
-    animation-duration: 8s;
-  }
-}
-
-/* Mobile tweaks */
-@media (max-width: 768px) {
-  .black-banner {
-    height: 55px;
-  }
-  .scrolling-text-black {
-    font-size: 50px;
-    font-weight:200;
-    animation-duration: 8s; /* slower on mobile */
-  }
-}
 
 /* ===== PHOTO BANNER ===== */
 .photo-banner {
   position: relative;
   width: 100%;
-  height: 400px;
+  height: 500px;
   overflow: hidden;
-  margin-top: 140px; /* ✅ pushes below fixed banners */
+  margin-top: 10px; /* ✅ pushes below fixed banners */
 }
 .photo-banner img {
   width: 100%;
@@ -364,7 +305,10 @@ header {
     bottom: 20px;
   }
   .photo-banner{
-    margin-top:154px;
+    margin-top:113px;
+    height:650px;
+    padding-right:10px;
+    padding-left:10px;
   }
 }
 
@@ -588,57 +532,85 @@ header {
   }
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
-/*@media (max-width: 768px) {
-  header {
-    
-    padding: 15px 20px;
-  }
-
-  .nav-links {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;*/
-  }
-
-  .photo-banner {
-    height: 550px;
-  }
-  
-  }
-
-  .product-container {
-    gap: 25px;
-  }
-
-  .wrapper {
-    width: 90%;
-  }
-
-  .video-section {
-    height: 150px;
-  }
-
-  .contact-us form {
-    width: 90%;
-  }
+/* ===========================
+   CATEGORY BAR
+=========================== */
+.product-category-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  background: #fff;
+  padding: 15px 10px;
+  gap: 25px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  scrollbar-width: none; /* hide scrollbar on desktop */
 }
 
-/*@media (max-width: 480px) {
-  .logo {
-    font-size: 24px;
-  }*/
+.product-category-bar::-webkit-scrollbar {
+  display: none;
+}
 
-  .shop-now-btn {
-    padding: 10px 20px;
-    font-size: 14px;
+/* Each category item */
+.category-item {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #111;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-item:hover {
+  transform: translateY(-3px);
+}
+
+/* Placeholder image block */
+.category-img {
+  width: 80px;
+  height: 80px;
+  background: #ddd;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Category name */
+.category-item p {
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* ===========================
+   MOBILE LAYOUT (VERTICAL)
+=========================== */
+@media (max-width: 768px) {
+  .product-category-bar {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 20px;
+    overflow: visible;
   }
 
-  .category-item i {
-    font-size: 22px;
+  .category-item {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .category-img {
+    width: 100%;
+    height: 120px;
+    background: #eee;
+    border-radius: 10px;
   }
 
   .category-item p {
-    font-size: 12px;
+    margin-top: 6px;
+    font-size: 13px;
   }
 }
