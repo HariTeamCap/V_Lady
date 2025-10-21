@@ -24,6 +24,8 @@
     "express-session": "^1.18.2",
     "joi": "^18.0.1",
     "mongoose": "^8.19.2",
-    "nodemailer": "^7.0.9"
+    "multer": "^2.0.2",
+    "nodemailer": "^7.0.9",
+    "twilio": "^5.10.3"
   }
 }
