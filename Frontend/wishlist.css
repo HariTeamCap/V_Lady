@@ -329,19 +329,13 @@ header {
 .left .details .mrp {
   font-size: 14px;
   font-weight: 500;
-  color:	#880808 /* 🔴 Red MRP text */
-  text-decoration: line-through;
+  color:	#880808;
+  text-decoration: line-through; /* cross out MRP */
   margin-top: 3px;
-
 }
 
 .left .details .mrp span {
-  color:black !important;
-  text-decoration:;
-}
-.left .details .mrp {
-  color:	#000 !important;        /* 👈 choose your color */
-  text-decoration: line-through !important; /* 👈 keeps the strikethrough */
+  color:black;
 }
 
 /* BUTTONS */
@@ -378,9 +372,9 @@ header {
 }
 
 .left .buy-now {
-  background:#FF4D6D;
+  background: #FF4D6D;
   color: white;
-  font-size: 17px;
+  font-size: 14px;
   line-height: 1.2;
   margin:0;
   text-align: center;
@@ -438,7 +432,7 @@ header {
 
   .left .buy,
   .left .buy-now {
-    height: 45px;
+    height: 65px;
     font-size: 13px;
     margin:0;
   }
@@ -479,3 +473,592 @@ header {
     letter-spacing:10px;
   }
 }
+
+/* ===========================
+   PRODUCT GRID VIEWS
+=========================== */
+
+/* 1 product per row */
+.product-container.view-1 {
+  grid-template-columns: 1fr !important;
+}
+
+/* 2 products per row */
+.product-container.view-2 {
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 25px;
+}
+
+/* 4 products per row (already default) */
+.product-container.view-4 {
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 30px;
+}
+
+/* Responsive adjustments for 2 products per row */
+@media (max-width: 1024px) {
+  .product-container.view-2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-container.view-2 {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-container.view-2 {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* ===========================
+   MOBILE FIX FOR 2-PRODUCT GRID
+=========================== */
+@media (max-width: 768px) {
+  /* When 2-products-per-row view is active on mobile */
+  .product-container.view-2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .product-container.view-2 .wrapper {
+    max-width: 100%;
+    height: auto; /* let height adjust automatically */
+  }
+
+  .product-container.view-2 .top {
+    height: 180px; /* fixed image height for consistency */
+  }
+
+  .product-container.view-2 .top img {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .product-container.view-2 .bottom {
+    height: auto;
+    padding: 8px;
+  }
+
+  .product-container.view-2 .left {
+    flex-direction: column; /* stack details and buttons vertically */
+    align-items: center;
+    gap: 5px;
+  }
+
+  .product-container.view-2 .left .details {
+    width: 100%;
+    text-align: center;
+  }
+
+  .product-container.view-2 .left .buy,
+  .product-container.view-2 .left .buy-now {
+    width: 90%;
+    height: 40px;
+    font-size: 12px;
+  }
+
+  .product-container.view-2 .left .buy i {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* 2 products per row */
+  .product-container.view-2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px 10px; /* row gap / column gap */
+  }
+
+  .product-container.view-2 .wrapper {
+    height: auto; /* allow card to adjust automatically */
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Top image section */
+  .product-container.view-2 .top {
+    height: 200px; /* bigger image for better visibility */
+  }
+
+  .product-container.view-2 .top img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Bottom section */
+  .product-container.view-2 .bottom {
+    height: auto; /* reduce bottom section height */
+    padding: 6px 5px;
+  }
+
+  .product-container.view-2 .left {
+    display: flex;
+    flex-direction: column; /* stack details and buttons vertically */
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  /* Product details */
+  .product-container.view-2 .left .details {
+    width: 100%;
+    text-align: center;
+  }
+
+  .product-container.view-2 .left .details h1 {
+    font-size: 14px;
+    line-height: 1.2;
+  }
+
+  .product-container.view-2 .left .details p {
+    font-size: 12px;
+  }
+
+  .product-container.view-2 .left .details .mrp {
+    font-size: 10px;
+  }
+
+  /* Buttons */
+  .product-container.view-2 .left .buy,
+  .product-container.view-2 .left .buy-now {
+    width: 90%;
+    height: 35px;
+    font-size: 12px;
+    margin: 0;
+  }
+
+  .product-container.view-2 .left .buy i {
+    font-size: 24px;
+  }
+
+  .product-container.view-2 .left .buy-now {
+    font-size: 12px;
+    line-height: 1.1;
+  }
+}
+
+@media (max-width: 768px) {
+  /* 2 products per row */
+  .product-container.view-2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px 10px; /* row / column gap */
+  }
+
+  .product-container.view-2 .wrapper {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Top image section – bigger */
+  .product-container.view-2 .top {
+    height: 240px; /* increased from 200px */
+  }
+
+  .product-container.view-2 .top img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Bottom section – smaller to allow bigger image */
+  .product-container.view-2 .bottom {
+    height: auto;
+    padding: 4px 5px;
+  }
+
+  .product-container.view-2 .left {
+    display: flex;
+    flex-direction: column; /* stack details & buttons */
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+  }
+
+  /* Product details – smaller font to fit */
+  .product-container.view-2 .left .details {
+    width: 100%;
+    text-align: center;
+  }
+
+  .product-container.view-2 .left .details h1 {
+    font-size: 17px;
+    line-height: 1.1;
+  }
+
+  .product-container.view-2 .left .details p {
+    font-size: 16px;
+  }
+
+  .product-container.view-2 .left .details .mrp {
+    font-size: 11px;
+  }
+
+  /* Buttons – smaller */
+  .product-container.view-2 .left .buy,
+  .product-container.view-2 .left .buy-now {
+    width: 90%;
+    height: 32px;
+    font-size: 14px;
+    margin: 0;
+  }
+
+  .product-container.view-2 .left .buy i {
+    font-size: 22px;
+  }
+
+  .product-container.view-2 .left .buy-now {
+    font-size: 11px;
+    line-height: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  /* 2 products per row */
+  .product-container.view-2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px 10px; /* row / column gap */
+  }
+
+  .product-container.view-2 .wrapper {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Top image section – bigger images */
+  .product-container.view-2 .top {
+    height: 240px; /* bigger image */
+  }
+
+  .product-container.view-2 .top img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Bottom section – compact */
+  .product-container.view-2 .bottom {
+    height: auto;
+    padding: 6px 5px;
+  }
+
+  /* Left section: details + buttons side by side */
+  .product-container.view-2 .left {
+    display: flex;
+    flex-direction: row; /* buttons side by side */
+    justify-content: space-between; /* space between details & buttons */
+    align-items: center;
+    width: 100%;
+    gap: 5px;
+  }
+
+  /* Product details */
+  .product-container.view-2 .left .details {
+    width: 60%; /* leave room for buttons */
+    text-align: left;
+  }
+
+  .product-container.view-2 .left .details h1 {
+    font-size: 14px;
+    line-height: 1.2;
+  }
+
+  .product-container.view-2 .left .details p {
+    font-size: 12px;
+  }
+
+  .product-container.view-2 .left .details .mrp {
+    font-size: 11px;
+  }
+
+  /* Buttons */
+  .product-container.view-2 .left .buy,
+  .product-container.view-2 .left .buy-now {
+    width: 28%; /* fits side by side */
+    height: 75px;
+    font-size: 12px;
+    gap:0;
+    margin-left:0;
+    display: flex;
+    align-items: center;
+    padding-left:-10px;
+    justify-content: center;
+  }
+
+  .product-container.view-2 .left .buy i {
+    font-size: 22px;
+  }
+
+  .product-container.view-2 .left .buy-now {
+    font-size: 12px;
+    line-height: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  /* 2 products per row */
+  .product-container.view-2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px 10px; /* row / column gap */
+  }
+
+  .product-container.view-2 .wrapper {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Top image section */
+  .product-container.view-2 .top {
+    height: 240px; /* bigger image */
+  }
+
+  .product-container.view-2 .top img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Bottom section – compact with no extra padding */
+  .product-container.view-2 .bottom {
+    height: auto;
+    padding: 0; /* remove all padding */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Left section: details + buttons */
+  .product-container.view-2 .left {
+    display: flex;
+    flex-direction: row; /* side by side */
+    justify-content: space-between; /* push buttons to edges if needed */
+    align-items: center;
+    width: 100%;
+    gap: 0; /* remove gap between buttons */
+  }
+
+  /* Product details */
+  .product-container.view-2 .left .details {
+    width: 60%; /* leave space for buttons */
+    text-align: left;
+    margin: 0;
+  }
+
+  .product-container.view-2 .left .details h1 {
+    font-size: 14px;
+    line-height: 1.2;
+    margin-left:7px;
+  }
+
+  .product-container.view-2 .left .details p {
+    font-size: 14px;
+    margin-left:7px;
+  }
+
+  .product-container.view-2 .left .details .mrp {
+    font-size: 11px;
+    margin-left:3px;
+  }
+
+  /* Buttons – completely side by side */
+  .product-container.view-2 .left .buy,
+  .product-container.view-2 .left .buy-now {
+    width: 20%; /* adjust to fit side by side */
+    height: 60px; /* fixed height */
+    font-size: 12px;
+    margin: 0; /* remove all margins */
+    padding: 0; /* remove internal padding */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0; /* optional, keep flat edges if you want */
+  }
+
+  .product-container.view-2 .left .buy i {
+    font-size: 22px;
+  }
+
+  .product-container.view-2 .left .buy-now {
+    font-size: 12px;
+    line-height: 1;
+  }
+}
+
+/* Desktop 2-grid view (only for screens wider than 768px) */
+@media (min-width: 769px) {
+  .product-container.view-2 {
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+    gap: 10px; /* adjust spacing */
+  }
+
+  .product-container.view-2 .bottom {
+    height:30%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .product-container.view-2 .left {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 0; /* no gap between buttons */
+  }
+
+  .product-container.view-2 .left .details {
+    width: 60%;
+    text-align: left;
+    margin: 0;
+  }
+
+  .product-container.view-2 .left .details h1 {
+    font-size: 18px;
+    line-height: 1.2;
+  }
+
+  .product-container.view-2 .left .details p {
+    font-size: 14px;
+    margin: 0;
+  }
+
+  .product-container.view-2 .left .details .mrp {
+    font-size: 12px;
+    margin: 0;
+  }
+
+  .product-container.view-2 .left .buy,
+  .product-container.view-2 .left .buy-now {
+    width: 18%;
+    height: 65px;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .product-container.view-2 .left .buy i {
+    font-size: 28px;
+  }
+
+  .product-container.view-2 .left .buy-now {
+    font-size: 14px;
+    line-height: 1;
+  }
+}
+/* ===========================
+   DESKTOP PRODUCT CARDS
+=========================== */
+@media (min-width: 769px) {
+  .product-container.view-2,
+  .product-container.view-4 {
+    gap: 20px; /* spacing between cards */
+  }
+
+  .wrapper {
+    height: 500px; /* fixed card height */
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Top image section */
+  .wrapper .top {
+    height: 85%; /* increase image height */
+    overflow: hidden;
+  }
+
+  .wrapper .top img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s;
+  }
+
+  .wrapper:hover .top img {
+    transform: scale(1.05);
+  }
+
+  /* Bottom section – compact */
+  .wrapper .bottom {
+    height: 15%; /* smaller bottom section */
+    padding: 0; /* remove padding */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .wrapper .left {
+    display: flex;
+    flex-direction: row; /* details + buttons side by side */
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 0; /* no gap */
+    padding: 0;
+  }
+
+  /* Product details */
+  .wrapper .left .details {
+    width: 60%; /* leave room for buttons */
+    text-align: left;
+    margin: 0;
+  }
+
+  .wrapper .left .details h1 {
+    font-size: 18px;
+    line-height: 1.2;
+    margin-left:7px;
+  }
+
+  .wrapper .left .details p {
+    font-size: 19px;
+    margin: 0;
+    margin-left:7px;
+  }
+
+  .wrapper .left .details .mrp {
+    font-size: 12px;
+    margin: 0;
+    margin-left:3px;
+  }
+
+  /* Buttons – flush with no margin/padding */
+  .wrapper .left .buy,
+  .wrapper .left .buy-now {
+    width: 18%; /* adjust to fit side by side */
+    height: 75px;
+    font-size: 14px;
+    margin: 0; /* remove margin */
+    padding: 0; /* remove padding */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0; /* optional */
+  }
+
+  .wrapper .left .buy i {
+    font-size: 28px;
+    
+  }
+
+  .wrapper .left .buy-now {
+    font-size: 14px;
+    line-height: 1;
+  }
+}
+/* ===========================
+   DESKTOP PRODUCT CARDS – 2 GR
