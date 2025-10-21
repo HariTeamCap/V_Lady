@@ -7,7 +7,34 @@
   <link rel="stylesheet" href="wishlist.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+  <style>
+    /* ===== SOLD OUT BADGE ===== */
+    .sold-out-badge {
+      display: none;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: red;
+      color: white;
+      font-weight: bold;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 14px;
+      z-index: 10;
+    }
+    .wrapper.sold-out {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+    .wrapper.sold-out .buy-now {
+      background: gray !important;
+      color: white !important;
+      cursor: not-allowed;
+    }
+  </style>
 </head>
+
 <body>
 
 <header>
@@ -17,10 +44,10 @@
   </div>
   <nav>
     <ul class="nav-links">
-      <li><a href="mainpage.html"><i class="fa fa-house-chimney"></i></a></li>
+      <li><a href="index.html"><i class="fa fa-house-chimney"></i></a></li>
       <li><a href="about.html"><i class="fa fa-circle-info"></i></a></li>
       <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
-      <li><a href="mainpage.html"><i class="fa fa-envelope"></i></a></li>
+      <li><a href="index.html"><i class="fa fa-envelope"></i></a></li>
     </ul>
   </nav>
 </header>
@@ -42,13 +69,6 @@
     </button>
 
     <button class="view-btn" data-columns="2" title="2 per row">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <rect x="3" y="3" width="8" height="18" rx="2" />
-        <rect x="13" y="3" width="8" height="18" rx="2" />
-      </svg>
-    </button>
-
-    <button class="view-btn" data-columns="4" title="4 per row">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <rect x="3" y="3" width="18" height="18" rx="2" />
@@ -64,8 +84,25 @@
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const wishlistContainer = document.querySelector(".product-container");
+  const viewButtons = document.querySelectorAll(".view-btn");
   let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
 
+  // Default view: 2-grid on desktop, 1-grid on mobile
+  const defaultColumns = window.innerWidth < 768 ? 1 : 2;
+  wishlistContainer.classList.add(`view-${defaultColumns}`);
+
+  viewButtons.forEach(btn => {
+    if (parseInt(btn.dataset.columns) === defaultColumns) btn.classList.add("active");
+
+    btn.addEventListener("click", () => {
+      viewButtons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      wishlistContainer.classList.remove("view-1", "view-2", "view-4");
+      wishlistContainer.classList.add(`view-${btn.dataset.columns}`);
+    });
+  });
+
+  // Render wishlist
   if (wishlist.length === 0) {
     wishlistContainer.innerHTML = "<p>Your wishlist is empty ❤️</p>";
     return;
@@ -78,10 +115,13 @@ document.addEventListener("DOMContentLoaded", () => {
     wrapper.classList.add("wrapper");
     wrapper.dataset.productId = product.id;
 
+    const isSoldOut = product.soldOut === true; // from localStorage data
+
     wrapper.innerHTML = `
       <div class="wishlist-btn">
         <i class="material-icons" style="color:#ff4d6d;">favorite</i>
       </div>
+      <div class="sold-out-badge">SOLD OUT</div>
       <div class="container">
         <div class="top">
           <a href="productdetails.html?id=${product.id}">
@@ -106,6 +146,21 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     `;
 
+    // ===== SOLD OUT DISPLAY FIX =====
+    if (isSoldOut) {
+      wrapper.classList.add("sold-out");
+      const badge = wrapper.querySelector(".sold-out-badge");
+      badge.style.display = "block";
+      const buyNow = wrapper.querySelector(".buy-now");
+      buyNow.textContent = "SOLD OUT";
+      buyNow.style.background = "gray";
+      buyNow.style.color = "white";
+      buyNow.style.pointerEvents = "none";
+      const addToCart = wrapper.querySelector(".buy i");
+      addToCart.style.opacity = "0.5";
+      addToCart.style.pointerEvents = "none";
+    }
+
     // Remove from wishlist
     wrapper.querySelector(".wishlist-btn i").addEventListener("click", () => {
       wishlist = wishlist.filter(p => p.id !== product.id);
@@ -116,6 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Add to cart
     wrapper.querySelector(".buy i").addEventListener("click", () => {
+      if (isSoldOut) return; // Prevent adding sold-out item
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
       const existing = cart.find(p => p.id === product.id);
       if (existing) existing.quantity += 1;
@@ -126,6 +182,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Buy Now
     wrapper.querySelector(".buy-now").addEventListener("click", () => {
+      if (isSoldOut) return; // Prevent buying sold-out item
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
       const existing = cart.find(p => p.id === product.id);
       if (existing) existing.quantity += 1;
