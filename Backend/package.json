@@ -16,6 +16,7 @@
   "type": "commonjs",
   "description": "Backend for V Lady e-commerce site",
   "dependencies": {
+    "bcryptjs": "^3.0.2",
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",
     "express": "^4.21.0",

@@ -7,6 +7,7 @@ const nodemailer = require('nodemailer');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const cors = require('cors');
+const bcrypt = require('bcryptjs');
 require('dotenv').config();
 
 const app = express();
@@ -71,10 +72,49 @@ const wishlistSchema = new mongoose.Schema({
   items: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }]
 });
 
+const userSchema = new mongoose.Schema({
+  username: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  isAdmin: { type: Boolean, default: false }
+});
+
+const orderSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  items: [{
+    productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
+    quantity: { type: Number, required: true },
+    price: { type: Number, required: true }
+  }],
+  total: { type: Number, required: true },
+  shippingAddress: { type: String, required: true },
+  status: { type: String, default: 'Pending' },
+  createdAt: { type: Date, default: Date.now }
+});
+
 const Product = mongoose.model('Product', productSchema);
 const Contact = mongoose.model('Contact', contactSchema);
 const Cart = mongoose.model('Cart', cartSchema);
 const Wishlist = mongoose.model('Wishlist', wishlistSchema);
+const User = mongoose.model('User', userSchema);
+const Order = mongoose.model('Order', orderSchema);
+
+// Middleware to check for authentication
+const isAuthenticated = (req, res, next) => {
+  if (req.session.userId) {
+    next();
+  } else {
+    res.status(401).json({ error: 'Not authenticated' });
+  }
+};
+
+// Middleware to check for admin privileges
+const isAdmin = (req, res, next) => {
+  if (req.session.isAdmin) {
+    next();
+  } else {
+    res.status(403).json({ error: 'Forbidden' });
+  }
+};
 
 // Routes
 
@@ -173,6 +213,52 @@ app.post('/contact', async (req, res) => {
 
 // API Routes
 
+// User Authentication Routes
+app.post('/api/register', async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = new User({ username, password: hashedPassword });
+    await newUser.save();
+    res.status(201).json({ message: 'User registered successfully' });
+  } catch (error) {
+    res.status(500).json({ error: 'Error registering user' });
+  }
+});
+
+app.post('/api/login', async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(400).json({ error: 'Invalid credentials' });
+    }
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ error: 'Invalid credentials' });
+    }
+    req.session.userId = user._id;
+    req.session.isAdmin = user.isAdmin;
+    res.json({ message: 'Logged in successfully' });
+  } catch (error) {
+    res.status(500).json({ error: 'Error logging in' });
+  }
+});
+
+app.get('/api/logout', (req, res) => {
+  req.session.destroy();
+  res.json({ message: 'Logged out successfully' });
+});
+
+app.get('/api/user', async (req, res) => {
+  if (req.session.userId) {
+    const user = await User.findById(req.session.userId).select('-password');
+    res.json(user);
+  } else {
+    res.status(401).json({ error: 'Not authenticated' });
+  }
+});
+
 // Get all products or by category
 app.get('/api/products', async (req, res) => {
   const { category } = req.query;
@@ -181,8 +267,8 @@ app.get('/api/products', async (req, res) => {
   res.json(products);
 });
 
-// Add product (admin; secure in production)
-app.post('/api/products', async (req, res) => {
+// Add product (admin only)
+app.post('/api/products', isAuthenticated, isAdmin, async (req, res) => {
   const { name, description, price, image, category } = req.body;
   try {
     const newProduct = new Product({ name, description, price, image, category });
@@ -194,9 +280,9 @@ app.post('/api/products', async (req, res) => {
 });
 
 // Add to cart
-app.post('/api/cart/add', async (req, res) => {
+app.post('/api/cart/add', isAuthenticated, async (req, res) => {
   const { productId, quantity = 1 } = req.body;
-  const userId = req.session.id;
+  const userId = req.session.userId;
 
   try {
     let cart = await Cart.findOne({ userId });
@@ -227,16 +313,16 @@ app.post('/api/cart/add', async (req, res) => {
 });
 
 // Get cart
-app.get('/api/cart', async (req, res) => {
-  const userId = req.session.id;
+app.get('/api/cart', isAuthenticated, async (req, res) => {
+  const userId = req.session.userId;
   const cart = await Cart.findOne({ userId }).populate('items.productId');
   res.json(cart || { items: [], total: 0 });
 });
 
 // Remove from cart
-app.delete('/api/cart/remove/:productId', async (req, res) => {
+app.delete('/api/cart/remove/:productId', isAuthenticated, async (req, res) => {
   const { productId } = req.params;
-  const userId = req.session.id;
+  const userId = req.session.userId;
 
   try {
     const cart = await Cart.findOne({ userId });
@@ -252,9 +338,9 @@ app.delete('/api/cart/remove/:productId', async (req, res) => {
 });
 
 // Wishlist APIs
-app.post('/api/wishlist/add', async (req, res) => {
+app.post('/api/wishlist/add', isAuthenticated, async (req, res) => {
   const { productId } = req.body;
-  const userId = req.session.id;
+  const userId = req.session.userId;
 
   try {
     let wishlist = await Wishlist.findOne({ userId });
@@ -273,15 +359,15 @@ app.post('/api/wishlist/add', async (req, res) => {
   }
 });
 
-app.get('/api/wishlist', async (req, res) => {
-  const userId = req.session.id;
+app.get('/api/wishlist', isAuthenticated, async (req, res) => {
+  const userId = req.session.userId;
   const wishlist = await Wishlist.findOne({ userId }).populate('items');
   res.json(wishlist || { items: [] });
 });
 
-app.delete('/api/wishlist/remove/:productId', async (req, res) => {
+app.delete('/api/wishlist/remove/:productId', isAuthenticated, async (req, res) => {
   const { productId } = req.params;
-  const userId = req.session.id;
+  const userId = req.session.userId;
 
   try {
     const wishlist = await Wishlist.findOne({ userId });
@@ -294,6 +380,52 @@ app.delete('/api/wishlist/remove/:productId', async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 });
+
+// Order APIs
+app.post('/api/orders', isAuthenticated, async (req, res) => {
+  const { shippingAddress } = req.body;
+  const userId = req.session.userId;
+
+  try {
+    const cart = await Cart.findOne({ userId }).populate('items.productId');
+    if (!cart || cart.items.length === 0) {
+      return res.status(400).json({ error: 'Cart is empty' });
+    }
+
+    const order = new Order({
+      userId,
+      items: cart.items.map(item => ({
+        productId: item.productId._id,
+        quantity: item.quantity,
+        price: item.productId.price
+      })),
+      total: cart.total,
+      shippingAddress
+    });
+
+    await order.save();
+
+    // Clear the cart
+    cart.items = [];
+    cart.total = 0;
+    await cart.save();
+
+    res.status(201).json(order);
+  } catch (error) {
+    res.status(500).json({ error: 'Error creating order' });
+  }
+});
+
+app.get('/api/orders', isAuthenticated, async (req, res) => {
+  const userId = req.session.userId;
+  try {
+    const orders = await Order.find({ userId }).populate('items.productId');
+    res.json(orders);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching orders' });
+  }
+});
+
 
 // 404 Handler
 app.use((req, res) => {
