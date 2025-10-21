@@ -7,6 +7,31 @@
   <link rel="stylesheet" href="accessories.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <style>
+    .sold-out-badge {
+      display: none;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: red;
+      color: white;
+      padding: 5px 10px;
+      font-weight: bold;
+      border-radius: 5px;
+      z-index: 10;
+    }
+    .wrapper.sold-out {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+    .wrapper.sold-out .buy-now::after {
+      content: "SOLD OUT";
+      display: block;
+      text-align: center;
+      color: white;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
 
@@ -32,7 +57,6 @@
 <main class="bag-section">
   <h2>PIE BAGS</h2>
 
-  <!-- === VIEW TOGGLE BUTTONS WITH ICONS === -->
   <div class="view-toggle">
     <button class="view-btn" data-columns="1" title="1 per row">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -41,13 +65,6 @@
     </button>
 
     <button class="view-btn" data-columns="2" title="2 per row">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <rect x="3" y="3" width="8" height="18" rx="2" />
-        <rect x="13" y="3" width="8" height="18" rx="2" />
-      </svg>
-    </button>
-
-    <button class="view-btn" data-columns="4" title="4 per row">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <rect x="3" y="3" width="18" height="18" rx="2" />
@@ -56,32 +73,34 @@
       </svg>
     </button>
 
-    <button class="view-btn wishlist-btn-toggle" title="View Wishlist"
-            onclick="window.location.href='wishlist.html'"
-            style="font-size:22px; color:#ff4d6d;">❤️</button>
+    <button class="view-btn wishlist-btn-toggle" title="View Wishlist" 
+            onclick="window.location.href='wishlist.html'" 
+            style="font-size:22px; color:#ff4d6d;">
+      ❤️
+    </button>
   </div>
 
   <div class="product-container">
 
     <!-- Product Card 1 -->
-    <div class="wrapper" data-product-id="pie001">
+    <div class="wrapper" data-product-id="pie001" data-sold-out="false">
+      <div class="sold-out-badge">SOLD OUT</div>
       <div class="wishlist-btn">
         <i class="material-icons">favorite_border</i>
       </div>
       <div class="container">
         <div class="top">
           <a href="productdetails.html">
-            <img src="IMG_6724.png" alt="Pie Bag 1" />
+            <img src="https://cdn.pixabay.com/photo/2017/06/21/07/57/fashion-2423641_640.jpg" alt="Pie Bag 1" />
           </a>
         </div>
         <div class="bottom">
           <div class="left">
             <div class="details">
               <h1>Pie Bag 1</h1>
-              <p class="discounted-price">₹1250</p>
-    <p class="mrp">MRP: <span>₹2200</span></p>
-    </div>
-            
+              <p class="discounted-price">₹1550</p>
+              <p class="mrp">MRP: <span>₹2600</span></p>
+            </div>
             <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
             <div class="buy-now">BUY<br>NOW</div>
           </div>
@@ -90,51 +109,24 @@
     </div>
 
     <!-- Product Card 2 -->
-    <div class="wrapper" data-product-id="pie002">
+    <div class="wrapper" data-product-id="pie002" data-sold-out="true">
+      <div class="sold-out-badge">SOLD OUT</div>
       <div class="wishlist-btn">
         <i class="material-icons">favorite_border</i>
       </div>
       <div class="container">
         <div class="top">
           <a href="productdetails.html">
-            <img src="IMG_6724.png" alt="Pie Bag 2" />
+            <img src="https://cdn.pixabay.com/photo/2016/11/29/12/53/handbag-1866608_640.jpg" alt="Pie Bag 2" />
           </a>
         </div>
         <div class="bottom">
           <div class="left">
             <div class="details">
               <h1>Pie Bag 2</h1>
-              <p class="discounted-price">₹1250</p>
-    <p class="mrp">MRP: <span>₹2200</span></p>
-    </div>
-
-
-            <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
-            <div class="buy-now">BUY<br>NOW</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product Card 3 -->
-    <div class="wrapper" data-product-id="pie003">
-      <div class="wishlist-btn">
-        <i class="material-icons">favorite_border</i>
-      </div>
-      <div class="container">
-        <div class="top">
-          <a href="productdetails.html">
-            <img src="https://i.pinimg.com/736x/8a/5d/24/8a5d24bb1d6d1ef32c9b75f611bc72cf.jpg" alt="Pie Bag 3" />
-          </a>
-        </div>
-        <div class="bottom">
-          <div class="left">
-            <div class="details">
-              <h1>Pie Bag 3</h1>
-              <p class="discounted-price">₹1250</p>
-    <p class="mrp">MRP: <span>₹2200</span></p>
-    </div>
-          
+              <p class="discounted-price">₹1850</p>
+              <p class="mrp">MRP: <span>₹2990</span></p>
+            </div>
             <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
             <div class="buy-now">BUY<br>NOW</div>
           </div>
@@ -145,7 +137,6 @@
   </div>
 </main>
 
-
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const productWrappers = document.querySelectorAll(".wrapper");
@@ -154,9 +145,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const productId = wrapper.dataset.productId;
     const productName = wrapper.querySelector(".details h1").textContent;
     const productPrice = wrapper.querySelector(".details .discounted-price").textContent;
-    const productMRPElement = wrapper.querySelector(".details .mrp span");
-    const productMRP = productMRPElement ? productMRPElement.textContent : "";
+    const productMRP = wrapper.querySelector(".details .mrp span")?.textContent || "";
     const productImage = wrapper.querySelector(".top img").src;
+    const soldOutStatus = wrapper.dataset.soldOut === "true";
 
     const product = {
       id: productId,
@@ -164,14 +155,40 @@ document.addEventListener("DOMContentLoaded", () => {
       price: productPrice,
       mrp: productMRP,
       image: productImage,
-      quantity: 1
+      quantity: 1,
+      soldOut: soldOutStatus
     };
 
-    // ====== Wishlist ======
+    const soldBadge = wrapper.querySelector(".sold-out-badge");
+    const addToCartBtn = wrapper.querySelector(".buy i");
+    const buyNowBtn = wrapper.querySelector(".buy-now");
+
+    if (soldOutStatus) {
+      wrapper.classList.add("sold-out");
+
+      if (soldBadge) soldBadge.style.display = "block";
+
+      if (addToCartBtn) {
+        addToCartBtn.style.pointerEvents = "none";
+        addToCartBtn.style.opacity = "0.5";
+      }
+
+      if (buyNowBtn) {
+        buyNowBtn.textContent = "";
+        buyNowBtn.style.background = "gray";
+        buyNowBtn.style.color = "white";
+        buyNowBtn.style.cursor = "not-allowed";
+        buyNowBtn.style.pointerEvents = "none";
+      }
+
+      wrapper.style.pointerEvents = "auto"; 
+      wrapper.querySelector(".top a").style.pointerEvents = "auto"; 
+      wrapper.querySelector(".wishlist-btn").style.pointerEvents = "auto";
+    }
+
     const wishlistBtn = wrapper.querySelector(".wishlist-btn i");
     let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
 
-    // If already in wishlist, mark active
     if (wishlist.find(p => p.id === productId)) {
       wishlistBtn.textContent = "favorite";
       wishlistBtn.style.color = "#ff4d6d";
@@ -180,44 +197,54 @@ document.addEventListener("DOMContentLoaded", () => {
     wishlistBtn.addEventListener("click", () => {
       let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
       const exists = wishlist.find(p => p.id === productId);
-
       if (exists) {
         wishlist = wishlist.filter(p => p.id !== productId);
         wishlistBtn.textContent = "favorite_border";
         wishlistBtn.style.color = "white";
       } else {
-        wishlist.push({ ...product });
+        wishlist.push(product);
         wishlistBtn.textContent = "favorite";
         wishlistBtn.style.color = "#ff4d6d";
       }
-
       localStorage.setItem("wishlist", JSON.stringify(wishlist));
       alert(`${productName} updated in Wishlist!`);
     });
 
-    // ====== Add to Cart ======
-    const addToCartBtn = wrapper.querySelector(".buy i");
-    addToCartBtn.addEventListener("click", () => {
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      const existing = cart.find(p => p.id === productId);
+    if (addToCartBtn && !soldOutStatus) {
+      addToCartBtn.addEventListener("click", () => {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const existing = cart.find(p => p.id === productId);
+        if (existing) existing.quantity += 1;
+        else cart.push({ ...product });
+        localStorage.setItem("cart", JSON.stringify(cart));
+        alert(`${productName} added to Cart 🛒`);
+      });
+    }
 
-      if (existing) {
-        existing.quantity += 1;
-      } else {
-        cart.push({ ...product });
-      }
-      localStorage.setItem("cart", JSON.stringify(cart));
-      alert(`${productName} added to Cart 🛒`);
-    });
+    if (buyNowBtn && !soldOutStatus) {
+      buyNowBtn.addEventListener("click", () => {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const existing = cart.find(p => p.id === productId);
+        if (!existing) cart.push({ ...product });
+        localStorage.setItem("cart", JSON.stringify(cart));
+        window.location.href = "cart.html";
+      });
+    }
+  });
 
-    // ====== Buy Now ======
-    const buyNowBtn = wrapper.querySelector(".buy-now");
-    buyNowBtn.addEventListener("click", () => {
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      const existing = cart.find(p => p.id === productId);
-      if (!existing) cart.push({ ...product });
-      localStorage.setItem("cart", JSON.stringify(cart));
-      window.location.href = "cart.html";
+  const container = document.querySelector(".product-container");
+  const viewBtns = document.querySelectorAll(".view-toggle .view-btn");
+
+  if (window.innerWidth >= 769) {
+    container.classList.add("view-2");
+    container.classList.remove("view-1", "view-4");
+  }
+
+  viewBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const columns = btn.dataset.columns;
+      container.classList.remove("view-1", "view-2", "view-4");
+      container.classList.add(`view-${columns}`);
     });
   });
 });
