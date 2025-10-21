@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V Lady | My Profile</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="auth.js" defer></script>
+    <script src="profile.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            V LADY
+            <div class="tagline">Versatile Lady</div>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="mainpage.html"><i class="fa fa-house-chimney"></i></a></li>
+                <li><a href="about.html"><i class="fa fa-circle-info"></i></a></li>
+                <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                <li><a href="#contact-section"><i class="fa fa-envelope"></i></a></li>
+                <li><a href="login.html"><i class="fa fa-user"></i></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="profile-container">
+        <div class="profile-sidebar">
+            <div class="profile-header">
+                <i class="fa fa-user-circle"></i>
+                <h2 id="profile-username">Loading...</h2>
+            </div>
+            <ul class="profile-menu">
+                <li class="active" data-section="orders">
+                    <i class="fa fa-shopping-bag"></i> My Orders
+                </li>
+                <li data-section="addresses">
+                    <i class="fa fa-address-book"></i> My Addresses
+                </li>
+            </ul>
+        </div>
+
+        <div class="profile-content">
+            <!-- Orders Section -->
+            <section id="orders-section" class="profile-section active">
+                <h2>My Orders</h2>
+                <div class="orders-list">
+                    <!-- Orders will be loaded here dynamically -->
+                </div>
+            </section>
+
+            <!-- Addresses Section -->
+            <section id="addresses-section" class="profile-section">
+                <h2>My Addresses</h2>
+                <button id="add-address-btn" class="btn-primary">
+                    <i class="fa fa-plus"></i> Add New Address
+                </button>
+                <div class="addresses-list">
+                    <!-- Addresses will be loaded here dynamically -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Add/Edit Address Modal -->
+    <div id="address-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-title">Add New Address</h2>
+            <form id="address-form">
+                <div class="form-group">
+                    <label for="address-name">Address Name (e.g., Home, Office)</label>
+                    <input type="text" id="address-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="full-name">Full Name</label>
+                    <input type="text" id="full-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="street">Street Address</label>
+                    <textarea id="street" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" id="city" required>
+                </div>
+                <div class="form-group">
+                    <label for="state">State</label>
+                    <input type="text" id="state" required>
+                </div>
+                <div class="form-group">
+                    <label for="pincode">Pincode</label>
+                    <input type="text" id="pincode" required>
+                </div>
+                <input type="hidden" id="address-id">
+                <button type="submit" class="btn-primary">Save Address</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
