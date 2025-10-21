@@ -210,6 +210,16 @@ app.get('/api/orders', isAuthenticated, async (req, res) => {
         res.status(500).json({ error: 'Error fetching orders' });
     }
 });
+const Order = mongoose.model('Order', orderSchema);
+
+// Middleware to check for authentication
+const isAuthenticated = (req, res, next) => {
+  if (req.session.userId) {
+    next();
+  } else {
+    res.status(401).json({ error: 'Not authenticated' });
+  }
+};
 
 // Middleware to check for admin privileges
 const isAdmin = (req, res, next) => {
