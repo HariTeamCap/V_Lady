@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <style>
-    /* Simple sold-out badge style */
     .sold-out-badge {
       display: none;
       position: absolute;
@@ -32,6 +31,22 @@
       color: white;
       font-weight: bold;
     }
+        /* ===========================
+       FOOTER
+    ============================ */
+    footer.site-footer {
+      width: 100%;
+      padding: 20px;
+      text-align: center;
+      background: #222;
+      color: #fff;
+      margin-top: 990px;
+    }
+        /* Bigger text on desktop */
+   @media (min-width: 768px) {
+  footer.site-footer {
+    font-size: 29px;
+  }
   </style>
 </head>
 <body>
@@ -58,16 +73,13 @@
 <main class="bag-section">
   <h2>CANDY BAGS</h2>
 
-  <!-- === VIEW TOGGLE BUTTONS WITH ICONS === -->
+  <!-- VIEW TOGGLE BUTTONS -->
   <div class="view-toggle">
     <button class="view-btn" data-columns="1" title="1 per row">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <rect x="3" y="3" width="18" height="18" rx="2" />
       </svg>
     </button>
-
-    
-
     <button class="view-btn" data-columns="2" title="2 per row">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -76,7 +88,6 @@
         <line x1="12" y1="3" x2="12" y2="21" />
       </svg>
     </button>
-
     <button class="view-btn wishlist-btn-toggle" title="View Wishlist" 
             onclick="window.location.href='wishlist.html'" 
             style="font-size:22px; color:#ff4d6d;">
@@ -95,7 +106,7 @@
       <div class="container">
         <div class="top">
           <a href="productdetails.html">
-            <img src="https://s-media-cache-ak0.pinimg.com/736x/49/80/6f/49806f3f1c7483093855ebca1b8ae2c4.jpg" alt="Candy Bag 1" />
+            <img src="IMG_6726.PNG" alt="Candy Bag 1" />
           </a>
         </div>
         <div class="bottom">
@@ -121,14 +132,14 @@
       <div class="container">
         <div class="top">
           <a href="productdetails.html">
-            <img src="https://s-media-cache-ak0.pinimg.com/736x/49/80/6f/49806f3f1c7483093855ebca1b8ae2c4.jpg" alt="Candy Bag 2" />
+            <img src="IMG_6726.PNG" alt="Candy Bag 2" />
           </a>
         </div>
         <div class="bottom">
           <div class="left">
             <div class="details">
               <h1>Candy Bag 2</h1>
-              <p class="discounted-price">₹1250</p>
+              <p class="discounted-price">₹7666</p>
               <p class="mrp">MRP: <span>₹2200</span></p>
             </div>
             <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
@@ -140,6 +151,7 @@
 
   </div>
 </main>
+
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const productWrappers = document.querySelectorAll(".wrapper");
@@ -147,8 +159,8 @@ document.addEventListener("DOMContentLoaded", () => {
   productWrappers.forEach(wrapper => {
     const productId = wrapper.dataset.productId;
     const productName = wrapper.querySelector(".details h1").textContent;
-    const productPrice = wrapper.querySelector(".details .discounted-price").textContent;
-    const productMRP = wrapper.querySelector(".details .mrp span")?.textContent || "";
+    const productPrice = wrapper.querySelector(".discounted-price").textContent;
+    const productMRP = wrapper.querySelector(".mrp span")?.textContent || "";
     const productImage = wrapper.querySelector(".top img").src;
     const soldOutStatus = wrapper.dataset.soldOut === "true";
 
@@ -159,67 +171,38 @@ document.addEventListener("DOMContentLoaded", () => {
       mrp: productMRP,
       image: productImage,
       quantity: 1,
-      soldOut: soldOutStatus
+      soldOut: soldOutStatus,
+      category: "candy-bags"
     };
 
-    // ===== SOLD OUT BEHAVIOUR =====
+    // SOLD OUT
     const soldBadge = wrapper.querySelector(".sold-out-badge");
     const addToCartBtn = wrapper.querySelector(".buy i");
     const buyNowBtn = wrapper.querySelector(".buy-now");
-
     if (soldOutStatus) {
       wrapper.classList.add("sold-out");
-
-      // show badge
       if (soldBadge) soldBadge.style.display = "block";
-
-      // disable Add to Cart
-      if (addToCartBtn) {
-        addToCartBtn.style.pointerEvents = "none";
-        addToCartBtn.style.opacity = "0.5";
-      }
-
-      // disable Buy Now
-      if (buyNowBtn) {
-        buyNowBtn.textContent = "";
-        buyNowBtn.style.background = "gray";
-        buyNowBtn.style.color = "white";
-        buyNowBtn.style.cursor = "not-allowed";
-        buyNowBtn.style.pointerEvents = "none";
-      }
-
-      // ✅ Allow clicking image and wishlist even if sold out
+      if (addToCartBtn) { addToCartBtn.style.pointerEvents = "none"; addToCartBtn.style.opacity = "0.5"; }
+      if (buyNowBtn) { buyNowBtn.textContent = ""; buyNowBtn.style.background = "gray"; buyNowBtn.style.color = "white"; buyNowBtn.style.pointerEvents = "none"; }
       wrapper.style.pointerEvents = "auto"; 
       wrapper.querySelector(".top a").style.pointerEvents = "auto"; 
       wrapper.querySelector(".wishlist-btn").style.pointerEvents = "auto";
     }
 
-    // ===== WISHLIST =====
+    // WISHLIST
     const wishlistBtn = wrapper.querySelector(".wishlist-btn i");
     let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-
-    if (wishlist.find(p => p.id === productId)) {
-      wishlistBtn.textContent = "favorite";
-      wishlistBtn.style.color = "#ff4d6d";
-    }
-
+    if (wishlist.find(p => p.id === productId)) { wishlistBtn.textContent = "favorite"; wishlistBtn.style.color = "#ff4d6d"; }
     wishlistBtn.addEventListener("click", () => {
       let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
       const exists = wishlist.find(p => p.id === productId);
-      if (exists) {
-        wishlist = wishlist.filter(p => p.id !== productId);
-        wishlistBtn.textContent = "favorite_border";
-        wishlistBtn.style.color = "white";
-      } else {
-        wishlist.push(product);
-        wishlistBtn.textContent = "favorite";
-        wishlistBtn.style.color = "#ff4d6d";
-      }
+      if (exists) { wishlist = wishlist.filter(p => p.id !== productId); wishlistBtn.textContent = "favorite_border"; wishlistBtn.style.color = "white"; }
+      else { wishlist.push(product); wishlistBtn.textContent = "favorite"; wishlistBtn.style.color = "#ff4d6d"; }
       localStorage.setItem("wishlist", JSON.stringify(wishlist));
       alert(`${productName} updated in Wishlist!`);
     });
 
-    // ===== ADD TO CART =====
+    // ADD TO CART
     if (addToCartBtn && !soldOutStatus) {
       addToCartBtn.addEventListener("click", () => {
         let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -231,7 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    // ===== BUY NOW =====
+    // BUY NOW
     if (buyNowBtn && !soldOutStatus) {
       buyNowBtn.addEventListener("click", () => {
         let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -241,25 +224,44 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = "cart.html";
       });
     }
+
+    // LINK TO DETAILS
+    wrapper.querySelector(".top a").addEventListener("click", e => {
+      e.preventDefault();
+      localStorage.setItem("selectedProduct", JSON.stringify(product));
+      window.location.href = "productdetails.html";
+    });
+
   });
 
-  // ===== GRID VIEW TOGGLE =====
+  // GRID VIEW TOGGLE
   const container = document.querySelector(".product-container");
   const viewBtns = document.querySelectorAll(".view-toggle .view-btn");
+  if (window.innerWidth >= 769) { container.classList.add("view-2"); container.classList.remove("view-1","view-4"); }
+  viewBtns.forEach(btn => btn.addEventListener("click", () => {
+    const columns = btn.dataset.columns;
+    container.classList.remove("view-1","view-2","view-4");
+    container.classList.add(`view-${columns}`);
+  }));
 
-  // Default desktop view 2-columns
-  if (window.innerWidth >= 769) {
-    container.classList.add("view-2");
-    container.classList.remove("view-1", "view-4");
-  }
-
-  viewBtns.forEach(btn => {
-    btn.addEventListener("click", () => {
-      const columns = btn.dataset.columns;
-      container.classList.remove("view-1", "view-2", "view-4");
-      container.classList.add(`view-${columns}`);
-    });
+  // PUSH TO ALL PRODUCTS FOR DYNAMIC PAGE
+  let allProducts = JSON.parse(localStorage.getItem("allProducts")) || [];
+  productWrappers.forEach(wrapper => {
+    const productId = wrapper.dataset.productId;
+    if (!allProducts.find(p => p.id === productId)) {
+      allProducts.push({
+        id: productId,
+        name: wrapper.querySelector(".details h1").textContent,
+        price: wrapper.querySelector(".discounted-price").textContent,
+        mrp: wrapper.querySelector(".mrp span")?.textContent || "",
+        image: wrapper.querySelector(".top img").src,
+        soldOut: wrapper.dataset.soldOut === "true",
+        category: "candy-bags"
+      });
+    }
   });
+  localStorage.setItem("allProducts", JSON.stringify(allProducts));
+
 });
 </script>
 
