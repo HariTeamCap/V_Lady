@@ -133,7 +133,8 @@ header {
   width: 100%;
   background-color: #ff9fcf; /* soft gray-blue tone */
   color: #000000; /* black text */
-  height: 20px; /* thin height */
+  height: 28px; /* thin height */
+  
   display: flex;
   align-items: center;
   justify-content: center;
@@ -144,10 +145,12 @@ header {
 
 /* Banner Text */
 .scrolling-text {
-  font-size: 14px;
+  font-size: 19px;
   font-weight: 600;
-  letter-spacing: 3px;
+  letter-spacing: 7px;
   text-transform: uppercase;
+  margin-top:4px;
+  
 }
 
 /* Desktop adjustments */
@@ -157,6 +160,7 @@ header {
   }
   .scrolling-text {
     font-size: 15px;
+    
   }
 }
 
@@ -167,11 +171,11 @@ header {
     top:76px;
   }
   .scrolling-text {
-    font-size: 12.5px;
-    letter-spacing: 2px;
+    font-size: 14px;
+    letter-spacing: 5px;
+    margin-top:2px;
   }
 }
-
 /* ===== ABOUT PAGE STYLING ===== */
 .about-section {
   padding-top: 200px; /* for header + banner */
