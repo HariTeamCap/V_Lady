@@ -1,127 +1,77 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const productWrappers = document.querySelectorAll(".wrapper");
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const productContainer = document.querySelector('.product-container');
-  const navLinks = document.querySelector('.nav-links');
+  productWrappers.forEach(wrapper => {
+    const productId = wrapper.dataset.productId;
+    const productName = wrapper.querySelector(".details h1").textContent;
+    const productPrice = wrapper.querySelector(".details .discounted-price").textContent;
+    const productMrp = wrapper.querySelector(".details .mrp span").textContent;
+    const productImage = wrapper.querySelector(".top img").src;
 
-  let user = null;
+    const product = {
+      id: productId,
+      name: productName,
+      price: productPrice,
+      mrp: productMrp,
+      image: productImage,
+      quantity: 1
+    };
 
-  // Check authentication status
-  try {
-    const response = await fetch('/api/user');
-    if (response.ok) {
-      user = await response.json();
+    // ----- Wishlist -----
+    const wishlistBtn = wrapper.querySelector(".wishlist-btn i");
+    let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+    // If already in wishlist, mark active
+    if (wishlist.find(p => p.id === productId)) {
+      wishlistBtn.textContent = "favorite";
+      wishlistBtn.style.color = "#ff4d6d";
     }
-  } catch (error) {
-    console.error('Error fetching user status:', error);
-  }
 
-  // Update navigation with login/logout button
-  const authLink = document.createElement('li');
-  if (user) {
-    authLink.innerHTML = `<a href="#" id="logout-btn"><i class="fa fa-sign-out"></i></a>`;
-    navLinks.appendChild(authLink);
+    wishlistBtn.addEventListener("click", () => {
+      let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+      const exists = wishlist.find(p => p.id === productId);
 
-    document.getElementById('logout-btn').addEventListener('click', async () => {
-      await fetch('/api/logout');
-      window.location.reload();
+      if (exists) {
+        wishlist = wishlist.filter(p => p.id !== productId);
+        wishlistBtn.textContent = "favorite_border";
+        wishlistBtn.style.color = "white";
+      } else {
+        wishlist.push(product);
+        wishlistBtn.textContent = "favorite";
+        wishlistBtn.style.color = "#ff4d6d";
+      }
+
+      localStorage.setItem("wishlist", JSON.stringify(wishlist));
     });
-  } else {
-    const loginLink = navLinks.querySelector('a[href="login.html"]');
-    if (!loginLink) {
-        authLink.innerHTML = `<a href="login.html"><i class="fa fa-user"></i></a>`;
-        navLinks.appendChild(authLink);
+
+    // ----- Add to Cart -----
+    const addToCartBtn = wrapper.querySelector(".buy i");
+    if (addToCartBtn) {
+      addToCartBtn.addEventListener("click", () => {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const existing = cart.find(p => p.id === productId);
+
+        if (existing) {
+          existing.quantity += 1;
+        } else {
+          cart.push({ ...product });
+        }
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        alert(`${productName} added to cart 🛒`);
+      });
     }
-  }
 
-  // Fetch and render products
-  try {
-    const response = await fetch('/api/products');
-    const products = await response.json();
-    renderProducts(products);
-  } catch (error) {
-    console.error('Error fetching products:', error);
-    productContainer.innerHTML = '<p>Error loading products. Please try again later.</p>';
-  }
-
-  function renderProducts(products) {
-    productContainer.innerHTML = '';
-    products.forEach(product => {
-      const productCard = document.createElement('div');
-      productCard.className = 'wrapper';
-      productCard.dataset.productId = product._id;
-
-      productCard.innerHTML = `
-        <div class="wishlist-btn">
-          <i class="material-icons">favorite_border</i>
-        </div>
-        <div class="container">
-          <div class="top">
-            <a href="productdetails.html?id=${product._id}">
-              <img src="${product.image}" alt="${product.name}"/>
-            </a>
-          </div>
-          <div class="bottom">
-            <div class="left">
-              <div class="details">
-                <h1>${product.name}</h1>
-                <p class="discounted-price">₹${product.price}</p>
-              </div>
-              <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
-            </div>
-          </div>
-        </div>
-      `;
-
-      productContainer.appendChild(productCard);
-
-      // Add to wishlist
-      const wishlistBtn = productCard.querySelector('.wishlist-btn i');
-      wishlistBtn.addEventListener('click', async () => {
-        if (!user) {
-          alert('Please login to add items to your wishlist.');
-          window.location.href = 'login.html';
-          return;
-        }
-        try {
-          const response = await fetch('/api/wishlist/add', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ productId: product._id }),
-          });
-          if (response.ok) {
-            wishlistBtn.style.color = '#ff4d6d';
-            alert('Added to wishlist!');
-          } else {
-            alert('Failed to add to wishlist.');
-          }
-        } catch (error) {
-          console.error('Error adding to wishlist:', error);
-        }
+    // ----- Buy Now -----
+    const buyNowBtn = wrapper.querySelector(".buy-now");
+    if (buyNowBtn) {
+      buyNowBtn.addEventListener("click", () => {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const existing = cart.find(p => p.id === productId);
+        if (!existing) cart.push({ ...product });
+        localStorage.setItem("cart", JSON.stringify(cart));
+        window.location.href = "cart.html";
       });
-
-      // Add to cart
-      const addToCartBtn = productCard.querySelector('.buy i');
-      addToCartBtn.addEventListener('click', async () => {
-        if (!user) {
-          alert('Please login to add items to your cart.');
-          window.location.href = 'login.html';
-          return;
-        }
-        try {
-          const response = await fetch('/api/cart/add', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ productId: product._id, quantity: 1 }),
-          });
-          if (response.ok) {
-            alert('Added to cart!');
-          } else {
-            alert('Failed to add to cart.');
-          }
-        } catch (error) {
-          console.error('Error adding to cart:', error);
-        }
-      });
-    });
-  }
+    }
+  });
 });
