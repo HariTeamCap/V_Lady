@@ -133,7 +133,8 @@ header {
   width: 100%;
   background-color: #ff9fcf; /* soft gray-blue tone */
   color: #000000; /* black text */
-  height: 20px; /* thin height */
+  height: 28px; /* thin height */
+  
   display: flex;
   align-items: center;
   justify-content: center;
@@ -144,10 +145,12 @@ header {
 
 /* Banner Text */
 .scrolling-text {
-  font-size: 14px;
+  font-size: 19px;
   font-weight: 600;
-  letter-spacing: 3px;
+  letter-spacing: 7px;
   text-transform: uppercase;
+  margin-top:4px;
+  
 }
 
 /* Desktop adjustments */
@@ -157,6 +160,7 @@ header {
   }
   .scrolling-text {
     font-size: 15px;
+    
   }
 }
 
@@ -167,11 +171,11 @@ header {
     top:76px;
   }
   .scrolling-text {
-    font-size: 12.5px;
-    letter-spacing: 2px;
+    font-size: 14px;
+    letter-spacing: 5px;
+    margin-top:2px;
   }
 }
-
 /* ===========================
    BAG SECTION TITLE
 =========================== */
@@ -185,7 +189,7 @@ header {
   font-size: 32px;
   font-weight: 500;
   margin-bottom: 25px;
-  letter-spacing:15;
+  letter-spacing:10px;
   color: #111;
   
 }
@@ -401,7 +405,7 @@ header {
 
   .bag-section h2 {
     font-size: 28px;
-    letter-spacing:10;
+    letter-spacing:10px;
   }
 
   .product-container {
@@ -902,7 +906,7 @@ header {
   }
 
   .product-container.view-2 .bottom {
-    height:30%;
+    height:15%;
     padding: 0;
     display: flex;
     align-items: center;
@@ -925,25 +929,27 @@ header {
   }
 
   .product-container.view-2 .left .details h1 {
-    font-size: 18px;
+    font-size: 23px;
     line-height: 1.2;
+    margin-left:8px;
   }
 
   .product-container.view-2 .left .details p {
-    font-size: 14px;
-    margin: 0;
+    font-size: 23px;
+    margin-left:8px;
   }
 
   .product-container.view-2 .left .details .mrp {
-    font-size: 12px;
-    margin: 0;
+    font-size: 14px;
+    margin-left:7px;
+    margin-top:0px;
   }
 
   .product-container.view-2 .left .buy,
   .product-container.view-2 .left .buy-now {
     width: 18%;
-    height: 65px;
-    font-size: 14px;
+    height: 75px;
+    font-size: 16px;
     margin: 0;
     padding: 0;
     display: flex;
@@ -952,7 +958,7 @@ header {
   }
 
   .product-container.view-2 .left .buy i {
-    font-size: 28px;
+    font-size: 38px;
   }
 
   .product-container.view-2 .left .buy-now {
@@ -1059,6 +1065,5 @@ header {
     font-size: 14px;
     line-height: 1;
   }
+ 
 }
-/* ===========================
-   FIX ACCESSORIES 2-GRID DESKT
