@@ -31,6 +31,22 @@
       color: white;
       font-weight: bold;
     }
+        /* ===========================
+       FOOTER
+    ============================ */
+    footer.site-footer {
+      width: 100%;
+      padding: 20px;
+      text-align: center;
+      background: #222;
+      color: #fff;
+      margin-top:470px;
+    }
+        /* Bigger text on desktop */
+   @media (min-width: 768px) {
+  footer.site-footer {
+    font-size: 29px;
+  }
   </style>
 </head>
 <body>
@@ -81,7 +97,7 @@
       <div class="wishlist-btn"><i class="material-icons">favorite_border</i></div>
       <div class="container">
         <div class="top">
-          <a href="productdetails.html"><img src="https://s-media-cache-ak0.pinimg.com/736x/49/80/6f/49806f3f1c7483093855ebca1b8ae2c4.jpg" alt="Accessory 1" /></a>
+          <a href="productdetails.html"><img src="IMG_6725.PNG" alt="Accessory 1" /></a>
         </div>
         <div class="bottom">
           <div class="left">
@@ -103,7 +119,28 @@
       <div class="wishlist-btn"><i class="material-icons">favorite_border</i></div>
       <div class="container">
         <div class="top">
-          <a href="productdetails.html"><img src="https://s-media-cache-ak0.pinimg.com/736x/49/80/6f/49806f3f1c7483093855ebca1b8ae2c4.jpg" alt="Accessory 2" /></a>
+          <a href="productdetails.html"><img src="IMG_6724.png" alt="Accessory 2" /></a>
+        </div>
+        <div class="bottom">
+          <div class="left">
+            <div class="details">
+              <h1>Accessory 2</h1>
+              <p class="discounted-price">₹950</p>
+              <p class="mrp">MRP: <span>₹1500</span></p>
+            </div>
+            <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
+            <div class="buy-now">BUY<br>NOW</div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <!-- Accessory Product 3 -->
+    <div class="wrapper" data-product-id="accessory003" data-sold-out="true">
+      <div class="sold-out-badge">SOLD OUT</div>
+      <div class="wishlist-btn"><i class="material-icons">favorite_border</i></div>
+      <div class="container">
+        <div class="top">
+          <a href="productdetails.html"><img src="IMG_6726.PNG" alt="Accessory 3" /></a>
         </div>
         <div class="bottom">
           <div class="left">
@@ -210,6 +247,79 @@ document.addEventListener("DOMContentLoaded", () => {
       container.classList.add(`view-${columns}`);
     });
   });
+});
+</script>
+<!-- Only the modified parts are important, the rest of your HTML/CSS remains unchanged -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const productWrappers = document.querySelectorAll(".wrapper");
+
+  productWrappers.forEach(wrapper => {
+    const productId = wrapper.dataset.productId;
+    const productName = wrapper.querySelector(".details h1").textContent;
+    const productPrice = wrapper.querySelector(".details .discounted-price").textContent;
+    const productMRP = wrapper.querySelector(".details .mrp span")?.textContent || "";
+    const productImage = wrapper.querySelector(".top img").src;
+    const soldOutStatus = wrapper.dataset.soldOut === "true";
+
+    const product = {
+      id: productId,
+      name: productName,
+      price: productPrice,
+      mrp: productMRP,
+      image: productImage,
+      quantity: 1,
+      soldOut: soldOutStatus,
+      category: "candy-bags" // ✅ Important: identifies the category
+    };
+
+    // LINK TO PRODUCT DETAILS
+    wrapper.querySelector(".top a").addEventListener("click", (e) => {
+      e.preventDefault();
+      localStorage.setItem("selectedProduct", JSON.stringify(product)); // Save clicked product
+      window.location.href = "productdetails.html";
+    });
+
+    // SOLD OUT, WISHLIST, ADD TO CART, BUY NOW logic (same as before)
+    // ...
+  });
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const productWrappers = document.querySelectorAll(".wrapper");
+
+  // Fetch existing allProducts array or initialize empty
+  let allProducts = JSON.parse(localStorage.getItem("allProducts")) || [];
+
+  productWrappers.forEach(wrapper => {
+    const productId = wrapper.dataset.productId;
+    const productName = wrapper.querySelector(".details h1").textContent;
+    const productPrice = wrapper.querySelector(".details .discounted-price").textContent;
+    const productMRP = wrapper.querySelector(".details .mrp span")?.textContent || "";
+    const productImage = wrapper.querySelector(".top img").src;
+    const soldOutStatus = wrapper.dataset.soldOut === "true";
+    const category = wrapper.closest(".bag-section h2")?.textContent?.toLowerCase() || "other";
+
+    // Create product object
+    const product = {
+      id: productId,
+      name: productName,
+      price: productPrice,
+      mrp: productMRP,
+      image: productImage,
+      soldOut: soldOutStatus,
+      category: category
+    };
+
+    // Check if product already exists in allProducts
+    if (!allProducts.find(p => p.id === productId)) {
+      allProducts.push(product);
+    }
+  });
+
+  // Save updated allProducts array back to localStorage
+  localStorage.setItem("allProducts", JSON.stringify(allProducts));
 });
 </script>
 
