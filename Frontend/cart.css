@@ -124,23 +124,26 @@ header {
   top: 77px; /* adjust based on your header height */
   left: 0;
   width: 100%;
-  background-color: #ff9fcf;
-  color: #000000;
-  height: 20px;
+  background-color: #ff9fcf; /* soft gray-blue tone */
+  color: #000000; /* black text */
+  height: 28px; /* thin height */
+  
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 999;
   font-family: 'Montserrat', sans-serif;
-  border-bottom: 0px solid #e5e7eb;
+  border-bottom: 0px solid #e5e7eb; /* optional subtle divider */
 }
 
 /* Banner Text */
 .scrolling-text {
-  font-size: 14px;
+  font-size: 19px;
   font-weight: 600;
-  letter-spacing: 3px;
+  letter-spacing: 7px;
   text-transform: uppercase;
+  margin-top:4px;
+  
 }
 
 /* Desktop adjustments */
@@ -150,6 +153,7 @@ header {
   }
   .scrolling-text {
     font-size: 15px;
+    
   }
 }
 
@@ -160,8 +164,9 @@ header {
     top:76px;
   }
   .scrolling-text {
-    font-size: 12.5px;
-    letter-spacing: 2px;
+    font-size: 14px;
+    letter-spacing: 5px;
+    margin-top:2px;
   }
 }
 
@@ -206,7 +211,7 @@ body {
 
 .item-details {
   flex: 1;
-  margin-left: 2px;
+  margin-left: 4px;
   margin-top:15px;
 }
 
@@ -476,4 +481,7 @@ body {
     font-size: 14px;
     padding: 5px 35px 5px 10px;
   }
+  
+  
+  
 }
