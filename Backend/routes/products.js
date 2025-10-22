@@ -44,6 +44,110 @@ const isAdmin = (req, res, next) => {
     next();
 };
 
+// Create a new product
+router.post('/', isAdmin, upload.array('images', 10), async (req, res) => {
+    try {
+        const { name, description, price, category, stock, featured } = req.body;
+        const images = req.files ? req.files.map(file => path.join('uploads', file.filename)) : [];
+        
+        const product = new Product({
+            name,
+            description,
+            price,
+            category,
+            images,
+            stock,
+            featured
+        });
+
+        await product.save();
+        res.status(201).json(product);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to create product' });
+    }
+});
+
+// Get all products
+router.get('/', async (req, res) => {
+    try {
+        const products = await Product.find();
+        res.json(products);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to get products' });
+    }
+});
+
+// Get a single product
+router.get('/:productId', async (req, res) => {
+    try {
+        const product = await Product.findById(req.params.productId);
+        if (!product) {
+            return res.status(404).json({ error: 'Product not found' });
+        }
+        res.json(product);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to get product' });
+    }
+});
+
+// Update a product
+router.put('/:productId', isAdmin, upload.array('images', 10), async (req, res) => {
+    try {
+        const { name, description, price, category, stock, featured } = req.body;
+        const images = req.files ? req.files.map(file => path.join('uploads', file.filename)) : [];
+
+        const product = await Product.findById(req.params.productId);
+        if (!product) {
+            return res.status(404).json({ error: 'Product not found' });
+        }
+
+        product.name = name || product.name;
+        product.description = description || product.description;
+        product.price = price || product.price;
+        product.category = category || product.category;
+        product.stock = stock || product.stock;
+        product.featured = featured || product.featured;
+
+        if (images.length > 0) {
+            // Remove old images
+            product.images.forEach(image => {
+                if (fs.existsSync(path.join(__dirname, '..', image))) {
+                    fs.unlinkSync(path.join(__dirname, '..', image));
+                }
+            });
+            product.images = images;
+        }
+
+        await product.save();
+        res.json(product);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to update product' });
+    }
+});
+
+// Delete a product
+router.delete('/:productId', isAdmin, async (req, res) => {
+    try {
+        const product = await Product.findById(req.params.productId);
+        if (!product) {
+            return res.status(404).json({ error: 'Product not found' });
+        }
+
+        // Remove images
+        product.images.forEach(image => {
+            if (fs.existsSync(path.join(__dirname, '..', image))) {
+                fs.unlinkSync(path.join(__dirname, '..', image));
+            }
+        });
+
+        await product.remove();
+        res.json({ message: 'Product deleted' });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to delete product' });
+    }
+});
+
+
 // Add images/videos to product
 router.post('/:productId/media', isAdmin, upload.array('media', 10), async (req, res) => {
     try {
