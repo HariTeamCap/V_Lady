@@ -1,16 +1,21 @@
-
-/* ===== GENERAL STYLES ===== */
+/* ===========================
+   GENERAL RESET
+=========================== */
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #fff, #f9f9f9, #f1f1f1);
-  color: #222;
-  overflow-x: hidden;
+  background: #fafafa;
+  color: #111;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 /* Header styling */
@@ -123,12 +128,13 @@ header {
 /* 🌸 Static Thin Banner */
 .pink-banner {
   position: fixed;
-  top: 75px; /* adjust based on your header height */
+  top: 77px; /* adjust based on your header height */
   left: 0;
   width: 100%;
   background-color: #ff9fcf; /* soft gray-blue tone */
   color: #000000; /* black text */
-  height: 20px; /* thin height */
+  height: 28px; /* thin height */
+  
   display: flex;
   align-items: center;
   justify-content: center;
@@ -139,10 +145,12 @@ header {
 
 /* Banner Text */
 .scrolling-text {
-  font-size: 14px;
+  font-size: 19px;
   font-weight: 600;
-  letter-spacing: 3px;
+  letter-spacing: 7px;
   text-transform: uppercase;
+  margin-top:4px;
+  
 }
 
 /* Desktop adjustments */
@@ -152,17 +160,20 @@ header {
   }
   .scrolling-text {
     font-size: 15px;
+    
   }
 }
 
 /* Mobile adjustments */
 @media (max-width: 768px) {
   .pink-banner {
-    height: 20px;
+    height: 22px;
+    top:76px;
   }
   .scrolling-text {
-    font-size: 12.5px;
-    letter-spacing: 2px;
+    font-size: 14px;
+    letter-spacing: 5px;
+    margin-top:2px;
   }
 }
 
@@ -172,13 +183,12 @@ header {
   flex-wrap: wrap;
   gap: 40px;
   max-width: 1200px;
-  margin: auto;
+  margin: 150px auto 50px; /* margin from top for header + banner */
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
   padding: 30px;
-}
-
+  padding-top:200px;
 }
 
 /* --- Image Section --- */
@@ -187,6 +197,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative; /* so wishlist icon can appear */
 }
 
 .main-image img {
@@ -197,6 +208,28 @@ header {
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
+/* Wishlist Heart Icon */
+.wishlist-icon {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 32px;
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+  cursor: pointer;
+  transition: transform 0.3s, color 0.3s;
+  z-index: 5;
+}
+
+.wishlist-icon:hover {
+  transform: scale(1.2);
+}
+
+.wishlist-icon.wishlist-active {
+  color: #ff4d6d;
+}
+
+/* --- Thumbnails --- */
 .thumbnail-container {
   display: flex;
   gap: 10px;
@@ -215,86 +248,98 @@ header {
   transition: border 0.3s ease, transform 0.3s ease;
 }
 
-.thumbnail:hover {
-  transform: scale(1.05);
-}
-
 .thumbnail.active {
   border: 2px solid #d63384;
+}
+
+.thumbnail:hover {
+  transform: scale(1.05);
 }
 
 /* --- Details Section --- */
 .details {
   flex: 1 1 45%;
+  margin-top:100px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start; /* align to top */
 }
 
 .product-title {
-  font-size: 28px;
+  font-size: 38px;
   font-weight: 600;
   color: #222;
+  margin-bottom: 10px;
 }
 
 .price {
-  font-size: 24px;
+  font-size: 29px;
   color: #d63384;
   font-weight: 700;
-  margin: 15px 0;
+  margin: 5px 0;
+}
+
+/* MRP with strikethrough */
+.mrp {
+  font-size: 18px;
+  color: #555;
+  text-decoration: line-through;
+  margin-bottom: 10px;
 }
 
 .description {
-  font-size: 16px;
+  font-size: 26px;
   line-height: 1.6;
   margin-bottom: 25px;
   color: #555;
 }
 
-/* --- Buttons --- */
+/* --- Modern Buttons --- */
 .btn-group {
   display: flex;
   gap: 15px;
-  
 }
 
 .btn {
-  padding: 12px 20px;
+  padding: 14px 28px;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 .add-cart {
-  background-color: #254053;
+  background: linear-gradient(135deg, #254053, #2f556e);
   color: #fff;
 }
 
 .add-cart:hover {
-  background-color: #2f556e;
-  transform: scale(1.05);
+  background: linear-gradient(135deg, #2f556e, #254053);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
 }
 
 .buy-now {
-  background-color: #d63384;
+  background: linear-gradient(135deg, #d63384, #c02473);
   color: #fff;
 }
 
 .buy-now:hover {
-  background-color: #c02473;
-  transform: scale(1.05);
+  background: linear-gradient(135deg, #c02473, #d63384);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
 }
 
-/* --- Responsive Design --- */
+/* --- Responsive Adjustments --- */
 @media (max-width: 974px) {
   .product-page {
     flex-direction: column;
     align-items: center;
-    padding: 30px;
-    padding-top:130px;
+    padding: 20px;
+    margin-top: 100px;
   }
 
   .gallery, .details {
@@ -313,6 +358,9 @@ header {
   .product-title {
     font-size: 24px;
   }
+  .details{
+    margin-top:20px;
+  }
 
   .price {
     font-size: 20px;
@@ -321,6 +369,146 @@ header {
   .btn {
     font-size: 14px;
     padding: 10px 16px;
-    
   }
+
+  .wishlist-icon {
+    font-size: 28px;
+    top: 10px;
+    right: 10px;
+  }
+}
+
+/* --- Desktop Specific Adjustments --- */
+@media (min-width: 975px) {
+  .product-page {
+    margin-top: 90px; /* space from header + banner */
+  }
+
+  .wishlist-icon {
+    font-size: 32px;
+    top: 12px;
+    right: 12px;
+  }
+}
+/* ===========================
+   EXISTING CSS (unchanged)
+=========================== */
+/* ... your entire CSS above remains unchanged ... */
+
+
+/* --- Add this below your existing .thumbnail styles --- */
+
+/* ✅ Extra Thumbnails from Database */
+.extra-thumbnails {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.extra-thumbnails .thumbnail.extra {
+  width: 80px;
+  height: 80px;
+  border-radius: 6px;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: transform 0.3s ease, border 0.3s ease;
+}
+
+.extra-thumbnails .thumbnail.extra:hover {
+  transform: scale(1.05);
+}
+
+.extra-thumbnails .thumbnail.extra.active {
+  border: 2px solid #d63384;
+}
+
+/* ✅ Extra Product Description below MRP */
+.extra-description {
+  margin-top: 10px;
+  font-size: 23px;
+  line-height: 1.6;
+  color: #444;
+  font-weight: 400;
+  padding: 10px 0;
+  border-top: 1px solid #eee;
+}
+
+/* Thumbnails container */
+.thumbnail-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+  justify-content: center; /* aligns thumbnails in a row */
+}
+
+/* Thumbnail images (main + extra) */
+.thumbnail {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border 0.3s ease, transform 0.3s ease;
+}
+
+.thumbnail.active {
+  border: 2px solid #d63384;
+}
+
+.thumbnail:hover {
+  transform: scale(1.05);
+}
+
+/* Responsive for mobile */
+@media (max-width: 974px) {
+  .thumbnail {
+    width: 70px;
+    height: 70px;
+  }
+  .thumbnail {
+  border: 2px solid red;
+}
+/* ===========================
+   FIX EXTRA THUMBNAILS VISIBILITY
+=========================== */
+.thumbnail-container {
+  display: flex;           /* ensure thumbnails are in a row */
+  gap: 10px;               /* spacing between thumbnails */
+  margin-top: 15px;        /* space below main image */
+  flex-wrap: wrap;         /* wrap on small screens */
+  justify-content: center; /* center align */
+  position: relative;      /* ensure visible above banner/header */
+  z-index: 50;             /* bring thumbnails above other elements */
+}
+
+.thumbnail {
+  width: 80px;             /* thumbnail width */
+  height: 80px;            /* thumbnail height */
+  object-fit: cover;       /* scale image correctly */
+  border-radius: 6px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border 0.3s ease, transform 0.3s ease;
+}
+
+.thumbnail.active {
+  border: 2px solid #d63384; /* active thumbnail border */
+}
+
+.thumbnail:hover {
+  transform: scale(1.05);
+}
+
+/* Responsive: smaller thumbnails on mobile */
+@media (max-width: 974px) {
+  .thumbnail {
+    width: 70px;
+    height: 70px;
+  }
+}
 }
