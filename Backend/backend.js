@@ -37,7 +37,7 @@ app.use(bodyParser.json());
 app.use('/uploads', express.static(uploadsDir));
 app.use(express.static(path.join(__dirname, '..', 'Frontend')));
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' ? process.env.FRONTEND_ORIGIN : 'http://localhost:8080',
+  origin: '*', // Allow all origins
   credentials: true
 }));
 app.use(session({

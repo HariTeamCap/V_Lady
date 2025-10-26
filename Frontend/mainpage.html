@@ -97,86 +97,8 @@
 <section class="new-products">
   <section id="new-products"></section>
   <h2>FEATURED PRODUCTS</h2>
-  <div class="product-container">
-
-    <!-- Product Card -->
-    <div class="wrapper" data-product-id="product001">
-      <div class="wishlist-btn">
-        <i class="material-icons">favorite_border</i>
-      </div>
-      <div class="container">
-        <div class="top">
-          <a href="productdetails.html">
-            <img src="IMG_6724.png" alt="Product1"/>
-          </a>
-        </div>
-        <div class="bottom">
-          <div class="left">
-                 <div class="details">
-                <h1>Premium Clutch</h1>
-         <p class="discounted-price">₹1250</p>
-    <p class="mrp">MRP: <span>₹2200</span></p>
-    </div>
-            
-              
-              
-            <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Duplicate Product Cards -->
-    <div class="wrapper" data-product-id="product002">
-      <div class="wishlist-btn">
-        <i class="material-icons">favorite_border</i>
-      </div>
-      <div class="container">
-        <div class="top">
-          <a href="productdetails.html">
-            <img src="https://images.pexels.com/photos/27046146/pexels-photo-27046146.jpeg" alt="Product 2" />
-          </a>
-        </div>
-        <div class="bottom">
-          <div class="left">
-            <div class="details">
-              <h1>Premium Clutch</h1>
-         <p class="discounted-price">₹1250</p>
-    <p class="mrp">MRP: <span>₹2200</span></p>
-    </div>
-              
-            
-            <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="wrapper" data-product-id="product003">
-      <div class="wishlist-btn">
-        <i class="material-icons">favorite_border</i>
-      </div>
-      <div class="container">
-        <div class="top">
-          <a href="productdetails.html">
-            <img src="https://images.pexels.com/photos/22432994/pexels-photo-22432994.jpeg" alt="Product 3" />
-          </a>
-        </div>
-        <div class="bottom">
-          <div class="left">
-            <div class="details">
-              <h1>Premium Clutch</h1>
-         <p class="discounted-price">₹1250</p>
-    <p class="mrp">MRP: <span>₹2200</span></p>
-    </div>
-              
-            
-            <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
+  <div class="product-container" id="featured-products-container">
+    <!-- Products will be dynamically inserted here -->
   </div>
 </section>
 <!-- === 3 Photo Gallery Section === -->
@@ -297,38 +219,53 @@
   <script src="script.js"></script>
   <!-- Only the modified parts are important, the rest of your HTML/CSS remains unchanged -->
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const productWrappers = document.querySelectorAll(".wrapper");
+document.addEventListener('DOMContentLoaded', () => {
+    const productsContainer = document.getElementById('featured-products-container');
 
-  productWrappers.forEach(wrapper => {
-    const productId = wrapper.dataset.productId;
-    const productName = wrapper.querySelector(".details h1").textContent;
-    const productPrice = wrapper.querySelector(".details .discounted-price").textContent;
-    const productMRP = wrapper.querySelector(".details .mrp span")?.textContent || "";
-    const productImage = wrapper.querySelector(".top img").src;
-    const soldOutStatus = wrapper.dataset.soldOut === "true";
+    fetch('http://localhost:3000/api/products')
+        .then(response => response.json())
+        .then(products => {
+            const featuredProducts = products.filter(p => p.featured);
+            featuredProducts.forEach(product => {
+                const productElement = document.createElement('div');
+                productElement.classList.add('wrapper');
+                productElement.dataset.productId = product._id;
 
-    const product = {
-      id: productId,
-      name: productName,
-      price: productPrice,
-      mrp: productMRP,
-      image: productImage,
-      quantity: 1,
-      soldOut: soldOutStatus,
-      category: "candy-bags" // ✅ Important: identifies the category
-    };
+                productElement.innerHTML = `
+                    <div class="wishlist-btn">
+                        <i class="material-icons">favorite_border</i>
+                    </div>
+                    <div class="container">
+                        <div class="top">
+                            <a href="productdetails.html">
+                                <img src="http://localhost:3000/${product.images[0]}" alt="${product.name}"/>
+                            </a>
+                        </div>
+                        <div class="bottom">
+                            <div class="left">
+                                <div class="details">
+                                    <h1>${product.name}</h1>
+                                    <p class="discounted-price">₹${product.price}</p>
+                                    <p class="mrp">MRP: <span>₹${product.MRP}</span></p>
+                                </div>
+                                <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
 
-    // LINK TO PRODUCT DETAILS
-    wrapper.querySelector(".top a").addEventListener("click", (e) => {
-      e.preventDefault();
-      localStorage.setItem("selectedProduct", JSON.stringify(product)); // Save clicked product
-      window.location.href = "productdetails.html";
-    });
+                productElement.querySelector('.top a').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    localStorage.setItem('selectedProduct', JSON.stringify(product));
+                    window.location.href = 'productdetails.html';
+                });
 
-    // SOLD OUT, WISHLIST, ADD TO CART, BUY NOW logic (same as before)
-    // ...
-  });
+                productsContainer.appendChild(productElement);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching featured products:', error);
+        });
 });
 </script>
 </body>
