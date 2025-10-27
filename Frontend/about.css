@@ -125,107 +125,131 @@ header {
     font-size: 17px;
   }
 }
-/* 🌸 Static Thin Banner */
-.pink-banner {
+/* ===== TAGLINE BELOW HEADER ===== */
+#bannerText {
   position: fixed;
-  top: 77px; /* adjust based on your header height */
-  left: 0;
+  top:75px; /* adjust based on your header height */
   width: 100%;
-  background-color: #ff9fcf; /* soft gray-blue tone */
-  color: #000000; /* black text */
-  height: 28px; /* thin height */
-  
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-  font-family: 'Montserrat', sans-serif;
-  border-bottom: 0px solid #e5e7eb; /* optional subtle divider */
+  text-align: center;
+  background:background: linear-gradient(to bottom, #000000, #434343);
+  color:white;
+  font-size:0.7rem;
+  letter-spacing:10px;
+  font-weight: 500;
+  padding: 12px 0;
+  transition: all 0.6s ease;
+  z-index: 998;
+  opacity:70%;
 }
 
-/* Banner Text */
-.scrolling-text {
-  font-size: 19px;
-  font-weight: 600;
-  letter-spacing: 7px;
-  text-transform: uppercase;
-  margin-top:4px;
-  
-}
-
-/* Desktop adjustments */
-@media (min-width: 1024px) {
-  .pink-banner {
-    height: 28px;
-  }
-  .scrolling-text {
-    font-size: 15px;
-    
-  }
-}
-
-/* Mobile adjustments */
-@media (max-width: 768px) {
-  .pink-banner {
-    height: 22px;
-    top:76px;
-  }
-  .scrolling-text {
-    font-size: 14px;
-    letter-spacing: 5px;
-    margin-top:2px;
-  }
+#bannerText.hide {
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
 }
 /* ===== ABOUT PAGE STYLING ===== */
 .about-section {
-  padding-top: 200px; /* for header + banner */
-  padding: 200px 20px;
+  padding: 180px 20px;
   max-width: 900px;
   margin: 0 auto;
   text-align: left;
+  position: relative;
+  background: linear-gradient(to bottom, #000000, #1a1a1a);
+  color: #f2f2f2;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
 }
 
+/* Subtle background glow effect */
+.about-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(255,255,255,0.1), transparent 60%);
+  pointer-events: none;
+}
+
+/* Heading styles */
 .about-section h1 {
   text-align: center;
-  font-size: 2 rem;
-  font-weight:500;
+  font-size: 2.2rem;
+  font-weight: 400;
   letter-spacing: 2px;
   margin-bottom: 40px;
-  color: #111;
+  color: #fff;
+  text-transform:;
+  animation: fadeDown 1s ease-in-out;
 }
 
 .about-section h2 {
-  font-size: 1.3rem;
-  margin-bottom: 10px;
-  text-align:center;
-  color: #d63384;
+  font-size: 1.4rem;
+  margin-bottom: 12px;
+  text-align: center;
+  color: #ff4081;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-.about-section p, 
+/* Paragraph and list styles */
+.about-section p,
 .about-section li {
-  color: #444;
-  font-size: 1rem;
-  line-height: 1.7;
+  color: #ddd;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  animation: fadeIn 1.2s ease-in-out;
 }
 
 .about-section ul {
   list-style-type: disc;
-  margin-left: 20px;
+  margin-left: 25px;
   margin-bottom: 30px;
 }
 
-.brand-info, .terms-section, .mission-section {
-  background: #F9F9F9;
+/* Content blocks */
+.brand-info,
+.terms-section,
+.mission-section {
+  background: rgba(255, 255, 255, 0.08);
   padding: 25px 30px;
   border-radius: 16px;
   margin-bottom: 25px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+  backdrop-filter: blur(6px);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-.brand-info:hover, .terms-section:hover, .mission-section:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 14px rgba(0,0,0,0.1);
+.brand-info:hover,
+.terms-section:hover,
+.mission-section:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.4);
+}
+
+/* Animation keyframes */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .about-section {
+    padding: 140px 15px;
+  }
+
+  .about-section h1 {
+    font-size: 1.8rem;
+  }
+
+  .about-section h2 {
+    font-size: 1.2rem;
+  }
 }
 
 .site-footer {
