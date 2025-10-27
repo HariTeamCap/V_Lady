@@ -125,56 +125,31 @@ header {
     font-size: 17px;
   }
 }
-/* 🌸 Static Thin Banner */
-.pink-banner {
+/* ===== TAGLINE BELOW HEADER ===== */
+#bannerText {
   position: fixed;
-  top: 77px; /* adjust based on your header height */
-  left: 0;
+  top:75px; /* adjust based on your header height */
   width: 100%;
-  background-color: #ff9fcf; /* soft gray-blue tone */
-  color: #000000; /* black text */
-  height: 28px; /* thin height */
+  text-align: center;
+  background: transparent;linear-gradient(135deg, #ff7b00, #ff4d00)
+  color:white;
+  font-size:0.7rem;
+  letter-spacing:10px;
+  font-weight: 500;
+  padding: 12px 0;
   
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-  font-family: 'Montserrat', sans-serif;
-  border-bottom: 0px solid #e5e7eb; /* optional subtle divider */
-}
-
-/* Banner Text */
-.scrolling-text {
-  font-size: 19px;
-  font-weight: 600;
-  letter-spacing: 7px;
-  text-transform: uppercase;
-  margin-top:4px;
+  transition: all 0.6s ease;
+  z-index: 998;
+  opacity:70%;
   
+  
+
 }
 
-/* Desktop adjustments */
-@media (min-width: 1024px) {
-  .pink-banner {
-    height: 28px;
-  }
-  .scrolling-text {
-    font-size: 15px;
-    
-  }
-}
-
-/* Mobile adjustments */
-@media (max-width: 768px) {
-  .pink-banner {
-    height: 22px;
-    top:76px;
-  }
-  .scrolling-text {
-    font-size: 14px;
-    letter-spacing: 5px;
-    margin-top:2px;
-  }
+#bannerText.hide {
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
 }
 
 /* --- Product Page Layout --- */
@@ -183,13 +158,16 @@ header {
   flex-wrap: wrap;
   gap: 40px;
   max-width: 1200px;
-  margin: 150px auto 50px; /* margin from top for header + banner */
+  margin: 200px auto 50px;
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
   padding: 30px;
-  padding-top:200px;
+  padding-top:100px;
+  transition: all 0.3s ease;
 }
+
+
 
 /* --- Image Section --- */
 .gallery {
@@ -197,15 +175,21 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative; /* so wishlist icon can appear */
+  position: relative;
 }
 
 .main-image img {
   width: 100%;
   max-width: 450px;
   height: auto;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.main-image img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
 }
 
 /* Wishlist Heart Icon */
@@ -213,47 +197,53 @@ header {
   position: absolute;
   top: 12px;
   right: 12px;
-  font-size: 32px;
+  font-size: 36px;
   color: #fff;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
   cursor: pointer;
-  transition: transform 0.3s, color 0.3s;
+  transition: transform 0.3s, color 0.3s, text-shadow 0.3s;
   z-index: 5;
 }
 
 .wishlist-icon:hover {
-  transform: scale(1.2);
+  transform: scale(1.4);
+  text-shadow: 0 0 15px #ff4d6d;
 }
 
 .wishlist-icon.wishlist-active {
   color: #ff4d6d;
+  text-shadow: 0 0 20px #ff4d6d;
 }
 
 /* --- Thumbnails --- */
 .thumbnail-container {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   margin-top: 15px;
   flex-wrap: wrap;
   justify-content: center;
+  position: relative;
+  z-index: 50;
 }
 
 .thumbnail {
   width: 80px;
   height: 80px;
   object-fit: cover;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  border: 2px solid transparent;
-  transition: border 0.3s ease, transform 0.3s ease;
+  border: 2px solid whitesmoke; /* black border */
+  transition: border 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .thumbnail.active {
-  border: 2px solid #d63384;
+  border: 3px solid mediumvioletred;
+  box-shadow: 0 0 12px rgba(0,0,0,0.4);
 }
 
 .thumbnail:hover {
-  transform: scale(1.05);
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
 }
 
 /* --- Details Section --- */
@@ -262,24 +252,25 @@ header {
   margin-top:100px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* align to top */
+  justify-content: flex-start;
 }
 
 .product-title {
-  font-size: 38px;
-  font-weight: 600;
-  color: #222;
+  font-size: 40px;
+  font-weight: 400;
+  color: #000; /* black */
   margin-bottom: 10px;
+  transition: all 0.3s ease;
 }
 
 .price {
-  font-size: 29px;
-  color: #d63384;
-  font-weight: 700;
+  font-size: 42px;
+  color: #000; /* black */
+  font-weight: 300;
   margin: 5px 0;
+  transition: all 0.3s ease;
 }
 
-/* MRP with strikethrough */
 .mrp {
   font-size: 18px;
   color: #555;
@@ -288,49 +279,109 @@ header {
 }
 
 .description {
-  font-size: 26px;
+  font-size: 24px;
   line-height: 1.6;
   margin-bottom: 25px;
   color: #555;
 }
 
-/* --- Modern Buttons --- */
-.btn-group {
-  display: flex;
-  gap: 15px;
-}
-
+/* --- Modern Animated Buttons --- */
 .btn {
-  padding: 14px 28px;
+  padding: 10px 22px;
   border: none;
-  border-radius: 8px;
+  border-radius: 5px;
   cursor: pointer;
-  font-size: 18px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-.add-cart {
-  background: linear-gradient(135deg, #254053, #2f556e);
+  font-size:20px;
+  font-weight: 400;
+  
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   color: #fff;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.25);
 }
 
-.add-cart:hover {
-  background: linear-gradient(135deg, #2f556e, #254053);
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+/* Animated gradient background */
+.add-cart {
+  background: linear-gradient(135deg, #ff6b6b, #ffcc70, #6bc1ff, #d63384);
+  background-size: 400% 400%;
+  animation: gradientMove 8s ease infinite;
 }
 
 .buy-now {
-  background: linear-gradient(135deg, #d63384, #c02473);
-  color: #fff;
+  margin-left:30px;
+  background: linear-gradient(135deg, #6bc1ff, #ff6b6b, #d63384, #ffcc70);
+  background-size: 400% 400%;
+  animation: gradientMove 8s ease infinite;
 }
 
-.buy-now:hover {
-  background: linear-gradient(135deg, #c02473, #d63384);
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+/* Hover Effects */
+.btn:hover {
+  transform: translateY(-4px) scale(1.1);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+/* Optional shine overlay */
+.btn::before {
+  content: "";
+  position: absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(255,255,255,0.1);
+  opacity:0;
+  transition: opacity 0.3s ease;
+  border-radius: 12px;
+}
+
+.btn:hover::before {
+  opacity:1;
+}
+
+/* Gradient Animation Keyframes */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+/* --- Extra Thumbnails --- */
+.extra-thumbnails {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.extra-thumbnails .thumbnail.extra {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px deeppink; /* black border */
+  transition: transform 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.extra-thumbnails .thumbnail.extra:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+}
+
+.extra-thumbnails .thumbnail.extra.active {
+  border: 3px deeppink;
+}
+
+/* --- Extra Description --- */
+.extra-description {
+  margin-top: 10px;
+  font-size: 20px;
+  margin-bottom:10px;
+  line-height: 1.6;
+  color: #444;
+  font-weight: 400;
+  padding: 10px 0;
+  border-top: 1px solid #eee;
 }
 
 /* --- Responsive Adjustments --- */
@@ -350,25 +401,28 @@ header {
     max-width: 100%;
   }
 
-  .thumbnail {
+  .thumbnail, .extra-thumbnails .thumbnail.extra {
     width: 70px;
     height: 70px;
   }
 
   .product-title {
-    font-size: 24px;
+    font-size: 28px;
   }
-  .details{
+
+  .details {
     margin-top:20px;
   }
 
   .price {
-    font-size: 20px;
+    font-size: 42px;
   }
 
-  .btn {
-    font-size: 14px;
-    padding: 10px 16px;
+  . {
+    font-size: 17px;
+    font-weight:400;
+    letter-spacing:2px;
+    padding: 14px 28px;
   }
 
   .wishlist-icon {
@@ -376,139 +430,4 @@ header {
     top: 10px;
     right: 10px;
   }
-}
-
-/* --- Desktop Specific Adjustments --- */
-@media (min-width: 975px) {
-  .product-page {
-    margin-top: 90px; /* space from header + banner */
-  }
-
-  .wishlist-icon {
-    font-size: 32px;
-    top: 12px;
-    right: 12px;
-  }
-}
-/* ===========================
-   EXISTING CSS (unchanged)
-=========================== */
-/* ... your entire CSS above remains unchanged ... */
-
-
-/* --- Add this below your existing .thumbnail styles --- */
-
-/* ✅ Extra Thumbnails from Database */
-.extra-thumbnails {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 12px;
-  flex-wrap: wrap;
-}
-
-.extra-thumbnails .thumbnail.extra {
-  width: 80px;
-  height: 80px;
-  border-radius: 6px;
-  object-fit: cover;
-  cursor: pointer;
-  border: 2px solid transparent;
-  transition: transform 0.3s ease, border 0.3s ease;
-}
-
-.extra-thumbnails .thumbnail.extra:hover {
-  transform: scale(1.05);
-}
-
-.extra-thumbnails .thumbnail.extra.active {
-  border: 2px solid #d63384;
-}
-
-/* ✅ Extra Product Description below MRP */
-.extra-description {
-  margin-top: 10px;
-  font-size: 23px;
-  line-height: 1.6;
-  color: #444;
-  font-weight: 400;
-  padding: 10px 0;
-  border-top: 1px solid #eee;
-}
-
-/* Thumbnails container */
-.thumbnail-container {
-  display: flex;
-  gap: 10px;
-  margin-top: 15px;
-  flex-wrap: wrap;
-  justify-content: center; /* aligns thumbnails in a row */
-}
-
-/* Thumbnail images (main + extra) */
-.thumbnail {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 6px;
-  cursor: pointer;
-  border: 2px solid transparent;
-  transition: border 0.3s ease, transform 0.3s ease;
-}
-
-.thumbnail.active {
-  border: 2px solid #d63384;
-}
-
-.thumbnail:hover {
-  transform: scale(1.05);
-}
-
-/* Responsive for mobile */
-@media (max-width: 974px) {
-  .thumbnail {
-    width: 70px;
-    height: 70px;
-  }
-  .thumbnail {
-  border: 2px solid red;
-}
-/* ===========================
-   FIX EXTRA THUMBNAILS VISIBILITY
-=========================== */
-.thumbnail-container {
-  display: flex;           /* ensure thumbnails are in a row */
-  gap: 10px;               /* spacing between thumbnails */
-  margin-top: 15px;        /* space below main image */
-  flex-wrap: wrap;         /* wrap on small screens */
-  justify-content: center; /* center align */
-  position: relative;      /* ensure visible above banner/header */
-  z-index: 50;             /* bring thumbnails above other elements */
-}
-
-.thumbnail {
-  width: 80px;             /* thumbnail width */
-  height: 80px;            /* thumbnail height */
-  object-fit: cover;       /* scale image correctly */
-  border-radius: 6px;
-  cursor: pointer;
-  border: 2px solid transparent;
-  transition: border 0.3s ease, transform 0.3s ease;
-}
-
-.thumbnail.active {
-  border: 2px solid #d63384; /* active thumbnail border */
-}
-
-.thumbnail:hover {
-  transform: scale(1.05);
-}
-
-/* Responsive: smaller thumbnails on mobile */
-@media (max-width: 974px) {
-  .thumbnail {
-    width: 70px;
-    height: 70px;
-  }
-}
 }
