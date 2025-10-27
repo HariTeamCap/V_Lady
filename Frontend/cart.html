@@ -26,12 +26,7 @@
   </nav>
 </header>
 
-<!-- Pink Banner -->
-<div class="pink-banner">
-  <div class="scrolling-text">
-    THE LADY WHO LEADS
-  </div>
-</div>
+<div id="bannerText">THE LADY WHO LEADS</div>
 
 <section class="cart-section">
   <h2>🛒 YOUR SHOPPING CART</h2>
@@ -94,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <img src="${product.image}" alt="${product.name}" />
         <div class="item-details">
           <h3>${product.name}</h3>
-          <p class="price">${product.price}</p>
+          <p class="price">${product.price}/-</p>
         </div>
         <div class="item-controls">
           <button class="qty-btn minus">−</button>
@@ -194,6 +189,17 @@ document.addEventListener("DOMContentLoaded", () => {
   renderCart();
 });
 </script>
+<script>
+window.addEventListener("scroll", function() {
+  const text = document.getElementById("bannerText");
+  if (window.scrollY > 100) {
+    text.classList.add("hide");
+  } else {
+    text.classList.remove("hide");
+  }
+});
+</script>
+
 
 </body>
 </html>
