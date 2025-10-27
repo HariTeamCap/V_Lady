@@ -13,7 +13,7 @@
       position: absolute;
       top: 10px;
       left: 10px;
-      background: red;
+      background:linear-gradient(90deg, #ff4d6d, #ffb347);
       color: white;
       padding: 5px 10px;
       font-weight: bold;
@@ -38,8 +38,8 @@
       width: 100%;
       padding: 20px;
       text-align: center;
-      background: #222;
-      color: #fff;
+      background:white;
+      color:black;
       margin-top:470px;
     }
         /* Bigger text on desktop */
@@ -63,9 +63,7 @@
   </nav>
 </header>
 
-<div class="pink-banner">
-  <div class="scrolling-text">THE LADY WHO LEADS</div>
-</div>
+<div id="bannerText">THE LADY WHO LEADS</div>
 
 <main class="bag-section">
   <h2>ACCESSORIES</h2>
@@ -97,7 +95,7 @@
       <div class="wishlist-btn"><i class="material-icons">favorite_border</i></div>
       <div class="container">
         <div class="top">
-          <a href="productdetails.html"><img src="IMG_6725.PNG" alt="Accessory 1" /></a>
+          <a href="productdetails.html"><img src="f3.jpg" alt="Accessory 1" /></a>
         </div>
         <div class="bottom">
           <div class="left">
@@ -119,7 +117,7 @@
       <div class="wishlist-btn"><i class="material-icons">favorite_border</i></div>
       <div class="container">
         <div class="top">
-          <a href="productdetails.html"><img src="IMG_6724.png" alt="Accessory 2" /></a>
+          <a href="productdetails.html"><img src="f3.jpg" alt="Accessory 2" /></a>
         </div>
         <div class="bottom">
           <div class="left">
@@ -140,7 +138,7 @@
       <div class="wishlist-btn"><i class="material-icons">favorite_border</i></div>
       <div class="container">
         <div class="top">
-          <a href="productdetails.html"><img src="IMG_6726.PNG" alt="Accessory 3" /></a>
+          <a href="productdetails.html"><img src="f3.jpg" alt="Accessory 3" /></a>
         </div>
         <div class="bottom">
           <div class="left">
@@ -322,6 +320,17 @@ document.addEventListener("DOMContentLoaded", () => {
   localStorage.setItem("allProducts", JSON.stringify(allProducts));
 });
 </script>
+<script>
+window.addEventListener("scroll", function() {
+  const text = document.getElementById("bannerText");
+  if (window.scrollY > 100) {
+    text.classList.add("hide");
+  } else {
+    text.classList.remove("hide");
+  }
+});
+</script>
+
 
 <footer class="site-footer">
   <p>© 2025 V Lady. All rights reserved.</p>
