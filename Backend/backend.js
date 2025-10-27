@@ -52,18 +52,25 @@ app.use(session({
 }));
 
 // Mount API routes
+
 app.use('/api/auth', authRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/addresses', addressRoutes);
 app.use('/api/cart', cartRoutes);
 
+const { productsData } = require('./seed.js');
+app.get('/api/seed-products', (req, res) => {
+  res.json(productsData);
+});
+
 // Fallback to frontend for non-API routes (use middleware to avoid path-to-regexp issues)
 app.use((req, res, next) => {
-  if (req.path.startsWith('/api/')) {
-    return res.status(404).json({ error: 'API endpoint not found' });
+  if (!req.path.startsWith('/api/') && !req.path.includes('.')) {
+    res.sendFile(path.join(__dirname, '..', 'Frontend', 'mainpage.html'));
+  } else {
+    next();
   }
-  res.sendFile(path.join(__dirname, '..', 'Frontend', 'mainpage.html'));
 });
 
 // Error handler

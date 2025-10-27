@@ -222,14 +222,15 @@
 document.addEventListener('DOMContentLoaded', () => {
     const productsContainer = document.getElementById('featured-products-container');
 
-    fetch('http://localhost:3000/api/products')
+    fetch('/api/seed-products')
         .then(response => response.json())
         .then(products => {
             const featuredProducts = products.filter(p => p.featured);
             featuredProducts.forEach(product => {
                 const productElement = document.createElement('div');
                 productElement.classList.add('wrapper');
-                productElement.dataset.productId = product._id;
+                const productId = product._id || `seed_${product.name.replace(/\s/g, '_')}`;
+                productElement.dataset.productId = productId;
 
                 productElement.innerHTML = `
                     <div class="wishlist-btn">
@@ -238,7 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="container">
                         <div class="top">
                             <a href="productdetails.html">
-                                <img src="http://localhost:3000/${product.images[0]}" alt="${product.name}"/>
+                                <img src="${product.images[0]}" alt="${product.name}"/>
                             </a>
                         </div>
                         <div class="bottom">
@@ -254,6 +255,56 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 `;
 
+                const productForStorage = {
+                    id: productId,
+                    name: product.name,
+                    price: `₹${product.price}`,
+                    mrp: `₹${product.MRP}`,
+                    image: product.images[0],
+                    quantity: 1
+                };
+
+                // ----- Wishlist -----
+                const wishlistBtn = productElement.querySelector(".wishlist-btn i");
+                let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+                if (wishlist.find(p => p.id === productId)) {
+                    wishlistBtn.textContent = "favorite";
+                    wishlistBtn.style.color = "#ff4d6d";
+                }
+
+                wishlistBtn.addEventListener("click", () => {
+                    let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+                    const exists = wishlist.find(p => p.id === productId);
+
+                    if (exists) {
+                        wishlist = wishlist.filter(p => p.id !== productId);
+                        wishlistBtn.textContent = "favorite_border";
+                        wishlistBtn.style.color = "white";
+                    } else {
+                        wishlist.push(productForStorage);
+                        wishlistBtn.textContent = "favorite";
+                        wishlistBtn.style.color = "#ff4d6d";
+                    }
+                    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+                });
+
+                // ----- Add to Cart -----
+                const addToCartBtn = productElement.querySelector(".buy i");
+                addToCartBtn.addEventListener("click", () => {
+                    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                    const existing = cart.find(p => p.id === productId);
+
+                    if (existing) {
+                        existing.quantity += 1;
+                    } else {
+                        cart.push({ ...productForStorage });
+                    }
+
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                    alert(`${product.name} added to cart 🛒`);
+                });
+                
                 productElement.querySelector('.top a').addEventListener('click', (e) => {
                     e.preventDefault();
                     localStorage.setItem('selectedProduct', JSON.stringify(product));

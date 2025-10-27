@@ -10,10 +10,10 @@ const productsData = [
         price: 799,
         category: 'Pie Bags',
         images: [
-            '/Users/harikrishna/Downloads/IMG_6439.HEIC',
-            '/Users/harikrishna/Downloads/IMG_6442.HEIC',
-            '/Users/harikrishna/Downloads/IMG_6431.HEIC',
-            '/Users/harikrishna/Downloads/IMG_6438.HEIC'
+            'IMG_6439.HEIC',
+            'IMG_6442.HEIC',
+            'IMG_6431.HEIC',
+            'IMG_6438.HEIC'
         ],
         videos: [],
         stock: 50,
@@ -26,15 +26,15 @@ const productsData = [
         price: 1199,
         category: 'Pie bags',
         images: [
-            '/Users/harikrishna/Downloads/white sling bag/Photoroom_20251023_185235.JPG',
-            '/Users/harikrishna/Downloads/white sling bag/Photoroom_20251023_184630.JPG',
-            '/Users/harikrishna/Downloads/white sling bag/Photoroom_20250902_190934.JPG',
-            '/Users/harikrishna/Downloads/white sling bag/Photoroom_20251023_184707.JPG'
+            'Photoroom_20251023_185235.JPG',
+            'Photoroom_20251023_184630.JPG',
+            'Photoroom_20250902_190934.JPG',
+            'Photoroom_20251023_184707.JPG'
             
         ],
         videos: [],
         stock: 50,
-        featured: false
+        featured: true
     },
     {
         name: 'Pink Sling Bag',
@@ -43,10 +43,10 @@ const productsData = [
         price: 1199,
         category: 'Pie Bags',
         images: [
-            '/Users/harikrishna/Downloads/pink sling bag/Photoroom_20250922_172733.JPG',
-            '/Users/harikrishna/Downloads/pink sling bag/Photoroom_20250922_181102.JPG',
-            '/Users/harikrishna/Downloads/pink sling bag/Photoroom_20250922_180533.JPG',
-            '/Users/harikrishna/Downloads/pink sling bag/Photoroom_20250922_181222.JPG',
+            'Photoroom_20250922_172733.JPG',
+            'Photoroom_20250922_181102.JPG',
+            'Photoroom_20250922_180533.JPG',
+            'Photoroom_20250922_181222.JPG'
         ],
         videos: [
             'https://example.com/videos/tv-demo.mp4'
@@ -60,7 +60,7 @@ const productsData = [
 const seedDatabase = async () => {
     try {
         // Connect to your MongoDB database (use your connection string)
-        await mongoose.connect('mongodb://localhost:27017/your-database-name', {
+        await mongoose.connect('mongodb://localhost:27017/vlady', {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
@@ -85,4 +85,6 @@ const seedDatabase = async () => {
 };
 
 // Run the seed function
-seedDatabase();
+// seedDatabase();
+
+module.exports = { productsData };
