@@ -15,7 +15,7 @@
       position: absolute;
       top: 10px;
       left: 10px;
-      background: red;
+      background:linear-gradient(90deg, #ff4d6d, #ffb347);
       color: white;
       font-weight: bold;
       padding: 5px 10px;
@@ -25,6 +25,8 @@
     }
     .wrapper.sold-out {
       opacity: 0.6;
+    }
+    
     }
     .wrapper.sold-out .buy-now {
       background: gray !important;
@@ -71,9 +73,9 @@
       width: 100%;
       padding: 20px;
       text-align: center;
-      background: #222;
+      background:white;
       
-      color: #fff;
+      color:black;
       margin-top: 1090px;
     }
     /* Bigger text on desktop */
@@ -81,7 +83,6 @@
   footer.site-footer {
     font-size: 29px;
   }
-}
   </style>
 </head>
 
@@ -102,10 +103,7 @@
   </nav>
 </header>
 
-<!-- Pink Banner -->
-<div class="pink-banner">
-  <div class="scrolling-text">THE LADY WHO LEADS</div>
-</div>
+<div id="bannerText">THE LADY WHO LEADS</div>
 
 <main class="bag-section">
   <h2>MY WISHLIST ❤️</h2>
@@ -187,7 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
               <h1>${product.name}</h1>
               <p>
                 <span class="discounted-price">${product.price}</span><br>
-                <span class="mrp">MRP: ${product.mrp}</span>
+              <p> <span class="mrp">MRP: ${product.mrp}</span></p>
               </p>
             </div>
             <div class="buy">
@@ -253,6 +251,17 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 </script>
+<script>
+window.addEventListener("scroll", function() {
+  const text = document.getElementById("bannerText");
+  if (window.scrollY > 100) {
+    text.classList.add("hide");
+  } else {
+    text.classList.remove("hide");
+  }
+});
+</script>
+
 
 <footer class="site-footer">
   <p>© 2025 V Lady. All rights reserved. </p>
