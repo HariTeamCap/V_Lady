@@ -13,10 +13,10 @@
       position: absolute;
       top: 10px;
       left: 10px;
-      background: red;
+      background:linear-gradient(90deg, #ff4d6d, #ffb347);;
       color: white;
       padding: 5px 10px;
-      font-weight: bold;
+      font-weight:700;
       border-radius: 5px;
       z-index: 10;
     }
@@ -38,8 +38,8 @@
       width: 100%;
       padding: 20px;
       text-align: center;
-      background: #222;
-      color: #fff;
+      background: white;
+      color:black;
       margin-top: 290px;
     }
         /* Bigger text on desktop */
@@ -66,9 +66,7 @@
   </nav>
 </header>
 
-<div class="pink-banner">
-  <div class="scrolling-text">THE LADY WHO LEADS</div>
-</div>
+<div id="bannerText">THE LADY WHO LEADS</div>
 
 <main class="bag-section">
   <h2>PIE BAGS</h2>
@@ -100,7 +98,7 @@
 
 
         <!-- Product Card 1 -->
-    <div class="wrapper" data-product-id="pie001" data-sold-out="true">
+    <div class="wrapper" data-product-id="pie001" data-sold-out="false">
       <div class="sold-out-badge">SOLD OUT</div>
       <div class="wishlist-btn">
         <i class="material-icons">favorite_border</i>
@@ -108,7 +106,7 @@
       <div class="container">
         <div class="top">
           <a href="productdetails.html">
-            <img src="IMG_6726.PNG" alt="Pie Bag 1" />
+            <img src="pie.JPG" alt="Pie Bag 1" />
           </a>
         </div>
         <div class="bottom">
@@ -134,7 +132,7 @@
       <div class="container">
         <div class="top">
           <a href="productdetails.html">
-            <img src="IMG_6726.PNG" alt="Pie Bag 1" />
+            <img src="u1.JPG" alt="Pie Bag 1" />
           </a>
         </div>
         <div class="bottom">
@@ -160,7 +158,7 @@
       <div class="container">
         <div class="top">
           <a href="productdetails.html">
-            <img src="IMG_6727.PNG" alt="Pie Bag 1" />
+            <img src="beigesling2.jpg" alt="Pie Bag 1" />
           </a>
         </div>
         <div class="bottom">
@@ -186,7 +184,7 @@
       <div class="container">
         <div class="top">
           <a href="productdetails.html">
-            <img src="IMG_6726.PNG" alt="Pie Bag 2" />
+            <img src="beigesling2.jpg" alt="Pie Bag 2" />
           </a>
         </div>
         <div class="bottom">
@@ -211,7 +209,7 @@
       <div class="container">
         <div class="top">
           <a href="productdetails.html">
-            <img src="IMG_6729.PNG" alt="Pie Bag 1" />
+            <img src="beigesling4.jpg" alt="Pie Bag 1" />
           </a>
         </div>
         <div class="bottom">
@@ -416,6 +414,17 @@ document.addEventListener("DOMContentLoaded", () => {
   localStorage.setItem("allProducts", JSON.stringify(allProducts));
 });
 </script>
+<script>
+window.addEventListener("scroll", function() {
+  const text = document.getElementById("bannerText");
+  if (window.scrollY > 100) {
+    text.classList.add("hide");
+  } else {
+    text.classList.remove("hide");
+  }
+});
+</script>
+
 
 <footer class="site-footer">
   <p>© 2025 V Lady. All rights reserved.</p>
