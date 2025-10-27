@@ -13,7 +13,7 @@
       position: absolute;
       top: 10px;
       left: 10px;
-      background: red;
+      background:linear-gradient(90deg, #ff4d6d, #ffb347);
       color: white;
       padding: 5px 10px;
       font-weight: bold;
@@ -38,8 +38,8 @@
       width: 100%;
       padding: 20px;
       text-align: center;
-      background: #222;
-      color: #fff;
+      background:white;
+      color:black;
       margin-top: 990px;
     }
         /* Bigger text on desktop */
@@ -50,7 +50,6 @@
   </style>
 </head>
 <body>
-
 <header>
   <div class="logo">
     V LADY
@@ -66,9 +65,7 @@
   </nav>
 </header>
 
-<div class="pink-banner">
-  <div class="scrolling-text">THE LADY WHO LEADS</div>
-</div>
+<div id="bannerText">THE LADY WHO LEADS</div>
 
 <main class="bag-section">
   <h2>CANDY BAGS</h2>
@@ -106,15 +103,15 @@
       <div class="container">
         <div class="top">
           <a href="productdetails.html">
-            <img src="IMG_6726.PNG" alt="Candy Bag 1" />
+            <img src="f1.JPG" alt="Candy Bag 1" />
           </a>
         </div>
         <div class="bottom">
           <div class="left">
             <div class="details">
-              <h1>Candy Bag 1</h1>
-              <p class="discounted-price">₹1250</p>
-              <p class="mrp">MRP: <span>₹2200</span></p>
+              <h1>Orange Hand Bag</h1>
+              <p class="discounted-price">₹1450</p>
+              <p class="mrp">MRP: <span>₹2399</span></p>
             </div>
             <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
             <div class="buy-now">BUY<br>NOW</div>
@@ -124,7 +121,7 @@
     </div>
 
     <!-- Product Card 2 -->
-    <div class="wrapper" data-product-id="candy002" data-sold-out="true">
+    <div class="wrapper" data-product-id="candy002" data-sold-out="false">
       <div class="sold-out-badge">SOLD OUT</div>
       <div class="wishlist-btn">
         <i class="material-icons">favorite_border</i>
@@ -132,15 +129,41 @@
       <div class="container">
         <div class="top">
           <a href="productdetails.html">
-            <img src="IMG_6726.PNG" alt="Candy Bag 2" />
+            <img src="f2.jpg" alt="Candy Bag 2" />
           </a>
         </div>
         <div class="bottom">
           <div class="left">
             <div class="details">
-              <h1>Candy Bag 2</h1>
-              <p class="discounted-price">₹7666</p>
-              <p class="mrp">MRP: <span>₹2200</span></p>
+              <h1>Tan Brown Hand Bag</h1>
+              <p class="discounted-price">₹1650</p>
+              <p class="mrp">MRP: <span>₹2399</span></p>
+            </div>
+            <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
+            <div class="buy-now">BUY<br>NOW</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+        <!-- Product Card 3 -->
+    <div class="wrapper" data-product-id="candy003" data-sold-out="false">
+      <div class="sold-out-badge">SOLD OUT</div>
+      <div class="wishlist-btn">
+        <i class="material-icons">favorite_border</i>
+      </div>
+      <div class="container">
+        <div class="top">
+          <a href="productdetails.html">
+            <img src="candy.JPG" alt="Candy Bag 3" />
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="left">
+            <div class="details">
+              <h1>Pink Hand Bag</h1>
+              <p class="discounted-price">₹1450</p>
+              <p class="mrp">MRP: <span>₹2399</span></p>
             </div>
             <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
             <div class="buy-now">BUY<br>NOW</div>
@@ -264,6 +287,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 </script>
+<script>
+window.addEventListener("scroll", function() {
+  const text = document.getElementById("bannerText");
+  if (window.scrollY > 100) {
+    text.classList.add("hide");
+  } else {
+    text.classList.remove("hide");
+  }
+});
+</script>
+
 
 <footer class="site-footer">
   <p>© 2025 V Lady. All rights reserved.</p>
