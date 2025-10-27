@@ -25,8 +25,8 @@
       width: 100%;
       padding: 20px;
       text-align: center;
-      background: #222;
-      color: #fff;
+      background:white;
+      color: black;
       margin-top: 660px;
     }
         /* Bigger text on desktop */
@@ -53,12 +53,7 @@
       </ul>
     </nav>
   </header>
-<!-- Pink Banner -->
-<div class="pink-banner">
-  <div class="scrolling-text">
-    THE LADY WHO LEADS
-  </div>
-</div>
+<div id="bannerText">THE LADY WHO LEADS</div>
   <!-- About Section -->
   <main class="about-section">
     <h1>About Versatile Lady</h1>
@@ -85,7 +80,8 @@
         <li>Customer data is securely handled and never shared with third parties.</li>
       </ul>
     </section>
-
+    
+      <section id="faq"></section>
     <section class="mission-section">
       <h2>Our Mission</h2>
       <p>
@@ -94,8 +90,20 @@
       </p>
     </section>
   </main>
+  
 
 </body>
+<script>
+window.addEventListener("scroll", function() {
+  const text = document.getElementById("bannerText");
+  if (window.scrollY > 100) {
+    text.classList.add("hide");
+  } else {
+    text.classList.remove("hide");
+  }
+});
+</script>
+
 <!-- Footer Section -->
 <footer class="site-footer">
   <p>© 2025 V Lady. All rights reserved. </p>
