@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>V Lady</title>
+  <link rel="stylesheet" href="style.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+  />
+  <link
+    href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+  />
+</head>
+<body>
+  <header>
+    <div class="logo">
+      V LADY
+      <div class="tagline">Versatile Lady</div>
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="mainpage.html"><i class="fa fa-house-chimney"></i></a></li>
+        <li><a href="about.html"><i class="fa fa-circle-info"></i></a></li>
+        <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+        <li><a href="#contact-section"><i class="fa fa-envelope"></i></a></li>
+      </ul>
+    </nav>
+  </header>
+<div id="bannerText">THE LADY WHO LEADS</div>
+
+<!-- 📦 Floating "Your Orders" Button -->
+<a href="yourorders.html" class="floating-orders-btn">
+  <i class="fa-solid fa-box"></i>
+  <span class="tooltip-text1">Your Orders</span>
+</a>
+
+<!-- Font Awesome (if not already included) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+
+<!-- 📸 Photo Banner Section with Moving Black Banner -->
+<section class="photo-banner">
+  <img src="0867bd85ac2d256323799afda39082cc.jpg" alt="Banner Image" class="banner-img" />
+  <!-- Swipe Text -->
+  <div class="banner-text">GET 50% OFF<br> ON YOUR FIRST ORDER</div>
+
+
+  <a href="#new-products" class="shop-now-btn">SHOP NOW</a>
+</section>
+<!-- Video Banner Section -->
+<!-- 🎥 Video Banner Section -->
+<section class="video-banner">
+  <video autoplay muted loop playsinline class="banner-video">
+    <source src="videobanner1.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Swipe Text -->
+  <div class="banner-text">Everything You Love, All in One Place</br> Browse Our Top Categories Now!</div>
+    <a href="#categories" class="see-categories-btn">SEE CATEGORIES</a>
+  </div>
+</section>
+ <section class="our-influence">
+  <h2>TRENDSETTERS</h2>
+  <div class="influence-container">
+    <div class="influence-video">
+      <video class="lazy-video" controls muted loop preload="none" poster="thumb1.jpg" data-src="videobanner1.mp4"></video>
+    </div>
+    <div class="influence-video">
+      <video class="lazy-video" controls muted loop preload="none" poster="thumb1.jpg" data-src="videobanner1.mp4"></video>
+    </div>
+    <div class="influence-video">
+      <video class="lazy-video" controls muted loop preload="none" poster="thumb1.jpg" data-src="videobanner1.mp4"></video>
+    </div>
+    <div class="influence-video">
+      <video class="lazy-video" controls muted loop preload="none" poster="thumb1.jpg" data-src="videobanner1.mp4"></video>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRODUCT SECTION ===== -->
+<section class="product-scroll-section">
+  <h2>FOR EVERY NEED</h2>
+
+  <div class="product-row">
+    <div class="product-card">
+      <img src="beigesling3.jpg" alt="Pink Sling Bag">
+      <p class="price">HOT SELLING</p>
+      <p class="name"></p>
+    </div>
+
+    <div class="product-card">
+      <a href="#under999"><img src="999.jpg" alt="Candy Bag"></a>
+      <p class="price">UNDER ₹999</p>
+      <p class="name"></p>
+    </div>
+    
+    <div class="product-card">
+      <img src="beigesling5.jpg" alt="Clutch Purse">
+      <p class="price">LATEST BAGS</p>
+      <p class="name"></p>
+    </div>
+
+    <div class="product-card">
+      <img src="candy.JPG" alt="PIE Bag">
+      <p class="price">TRENDY</p>
+      <p class="name"></p>
+    </div>
+
+    <div class="product-card">
+      <img src="pie.JPG" alt="Stylish Tote">
+      <p class="price">BEST DEALS</p>
+      <p class="name"></p>
+    </div>
+  </div>
+</section>
+
+<!-- 🛍 New Product Section -->
+<section class="new-products">
+  <section id="new-products"></section>
+  <h2>FEATURED PRODUCTS</h2>
+  <div class="product-container">
+      <div class="spacer"></div> <!-- spacer for first card -->
+
+    <!-- Product Card -->
+    <div class="wrapper" data-product-id="product001">
+      <div class="wishlist-btn">
+        <i class="material-icons">favorite_border</i>
+      </div>
+      <div class="container">
+        <div class="top">
+          <a href="productdetails.html">
+            <img src="f1.JPG" alt="Product1"/>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="left">
+                 <div class="details">
+                <h1>Premium Clutch</h1>
+         <p class="discounted-price">₹1250</p>
+    <p class="mrp">MRP: <span>₹2200</span></p>
+    </div>
+
+
+
+            <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Duplicate Product Cards -->
+    <div class="wrapper" data-product-id="product002">
+      <div class="wishlist-btn">
+        <i class="material-icons">favorite_border</i>
+      </div>
+      <div class="container">
+        <div class="top">
+          <a href="productdetails.html">
+            <img src="f2.jpg" alt="Product 2" />
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="left">
+            <div class="details">
+              <h1>Premium Clutch</h1>
+         <p class="discounted-price">₹1250</p>
+    <p class="mrp">MRP: <span>₹2200</span></p>
+    </div>
+
+
+            <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrapper" data-product-id="product003">
+      <div class="wishlist-btn">
+        <i class="material-icons">favorite_border</i>
+      </div>
+      <div class="container">
+        <div class="top">
+          <a href="productdetails.html">
+            <img src="f3.jpg" alt="Product 3" />
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="left">
+            <div class="details">
+              <h1>Premium Clutch</h1>
+         <p class="discounted-price">₹1250</p>
+    <p class="mrp">MRP: <span>₹2200</span></p>
+    </div>
+
+
+            <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+    
+<!-- ===== Product Categories Section ===== -->
+<!-- ===== TOP CATEGORIES SECTION ===== -->
+ <section id="categories"></section>
+<section class="category-section">
+  <h2 class="category-heading">TOP CATEGORIES<br>& WISHLIST</h2>
+  
+  <div class="category-tabs">
+    <a href="All_Handbags.html" class="category-tab">
+      <img src="allhandbags.PNG" alt="All Handbags" />
+      <span>ALL HANDBAGS &gt;</span>
+    </a>
+
+    <a href="Candy_Bags.html" class="category-tab">
+      <img src="candy.JPG" alt="Candy Bags" />
+      <span>CANDY BAGS &gt;</span>
+    </a>
+
+    <a href="Pie_Bags.html" class="category-tab">
+      <img src="pie.JPG" alt="Pie Bags" />
+      <span>PIE BAGS &gt;</span>
+    </a>
+
+    <a href="Clutches.html" class="category-tab">
+      <img src="clutch.png.jpg" alt="Clutches" />
+      <span>CLUTCHES &gt;</span>
+    </a>
+
+    <a href="accessories.html" class="category-tab">
+      <img src="accessories.JPG" alt="Accessories" />
+      <span>ACCESSORIES &gt;</span>
+    </a>
+
+    <a href="wishlist.html" class="category-tab">
+      <img src="wishlist.jpg" alt="Wishlist" />
+      <span>SEE WISHLIST &gt;</span>
+    </a>
+  </div>
+</section>
+      <!-- ===== PHOTO LINK SECTION ===== -->
+  <section class="photo-links">
+    <a href="#faq" class="photo-card">
+      <img src="faqs.jpg" alt="FAQ">
+      <div class="photo-text">FAQs</div>
+    </a>
+    <a href="#icon" class="photo-card">
+      <img src="influenceus.jpg" alt="Influence">
+      <div class="photo-text">Become<br>Our Icon</div>
+    </a>
+  </section> 
+  
+
+
+<!-- 🎥 Thin Video Section -->
+<section class="video-section">
+  
+    
+      
+  <video autoplay muted loop playsinline>
+    <source src="videobanner1.mp4" type="video/mp4" />
+
+    Your browser does not support the video tag.
+  </video>
+</section>
+<!-- 💸 UNDER 999 Section -->
+<section class="under-999-section">
+  <section id="under999"></section>
+  <h2 class="section-title">UNDER ₹999/-</h2>
+  <div class="product-container">
+      <div class="spacer"></div> <!-- spacer for first card -->
+
+    <!-- Product Card -->
+    <div class="wrapper" data-product-id="product004">
+      <div class="wishlist-btn">
+        <i class="material-icons">favorite_border</i>
+      </div>
+      <div class="container">
+        <div class="top">
+          <a href="productdetails.html">
+            <img src="u1.JPG" alt="Product 4" />
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="left">
+            <div class="details">
+                 <h1>Luxury Bag1</h1>
+         <p class="discounted-price">₹950</p>
+    <p class="mrp">MRP: <span>₹2200</span></p>
+    </div>
+
+
+            <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Duplicate Product Cards -->
+    <div class="wrapper" data-product-id="product005">
+      <div class="wishlist-btn">
+        <i class="material-icons">favorite_border</i>
+      </div>
+      <div class="container">
+        <div class="top">
+          <a href="productdetails.html">
+            <img src="u1.JPG" alt="Product 5" />
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="left">
+            <div class="details">
+                 <h1>beautiful pie</h1>
+         <p class="discounted-price">₹950</p>
+    <p class="mrp">MRP: <span>₹2200</span></p>
+    </div>
+
+
+            <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrapper" data-product-id="product006">
+      <div class="wishlist-btn">
+        <i class="material-icons">favorite_border</i>
+      </div>
+      <div class="container">
+        <div class="top">
+          <a href="productdetails.html">
+            <img src="u1.JPG" alt="Product 6" />
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="left">
+            <div class="details">
+                 <h1>Luxury Bag3</h1>
+         <p class="discounted-price">₹950</p>
+    <p class="mrp">MRP: <span>₹2200</span></p>
+    </div>
+
+
+            <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- ===== JOIN AS AN ICON SECTION ===== -->
+<section class="icon-collab-section">
+  <section id="icon"></section>
+  <div class="icon-collab-container">
+    <h2 class="icon-title">🌟 Become Our Icon</h2>
+    <p class="icon-subtext">
+      Ready to shine with us? Collaborate and grow your influence — fill out the form to get started!
+    </p>
+
+    <button class="icon-toggle-btn">✨ Join the Movement</button>
+
+    <div class="icon-form-box">
+      <form id="iconForm">
+        <div class="icon-input-field">
+          <label>Full Name</label>
+          <input type="text" name="name" placeholder="Enter your full name" required>
+        </div>
+
+        <div class="icon-input-field">
+          <label>Age</label>
+          <input type="number" name="age" placeholder="Your age" required>
+        </div>
+
+        <div class="icon-input-field">
+          <label>Email Address</label>
+          <input type="email" name="email" placeholder="example@gmail.com" required>
+        </div>
+
+        <div class="icon-input-field">
+          <label>Instagram Username</label>
+          <input type="text" name="instagram" placeholder="@yourusername" required>
+        </div>
+
+        <div class="icon-input-field">
+          <label>Total Followers</label>
+          <input type="number" name="followers" placeholder="e.g. 25,000" required>
+        </div>
+
+        <div class="icon-input-field">
+          <label>Expected Monthly Reach</label>
+          <input type="text" name="reach" placeholder="e.g. 100,000+" required>
+        </div>
+        
+        <div class="icon-input-field">
+  <label>Upload Aadhaar Card (Image)</label>
+  <input type="file" name="aadhaar" accept="image/*" required>
+</div>
+
+        <button type="submit" class="icon-submit-btn">🚀 Submit Application</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ===== BRIGHT & COLORFUL JOIN SECTION ===== */
+  .icon-collab-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 90px 20px;
+    background: linear-gradient(135deg, #ffe4ec, #d0f0ff, #fff0c2);
+    animation: gradientFlow 6s ease infinite alternate;
+    background-size: 200% 200%;
+  }
+
+  @keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+  }
+
+  .icon-collab-container {
+    max-width: 650px;
+    width: 100%;
+    background: #ffffffc7;
+    border-radius: 25px;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+    padding: 40px 30px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+  }
+  #icon {
+  scroll-margin-top:200px; /* height of your fixed header */
+    }
+
+  .icon-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, #ff6a00, #ee0979);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
+  }
+
+  .icon-subtext {
+    color: #555;
+    font-size: 1.05rem;
+    margin-bottom: 25px;
+  }
+
+  .icon-toggle-btn {
+    background: linear-gradient(135deg, #ff6a00, #ee0979);
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 14px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 18px rgba(238, 9, 121, 0.3);
+  }
+
+  .icon-toggle-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(238, 9, 121, 0.5);
+  }
+
+  .icon-form-box {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.6s ease;
+    margin-top: 20px;
+  }
+
+  .icon-form-box.open {
+    max-height: 1200px;
+    opacity: 1;
+    padding-top: 20px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .icon-input-field {
+    text-align: left;
+  }
+
+  .icon-input-field label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #333;
+  }
+
+  .icon-input-field input {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 2px solid #eee;
+    font-size: 15px;
+    background: #fff;
+    color: #333;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+
+  .icon-input-field input:focus {
+    border-color: #ee0979;
+    box-shadow: 0 0 8px rgba(238, 9, 121, 0.3);
+  }
+
+  .icon-submit-btn {
+    background: linear-gradient(135deg, #ff512f, #dd2476);
+    border: none;
+    color: #fff;
+    padding: 14px;
+    border-radius: 40px;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(255, 81, 47, 0.4);
+  }
+
+  .icon-submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(255, 81, 47, 0.6);
+    background: linear-gradient(135deg, #dd2476, #ff512f);
+  }
+
+  @media (max-width: 600px) {
+    .icon-collab-container {
+      padding: 25px 20px;
+    }
+    .icon-title {
+      font-size: 1.8rem;
+    }
+    .icon-toggle-btn {
+      font-size: 16px;
+      padding: 12px 18px;
+    }
+  }
+</style>
+
+<script>
+  // Toggle collapsible form
+  document.querySelector(".icon-toggle-btn").addEventListener("click", function() {
+    const formBox = document.querySelector(".icon-form-box");
+    formBox.classList.toggle("open");
+  });
+
+  // Handle form submission
+  document.getElementById("iconForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    alert("🎉 Thanks for applying! Our team will reach out soon!");
+    e.target.reset();
+  });
+  
+document.getElementById("iconForm").addEventListener("submit", function (e) {
+  e.preventDefault(); // stop default submission first
+
+  const form = e.target;
+  const inputs = form.querySelectorAll("input[required]");
+  let allFilled = true;
+
+  inputs.forEach(input => {
+    if (!input.value.trim()) {
+      input.style.border = "2px solid red";
+      allFilled = false;
+    } else {
+      input.style.border = "1px solid #ccc";
+    }
+  });
+
+  if (!allFilled) {
+    alert("⚠️ Please fill in all fields before submitting.");
+    return;
+  }
+
+  // If everything is filled
+  alert("✅ Form submitted successfully!");
+  form.reset(); // (Optional) clear form
+});
+
+</script>
+
+    <!-- Floating Wishlist Button -->
+<a href="wishlist.html" class="floating-wishlist" title="Wishlist">
+  <i class="fa fa-heart"></i>
+</a>
+     <!-- Floating Under ₹999 Button -->
+<a href="#categories" class="floating-under999-btn">
+  <i class="fa-solid fa-bag-shopping"></i>
+  <span class="plus-sign">+</span>
+  <span class="tooltip-text">See<br>Categories</span>
+</a> 
+
+<!-- 🔄 Combined Collapsible Section -->
+<section class="collapsible-section">
+<section id="faq"></section>
+
+  <!-- Return Policy -->
+  <button class="collapsible">Return Policy</button>
+  <div class="content">
+    <p>We accept returns within 7 days of delivery. Items must be unused, in original packaging, and with the receipt. Refunds will be processed to the original payment method within 5–7 business days after we receive the returned item. Some items may be non-returnable as mentioned in the product description.</p>
+    <p>For more details, please contact our support via WhatsApp or email.</p>
+  </div>
+
+  <!-- FAQ -->
+  <button class="collapsible">What is the delivery time?</button>
+  <div class="content">
+    <p>Our standard delivery time is 3-5 business days. During festive seasons, it may take slightly longer.</p>
+  </div>
+
+  <button class="collapsible">Do you offer cash on delivery?</button>
+  <div class="content">
+    <p>Yes, we offer cash on delivery for select locations. Online payment is recommended for faster processing.</p>
+  </div>
+
+  <button class="collapsible">Can I cancel my order?</button>
+  <div class="content">
+    <p>Orders can be canceled within 24 hours of placing them. Please contact our support to initiate cancellation.</p>
+  </div>
+
+</section>
+
+
+   <!-- 📨 CONTACT US SECTION -->
+<section id="contact-section" class="contact-section">
+  <h2>GET IN TOUCH</h2>
+  <p class="contact-message">
+    For any queries or support, please fill out the form below.
+  </p>
+
+  <form class="contact-form" action="https://formspree.io/f/your_form_id" method="POST">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" placeholder="Enter your name" required />
+    </div>
+
+    <div class="form-group">
+      <label for="mobile">Mobile Number</label>
+      <input type="tel" id="mobile" name="mobile" placeholder="Enter your mobile number" pattern="[0-9]{10}" required />
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email" required />
+    </div>
+
+    <div class="form-group">
+      <label for="message">Message</label>
+      <textarea id="message" name="message" placeholder="Type your message..." rows="4" required></textarea>
+    </div>
+
+    <button type="submit" class="submit-btn">Submit</button>
+  </form>
+  
+
+
+  <!-- 🌐 FOLLOW US SECTION -->
+  <div class="follow-us">
+    <h3>FOLLOW US</h3>
+    <div class="social-links">
+      <a href="https://www.instagram.com/v_lady_official?igsh=MXFlZ3lhM2lnbTBwaw==" target="_blank" class="social-btn instagram">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+      <a href="https://www.facebook.com/share/14Ju7s4tXVq/" target="_blank" class="social-btn facebook">
+        <i class="fa-brands fa-facebook-f"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Font Awesome (if not already included) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+
+<script>
+window.addEventListener("scroll", function() {
+  const text = document.getElementById("bannerText");
+  if (window.scrollY > 100) {
+    text.classList.add("hide");
+  } else {
+    text.classList.remove("hide");
+  }
+});
+</script>
+
+<script src="script.js"></script>
+  
+  <!-- Only the modified parts are important, the rest of your HTML/CSS remains unchanged -->
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const collapsibles = document.querySelectorAll(".collapsible");
+
+  collapsibles.forEach(btn => {
+    const content = btn.nextElementSibling;
+    content.style.maxHeight = null; // ensures all closed on load
+
+    btn.addEventListener("click", function() {
+      this.classList.toggle("active");
+      if (content.style.maxHeight) {
+        content.style.maxHeight = null; // close
+      } else {
+        content.style.maxHeight = content.scrollHeight + "px"; // open
+      }
+    });
+  });
+});
+</script>
+  
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const productWrappers = document.querySelectorAll(".wrapper");
+
+  productWrappers.forEach(wrapper => {
+    const productId = wrapper.dataset.productId;
+    const productName = wrapper.querySelector(".details h1").textContent;
+    const productPrice = wrapper.querySelector(".details .discounted-price").textContent;
+    const productMRP = wrapper.querySelector(".details .mrp span")?.textContent || "";
+    const productImage = wrapper.querySelector(".top img").src;
+    const soldOutStatus = wrapper.dataset.soldOut === "true";
+
+    const product = {
+      id: productId,
+      name: productName,
+      price: productPrice,
+      mrp: productMRP,
+      image: productImage,
+      quantity: 1,
+      soldOut: soldOutStatus,
+      category: "candy-bags" // ✅ Important: identifies the category
+    };
+
+    // LINK TO PRODUCT DETAILS
+    wrapper.querySelector(".top a").addEventListener("click", (e) => {
+      e.preventDefault();
+      localStorage.setItem("selectedProduct", JSON.stringify(product)); // Save clicked product
+      window.location.href = "productdetails.html";
+      const container = document.querySelector('.product-container');
+
+let isDown = false, startX, scrollLeft;
+
+container.addEventListener('mousedown', (e) => {
+  isDown = true;
+  container.classList.add('active');
+  startX = e.pageX - container.offsetLeft;
+  scrollLeft = container.scrollLeft;
+});
+container.addEventListener('mouseleave', () => isDown = false);
+container.addEventListener('mouseup', () => isDown = false);
+container.addEventListener('mousemove', (e) => {
+  if(!isDown) return;
+  e.preventDefault();
+  const x = e.pageX - container.offsetLeft;
+  const walk = (x - startX) * 2; //scroll-fast
+  container.scrollLeft = scrollLeft - walk;
+});
+    });
+
+    // SOLD OUT, WISHLIST, ADD TO CART, BUY NOW logic (same as before)
+    // ...
+  });
+});
+</script>
+</body>
+</html>
+  
