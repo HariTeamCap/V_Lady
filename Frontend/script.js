@@ -61,7 +61,38 @@ document.addEventListener("DOMContentLoaded", () => {
         alert(`${productName} added to cart 🛒`);
       });
     }
+    
+    // videos.js
 
+// === Lazy Loading ===
+const lazyVideos = document.querySelectorAll('.lazy-video');
+
+const videoObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const video = entry.target;
+      if (!video.src) {
+        video.src = video.dataset.src;
+      }
+    }
+  });
+}, {
+  rootMargin: '100px', // start loading just before visible
+  threshold: 0.25
+});
+
+lazyVideos.forEach(video => videoObserver.observe(video));
+
+// === One-at-a-Time Playback ===
+const allVideos = document.querySelectorAll('video');
+
+allVideos.forEach(video => {
+  video.addEventListener('play', () => {
+    allVideos.forEach(v => {
+      if (v !== video) v.pause();
+    });
+  });
+});
     // ----- Buy Now -----
     const buyNowBtn = wrapper.querySelector(".buy-now");
     if (buyNowBtn) {
