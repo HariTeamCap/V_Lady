@@ -57,7 +57,7 @@
 <!-- Video Banner Section -->
 <!-- 🎥 Video Banner Section -->
 <section class="video-banner">
-  <video muted loop playsinline class="banner-video" preload="auto" loading="lazy">
+  <video muted loop playsinline class="banner-video" preload="none" loading="lazy">
     <source src="videobanner1.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
@@ -673,8 +673,7 @@ document.getElementById("iconForm").addEventListener("submit", function (e) {
   </form>
   
 
-
-   <!-- 🌐 FOLLOW US SECTION -->
+  <!-- 🌐 FOLLOW US SECTION -->
   <div class="follow-us">
     <h3>FOLLOW US</h3>
     <div class="social-links">
@@ -691,6 +690,110 @@ document.getElementById("iconForm").addEventListener("submit", function (e) {
 <!-- Font Awesome (if not already included) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
 
+  <!-- Only the modified parts are important, the rest of your HTML/CSS remains unchanged -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const productsContainer = document.getElementById('featured-products-container');
+
+    fetch('/api/seed-products')
+        .then(response => response.json())
+        .then(products => {
+            const featuredProducts = products.filter(p => p.featured);
+            featuredProducts.forEach(product => {
+                const productElement = document.createElement('div');
+                productElement.classList.add('wrapper');
+                const productId = product._id || `seed_${product.name.replace(/\s/g, '_')}`;
+                productElement.dataset.productId = productId;
+
+                productElement.innerHTML = `
+                    <div class="wishlist-btn">
+                        <i class="material-icons">favorite_border</i>
+                    </div>
+                    <div class="container">
+                        <div class="top">
+                            <a href="productdetails.html">
+                                <img src="${product.images[0]}" alt="${product.name}"/>
+                            </a>
+                        </div>
+                        <div class="bottom">
+                            <div class="left">
+                                <div class="details">
+                                    <h1>${product.name}</h1>
+                                    <p class="discounted-price">₹${product.price}</p>
+                                    <p class="mrp">MRP: <span>₹${product.MRP}</span></p>
+                                </div>
+                                <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                const productForStorage = {
+                    id: productId,
+                    name: product.name,
+                    price: `₹${product.price}`,
+                    mrp: `₹${product.MRP}`,
+                    image: product.images[0],
+                    quantity: 1
+                };
+
+                // ----- Wishlist -----
+                const wishlistBtn = productElement.querySelector(".wishlist-btn i");
+                let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+                if (wishlist.find(p => p.id === productId)) {
+                    wishlistBtn.textContent = "favorite";
+                    wishlistBtn.style.color = "#ff4d6d";
+                }
+
+                wishlistBtn.addEventListener("click", () => {
+                    let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+                    const exists = wishlist.find(p => p.id === productId);
+
+                    if (exists) {
+                        wishlist = wishlist.filter(p => p.id !== productId);
+                        wishlistBtn.textContent = "favorite_border";
+                        wishlistBtn.style.color = "white";
+                    } else {
+                        wishlist.push(productForStorage);
+                        wishlistBtn.textContent = "favorite";
+                        wishlistBtn.style.color = "#ff4d6d";
+                    }
+                    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+                });
+
+                // ----- Add to Cart -----
+                const addToCartBtn = productElement.querySelector(".buy i");
+                addToCartBtn.addEventListener("click", () => {
+                    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                    const existing = cart.find(p => p.id === productId);
+
+                    if (existing) {
+                        existing.quantity += 1;
+                    } else {
+                        cart.push({ ...productForStorage });
+                    }
+
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                    alert(`${product.name} added to cart 🛒`);
+                });
+
+                productElement.querySelector('.top a').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    localStorage.setItem('selectedProduct', JSON.stringify(product));
+                    window.location.href = 'productdetails.html';
+                });
+
+                productsContainer.appendChild(productElement);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching featured products:', error);
+        });
+});
+</script>
+
+
 <script>
 window.addEventListener("scroll", function() {
   const text = document.getElementById("bannerText");
@@ -704,7 +807,6 @@ window.addEventListener("scroll", function() {
 
 <script src="script.js"></script>
   
-  <!-- Only the modified parts are important, the rest of your HTML/CSS remains unchanged -->
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
