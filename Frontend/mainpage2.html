@@ -57,16 +57,18 @@
 <!-- Video Banner Section -->
 <!-- 🎥 Video Banner Section -->
 <section class="video-banner">
-  <video autoplay muted loop playsinline class="banner-video">
+  <video muted loop playsinline class="banner-video" preload="auto" loading="lazy">
     <source src="videobanner1.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
 
   <!-- Swipe Text -->
   <div class="banner-text">Everything You Love, All in One Place</br> Browse Our Top Categories Now!</div>
-    <a href="#categories" class="see-categories-btn">SEE CATEGORIES</a>
-  </div>
+  <a href="#categories" class="see-categories-btn">SEE CATEGORIES</a>
 </section>
+
+ <!-- TRENDSETTERS -->
+
  <section class="our-influence">
   <h2>TRENDSETTERS</h2>
   <div class="influence-container">
@@ -264,11 +266,8 @@
 
 <!-- 🎥 Thin Video Section -->
 <section class="video-section">
-  
-    
-      
-  <video autoplay muted loop playsinline>
-    <source src="videobanner1.mp4" type="video/mp4" />
+  <video autoplay muted loop playsinline preload="auto">
+    <source src="videobanner3.mp4" type="video/mp4" />
 
     Your browser does not support the video tag.
   </video>
@@ -675,7 +674,7 @@ document.getElementById("iconForm").addEventListener("submit", function (e) {
   
 
 
-  <!-- 🌐 FOLLOW US SECTION -->
+   <!-- 🌐 FOLLOW US SECTION -->
   <div class="follow-us">
     <h3>FOLLOW US</h3>
     <div class="social-links">
@@ -780,7 +779,31 @@ container.addEventListener('mousemove', (e) => {
     // ...
   });
 });
+document.addEventListener("DOMContentLoaded", () => {
+  const video = document.querySelector(".video-section video");
+  video.play().catch(err => console.log("Autoplay blocked:", err));
+});
 </script>
+<script>
+  // Lazy autoplay trigger for all videos
+  document.addEventListener("DOMContentLoaded", () => {
+    const videos = document.querySelectorAll("video");
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const video = entry.target;
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
+    });
+
+    videos.forEach(video => observer.observe(video));
+  });
+</script>
+
+
 </body>
 </html>
-  
