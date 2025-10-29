@@ -13,7 +13,7 @@
       position: absolute;
       top: 10px;
       left: 10px;
-      background:linear-gradient(90deg, #ff4d6d, #ffb347);
+      background: linear-gradient(90deg, #ff4d6d, #ffb347);
       color: white;
       padding: 5px 10px;
       font-weight: bold;
@@ -31,28 +31,30 @@
       color: white;
       font-weight: bold;
     }
-        /* ===========================
-       FOOTER
-    ============================ */
+
     footer.site-footer {
       width: 100%;
       padding: 20px;
       text-align: center;
-      background:white;
-      color:black;
-      margin-top:470px;
+      background: white;
+      color: black;
+      margin-top: 990px;
     }
-        /* Bigger text on desktop */
-   @media (min-width: 768px) {
-  footer.site-footer {
-    font-size: 29px;
-  }
+
+    @media (min-width: 768px) {
+      footer.site-footer {
+        font-size: 29px;
+      }
+    }
   </style>
 </head>
-<body>
 
+<body>
 <header>
-  <div class="logo">V LADY<div class="tagline">Versatile Lady</div></div>
+  <div class="logo">
+    V LADY
+    <div class="tagline">Versatile Lady</div>
+  </div>
   <nav>
     <ul class="nav-links">
       <li><a href="mainpage.html"><i class="fa fa-house-chimney"></i></a></li>
@@ -84,242 +86,14 @@
     </button>
     <button class="view-btn wishlist-btn-toggle" title="View Wishlist" 
             onclick="window.location.href='wishlist.html'" 
-            style="font-size:22px; color:#ff4d6d;">❤️</button>
+            style="font-size:22px; color:#ff4d6d;">
+      ❤️
+    </button>
   </div>
 
-  <div class="product-container">
-
-    <!-- Accessory Product 1 -->
-    <div class="wrapper" data-product-id="accessory001" data-sold-out="false">
-      <div class="sold-out-badge">SOLD OUT</div>
-      <div class="wishlist-btn"><i class="material-icons">favorite_border</i></div>
-      <div class="container">
-        <div class="top">
-          <a href="productdetails.html"><img src="f3.jpg" alt="Accessory 1" /></a>
-        </div>
-        <div class="bottom">
-          <div class="left">
-            <div class="details">
-              <h1>Accessory 1</h1>
-              <p class="discounted-price">₹750</p>
-              <p class="mrp">MRP: <span>₹1200</span></p>
-            </div>
-            <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
-            <div class="buy-now">BUY<br>NOW</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Accessory Product 2 -->
-    <div class="wrapper" data-product-id="accessory002" data-sold-out="true">
-      <div class="sold-out-badge">SOLD OUT</div>
-      <div class="wishlist-btn"><i class="material-icons">favorite_border</i></div>
-      <div class="container">
-        <div class="top">
-          <a href="productdetails.html"><img src="f3.jpg" alt="Accessory 2" /></a>
-        </div>
-        <div class="bottom">
-          <div class="left">
-            <div class="details">
-              <h1>Accessory 2</h1>
-              <p class="discounted-price">₹950</p>
-              <p class="mrp">MRP: <span>₹1500</span></p>
-            </div>
-            <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
-            <div class="buy-now">BUY<br>NOW</div>
-          </div>
-        </div>
-      </div>
-    </div>
-      <!-- Accessory Product 3 -->
-    <div class="wrapper" data-product-id="accessory003" data-sold-out="true">
-      <div class="sold-out-badge">SOLD OUT</div>
-      <div class="wishlist-btn"><i class="material-icons">favorite_border</i></div>
-      <div class="container">
-        <div class="top">
-          <a href="productdetails.html"><img src="f3.jpg" alt="Accessory 3" /></a>
-        </div>
-        <div class="bottom">
-          <div class="left">
-            <div class="details">
-              <h1>Accessory 2</h1>
-              <p class="discounted-price">₹950</p>
-              <p class="mrp">MRP: <span>₹1500</span></p>
-            </div>
-            <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
-            <div class="buy-now">BUY<br>NOW</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
+  <div class="product-container"></div>
 </main>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const productWrappers = document.querySelectorAll(".wrapper");
-
-  productWrappers.forEach(wrapper => {
-    const productId = wrapper.dataset.productId;
-    const productName = wrapper.querySelector(".details h1").textContent;
-    const productPrice = wrapper.querySelector(".details .discounted-price").textContent;
-    const productMRP = wrapper.querySelector(".details .mrp span")?.textContent || "";
-    const productImage = wrapper.querySelector(".top img").src;
-    const soldOutStatus = wrapper.dataset.soldOut === "true";
-
-    const product = {
-      id: productId,
-      name: productName,
-      price: productPrice,
-      mrp: productMRP,
-      image: productImage,
-      quantity: 1,
-      soldOut: soldOutStatus
-    };
-
-    // Sold out handling
-    const soldBadge = wrapper.querySelector(".sold-out-badge");
-    const addToCartBtn = wrapper.querySelector(".buy i");
-    const buyNowBtn = wrapper.querySelector(".buy-now");
-
-    if (soldOutStatus) {
-      wrapper.classList.add("sold-out");
-      if (soldBadge) soldBadge.style.display = "block";
-      if (addToCartBtn) { addToCartBtn.style.pointerEvents = "none"; addToCartBtn.style.opacity = "0.5"; }
-      if (buyNowBtn) { buyNowBtn.textContent = ""; buyNowBtn.style.background = "gray"; buyNowBtn.style.color = "white"; buyNowBtn.style.cursor = "not-allowed"; buyNowBtn.style.pointerEvents = "none"; }
-      wrapper.style.pointerEvents = "auto"; 
-      wrapper.querySelector(".top a").style.pointerEvents = "auto"; 
-      wrapper.querySelector(".wishlist-btn").style.pointerEvents = "auto";
-    }
-
-    // Wishlist functionality
-    const wishlistBtn = wrapper.querySelector(".wishlist-btn i");
-    let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-
-    if (wishlist.find(p => p.id === productId)) { wishlistBtn.textContent = "favorite"; wishlistBtn.style.color = "#ff4d6d"; }
-
-    wishlistBtn.addEventListener("click", () => {
-      let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-      const exists = wishlist.find(p => p.id === productId);
-      if (exists) { wishlist = wishlist.filter(p => p.id !== productId); wishlistBtn.textContent = "favorite_border"; wishlistBtn.style.color = "white"; }
-      else { wishlist.push(product); wishlistBtn.textContent = "favorite"; wishlistBtn.style.color = "#ff4d6d"; }
-      localStorage.setItem("wishlist", JSON.stringify(wishlist));
-      alert(`${productName} updated in Wishlist!`);
-    });
-
-    // Add to cart
-    if (addToCartBtn && !soldOutStatus) {
-      addToCartBtn.addEventListener("click", () => {
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-        const existing = cart.find(p => p.id === productId);
-        if (existing) existing.quantity += 1;
-        else cart.push({ ...product });
-        localStorage.setItem("cart", JSON.stringify(cart));
-        alert(`${productName} added to Cart 🛒`);
-      });
-    }
-
-    // Buy now
-    if (buyNowBtn && !soldOutStatus) {
-      buyNowBtn.addEventListener("click", () => {
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-        const existing = cart.find(p => p.id === productId);
-        if (!existing) cart.push({ ...product });
-        localStorage.setItem("cart", JSON.stringify(cart));
-        window.location.href = "cart.html";
-      });
-    }
-  });
-
-  // Grid view toggle
-  const container = document.querySelector(".product-container");
-  const viewBtns = document.querySelectorAll(".view-toggle .view-btn");
-  if (window.innerWidth >= 769) { container.classList.add("view-2"); container.classList.remove("view-1", "view-4"); }
-
-  viewBtns.forEach(btn => {
-    btn.addEventListener("click", () => {
-      const columns = btn.dataset.columns;
-      container.classList.remove("view-1", "view-2", "view-4");
-      container.classList.add(`view-${columns}`);
-    });
-  });
-});
-</script>
-<!-- Only the modified parts are important, the rest of your HTML/CSS remains unchanged -->
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const productWrappers = document.querySelectorAll(".wrapper");
-
-  productWrappers.forEach(wrapper => {
-    const productId = wrapper.dataset.productId;
-    const productName = wrapper.querySelector(".details h1").textContent;
-    const productPrice = wrapper.querySelector(".details .discounted-price").textContent;
-    const productMRP = wrapper.querySelector(".details .mrp span")?.textContent || "";
-    const productImage = wrapper.querySelector(".top img").src;
-    const soldOutStatus = wrapper.dataset.soldOut === "true";
-
-    const product = {
-      id: productId,
-      name: productName,
-      price: productPrice,
-      mrp: productMRP,
-      image: productImage,
-      quantity: 1,
-      soldOut: soldOutStatus,
-      category: "candy-bags" // ✅ Important: identifies the category
-    };
-
-    // LINK TO PRODUCT DETAILS
-    wrapper.querySelector(".top a").addEventListener("click", (e) => {
-      e.preventDefault();
-      localStorage.setItem("selectedProduct", JSON.stringify(product)); // Save clicked product
-      window.location.href = "productdetails.html";
-    });
-
-    // SOLD OUT, WISHLIST, ADD TO CART, BUY NOW logic (same as before)
-    // ...
-  });
-});
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const productWrappers = document.querySelectorAll(".wrapper");
-
-  // Fetch existing allProducts array or initialize empty
-  let allProducts = JSON.parse(localStorage.getItem("allProducts")) || [];
-
-  productWrappers.forEach(wrapper => {
-    const productId = wrapper.dataset.productId;
-    const productName = wrapper.querySelector(".details h1").textContent;
-    const productPrice = wrapper.querySelector(".details .discounted-price").textContent;
-    const productMRP = wrapper.querySelector(".details .mrp span")?.textContent || "";
-    const productImage = wrapper.querySelector(".top img").src;
-    const soldOutStatus = wrapper.dataset.soldOut === "true";
-    const category = wrapper.closest(".bag-section h2")?.textContent?.toLowerCase() || "other";
-
-    // Create product object
-    const product = {
-      id: productId,
-      name: productName,
-      price: productPrice,
-      mrp: productMRP,
-      image: productImage,
-      soldOut: soldOutStatus,
-      category: category
-    };
-
-    // Check if product already exists in allProducts
-    if (!allProducts.find(p => p.id === productId)) {
-      allProducts.push(product);
-    }
-  });
-
-  // Save updated allProducts array back to localStorage
-  localStorage.setItem("allProducts", JSON.stringify(allProducts));
-});
-</script>
 <script>
 window.addEventListener("scroll", function() {
   const text = document.getElementById("bannerText");
@@ -331,10 +105,175 @@ window.addEventListener("scroll", function() {
 });
 </script>
 
-
 <footer class="site-footer">
   <p>© 2025 V Lady. All rights reserved.</p>
 </footer>
 
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+  import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+
+  // ✅ Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyB_8hb_E4zqF9sbv8sSx31ZcLXGC5SvSAM",
+    authDomain: "studio-1046644394-281ce.firebaseapp.com",
+    projectId: "studio-1046644394-281ce",
+    storageBucket: "studio-1046644394-281ce.firebasestorage.app",
+    messagingSenderId: "722558821135",
+    appId: "1:722558821135:web:e67939ec381bf1922b547a"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  async function loadAccessories() {
+    const container = document.querySelector(".product-container");
+    container.innerHTML = "<p>Loading products...</p>";
+
+    try {
+      // ✅ Firestore path: Vlady → Accessories → Products
+      const productsRef = collection(db, "Vlady", "Accessories ", "Products");
+      const snapshot = await getDocs(productsRef);
+
+      container.innerHTML = "";
+
+      if (snapshot.empty) {
+        container.innerHTML = "<p>No products found.</p>";
+        return;
+      }
+
+      snapshot.forEach(doc => {
+        const data = doc.data();
+
+        const name = data["Name "] || data["Name"] || "Unnamed Product";
+        const price = data["Price "] || data["Price"] || 0;
+        const mrp = data["MRP "] || data["MRP"] || "";
+        const description = data["Description "] || data["Description"] || "";
+        const images = data["Images "] || data["Images"] || [];
+
+        let imageUrl = "placeholder.jpg";
+        if (Array.isArray(images) && images.length > 0) {
+          imageUrl = `./${images[0]}`;
+        }
+
+        const card = document.createElement("div");
+        card.classList.add("wrapper");
+        card.innerHTML = `
+          <div class="container">
+            <div class="top">
+              <a href="#"><img src="${imageUrl}" alt="${name}" /></a>
+              <div class="wishlist-btn"><i class="fa-regular fa-heart"></i></div>
+            </div>
+            <div class="bottom">
+              <div class="left">
+                <div class="details">
+                  <h1>${name}</h1>
+                  <p>₹${price}</p>
+                  <p class="mrp">MRP: ₹${mrp}</p>
+                </div>
+                <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
+                <div class="buy-now">BUY<br> NOW</div>
+              </div>
+            </div>
+          </div>
+        `;
+
+        // ✅ Wishlist, Cart, BuyNow functionality
+        const productData = {
+          id: `accessories-${doc.id}`, // ✅ unique ID per category
+          name,
+          price,
+          mrp,
+          description,
+          images,
+          image: imageUrl,
+          category: "accessories",
+          quantity: 1
+        };
+
+        // --- WISHLIST ---
+        const wishlistBtn = card.querySelector(".wishlist-btn i");
+        let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+        if (wishlist.find(p => p.id === productData.id)) {
+          wishlistBtn.classList.remove("fa-regular");
+          wishlistBtn.classList.add("fa-solid");
+          wishlistBtn.style.color = "#ff4d6d";
+        }
+        wishlistBtn.addEventListener("click", () => {
+          let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+          const exists = wishlist.find(p => p.id === productData.id);
+          if (exists) {
+            wishlist = wishlist.filter(p => p.id !== productData.id);
+            wishlistBtn.classList.remove("fa-solid");
+            wishlistBtn.classList.add("fa-regular");
+            wishlistBtn.style.color = "white";
+          } else {
+            wishlist.push(productData);
+            wishlistBtn.classList.remove("fa-regular");
+            wishlistBtn.classList.add("fa-solid");
+            wishlistBtn.style.color = "#ff4d6d";
+          }
+          localStorage.setItem("wishlist", JSON.stringify(wishlist));
+          alert(`${productData.name} updated in Wishlist ❤️`);
+        });
+
+        // --- ADD TO CART ---
+        const addToCartBtn = card.querySelector(".buy i");
+        addToCartBtn.addEventListener("click", () => {
+          let cart = JSON.parse(localStorage.getItem("cart")) || [];
+          const existing = cart.find(p => p.id === productData.id);
+          if (existing) existing.quantity += 1;
+          else cart.push(productData);
+          localStorage.setItem("cart", JSON.stringify(cart));
+          alert(`${productData.name} added to Cart 🛒`);
+        });
+
+        // --- BUY NOW ---
+        const buyNowBtn = card.querySelector(".buy-now");
+        buyNowBtn.addEventListener("click", () => {
+          let cart = JSON.parse(localStorage.getItem("cart")) || [];
+          const existing = cart.find(p => p.id === productData.id);
+          if (!existing) cart.push(productData);
+          localStorage.setItem("cart", JSON.stringify(cart));
+          window.location.href = "cart.html";
+        });
+
+        // --- PRODUCT DETAILS ---
+        card.querySelector(".top a").addEventListener("click", e => {
+          e.preventDefault();
+          localStorage.setItem("selectedProduct", JSON.stringify(productData));
+          window.location.href = "productdetails.html";
+        });
+
+        container.appendChild(card);
+      });
+
+      console.log("✅ Accessories loaded successfully!");
+
+      // ✅ Reattach view toggle buttons
+      const viewBtns = document.querySelectorAll(".view-toggle .view-btn");
+      const productContainer = document.querySelector(".product-container");
+
+      if (window.innerWidth >= 769) {
+        productContainer.classList.add("view-2");
+        productContainer.classList.remove("view-1", "view-4");
+      }
+
+      viewBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          const columns = btn.dataset.columns;
+          productContainer.classList.remove("view-1", "view-2", "view-4");
+          productContainer.classList.add(`view-${columns}`);
+        });
+      });
+
+    } catch (error) {
+      console.error("❌ Error fetching products:", error);
+      container.innerHTML = `<p style="color:red;">Error loading products: ${error.message}</p>`;
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", loadAccessories);
+</script>
 </body>
 </html>
