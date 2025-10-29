@@ -103,7 +103,7 @@
       <p class="price">UNDER ₹999</p>
       <p class="name"></p>
     </div>
-
+    
     <div class="product-card">
       <img src="beigesling5.jpg" alt="Clutch Purse">
       <p class="price">LATEST BAGS</p>
@@ -211,13 +211,13 @@
 
   </div>
 </section>
-
+    
 <!-- ===== Product Categories Section ===== -->
 <!-- ===== TOP CATEGORIES SECTION ===== -->
  <section id="categories"></section>
 <section class="category-section">
   <h2 class="category-heading">TOP CATEGORIES<br>& WISHLIST</h2>
-
+  
   <div class="category-tabs">
     <a href="All_Handbags.html" class="category-tab">
       <img src="allhandbags.PNG" alt="All Handbags" />
@@ -261,7 +261,7 @@
       <div class="photo-text">Become<br>Our Icon</div>
     </a>
   </section> 
-
+  
 
 
 <!-- 🎥 Thin Video Section -->
@@ -400,7 +400,7 @@
           <label>Expected Monthly Reach</label>
           <input type="text" name="reach" placeholder="e.g. 100,000+" required>
         </div>
-
+        
         <div class="icon-input-field">
   <label>Upload Aadhaar Card (Image)</label>
   <input type="file" name="aadhaar" accept="image/*" required>
@@ -571,7 +571,7 @@
     alert("🎉 Thanks for applying! Our team will reach out soon!");
     e.target.reset();
   });
-
+  
 document.getElementById("iconForm").addEventListener("submit", function (e) {
   e.preventDefault(); // stop default submission first
 
@@ -671,9 +671,10 @@ document.getElementById("iconForm").addEventListener("submit", function (e) {
 
     <button type="submit" class="submit-btn">Submit</button>
   </form>
+  
 
 
-  <!-- 🌐 FOLLOW US SECTION -->
+    <!-- 🌐 FOLLOW US SECTION -->
   <div class="follow-us">
     <h3>FOLLOW US</h3>
     <div class="social-links">
@@ -904,6 +905,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
     videos.forEach(video => observer.observe(video));
   });
+</script>
+<!--firebase-connection-->
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyB_8hb_E4zqF9sbv8sSx31ZcLXGC5SvSAM",
+    authDomain: "studio-1046644394-281ce.firebaseapp.com",
+    projectId: "studio-1046644394-281ce",
+    storageBucket: "studio-1046644394-281ce.firebasestorage.app",
+    messagingSenderId: "722558821135",
+    appId: "1:722558821135:web:e67939ec381bf1922b547a"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  console.log("✅ Firebase connected successfully!");
 </script>
 
 
