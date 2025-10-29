@@ -48,6 +48,7 @@
       <input type="text" id="pincode" placeholder="Pincode" required />
       <input type="text" id="area" placeholder="Area (Optional)" />
       <input type="text" id="landmark" placeholder="Landmark (Optional)" />
+
     </div>
 
     <!-- Coupon Section -->
@@ -89,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <img src="${product.image}" alt="${product.name}" />
         <div class="item-details">
           <h3>${product.name}</h3>
-          <p class="price">${product.price}/-</p>
+          <p class="price">₹${product.price}/-</p>
         </div>
         <div class="item-controls">
           <button class="qty-btn minus">−</button>
@@ -150,7 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const applyBtn = document.getElementById("apply-coupon");
 
   applyBtn.addEventListener("click", () => {
-    const code = couponInput.value.trim().toUpperCase();
+    const code = couponInput.value;
     if(code === "WELCOME50") {
       if(!discountApplied){
         discountApplied = true;
@@ -160,7 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("Coupon already applied!");
       }
     } else {
-      alert("❌ Incorrect code applied. Only 'WELCOME50' is valid.");
+      alert("❌ Incorrect code applied. Please Try Again.");
     }
   });
 
