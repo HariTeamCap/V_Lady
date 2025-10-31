@@ -15,7 +15,7 @@
     </div>
     <nav>
       <ul class="nav-links">
-        <li><a href="mainpage.html"><i class="fa fa-house-chimney"></i></a></li>
+        <li><a href="index.html"><i class="fa fa-house-chimney"></i></a></li>
         <li><a href="about.html"><i class="fa fa-circle-info"></i></a></li>
         <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
         <li><a href="mainpage.html"><i class="fa fa-envelope"></i></a></li>
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ✅ Put description in extra section
   const descElement = document.querySelector(".extra-description");
-  descElement.textContent = product.description || "No description available.";
+  descElement.innerHTML = product.description || "No description available.";
 
   // ===== HANDLE IMAGES =====
   const mainImg = document.getElementById("main-img");
@@ -152,6 +152,15 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = "cart.html";
   });
 });
+</script>
+<script>
+  // 🔹 Make the banner text roll up / fade out on scroll
+  const banner = document.getElementById("bannerText");
+  window.addEventListener("scroll", () => {
+    const scrollY = window.scrollY;
+    banner.style.transform = `translateY(-${scrollY * 0.5}px)`; // moves upward
+    banner.style.opacity = 1 - scrollY / 250; // fades out smoothly
+  });
 </script>
 
 </body>
