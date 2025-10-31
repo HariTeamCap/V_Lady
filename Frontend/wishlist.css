@@ -307,20 +307,21 @@ header {
   font-weight: 600;
   line-height: 1.2;
   color: #000;
+  
 }
 
 .left .details p {
   font-size: 30px;
   font-weight: 500;
   color: #254053;
-  margin-top:-1px;
+  margin-top:-2px;
 }
 .left .details .mrp {
   font-size: 14px;
   font-weight: 500;
   color:	#880808;
   text-decoration: line-through; /* cross out MRP */
-  margin-top: 3px;
+  margin-top:0px;
 }
 
 .left .details .mrp span {
@@ -852,12 +853,12 @@ header {
 
   .product-container.view-2 .left .details p {
     font-size: 16px;
-    margin-left:3px;
+    margin-left:5px;
   }
 
   .product-container.view-2 .left .details .mrp {
     font-size: 11px;
-    margin-left:3px;
+    margin-left:1px;
   }
 
   /* Buttons – completely side by side */
