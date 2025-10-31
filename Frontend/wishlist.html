@@ -95,7 +95,7 @@
   </div>
   <nav>
     <ul class="nav-links">
-      <li><a href="mainpage.html"><i class="fa fa-house-chimney"></i></a></li>
+      <li><a href="index.html"><i class="fa fa-house-chimney"></i></a></li>
       <li><a href="about.html"><i class="fa fa-circle-info"></i></a></li>
       <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
       <li><a href="mainpage.html"><i class="fa fa-envelope"></i></a></li>
@@ -127,6 +127,18 @@
   </div>
 
   <div class="product-container"></div>
+  <!-- add right after: <div class="product-container">...</div> -->
+<script>
+  // Ensure 2-grid layout is applied immediately (before products load)
+  (function setDefaultTwoGrid(){
+    const pc = document.querySelector('.product-container');
+    if (pc) pc.classList.add('view-2');
+
+    // Mark the 2-grid toggle button visually active if present
+    const twoBtn = document.querySelector('.view-btn[data-columns="2"]');
+    if (twoBtn) twoBtn.classList.add('active');
+  })();
+</script>
 </main>
 
 <script>
@@ -213,7 +225,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Remove from wishlist
     wrapper.querySelector(".wishlist-btn i").addEventListener("click", () => {
-      wishlist = wishlist.filter(p => p.id !== product.id);
+      wishlist = wishlist.filter(p => p.id !== product.id && p.id !== product.refPath);
       localStorage.setItem("wishlist", JSON.stringify(wishlist));
       wrapper.remove();
     });
