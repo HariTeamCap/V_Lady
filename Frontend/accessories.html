@@ -180,16 +180,16 @@ window.addEventListener("scroll", function() {
 
         // ✅ Wishlist, Cart, BuyNow functionality
         const productData = {
-          id: `accessories-${doc.id}`, // ✅ unique ID per category
-          name,
-          price,
-          mrp,
-          description,
-          images,
-          image: imageUrl,
-          category: "accessories",
-          quantity: 1
-        };
+  id: doc.ref.path, // ✅ Unique ID based on full Firestore path
+  name,
+  price,
+  mrp,
+  description,
+  images,
+  image: imageUrl,
+  category: "accessories",
+  quantity: 1
+};
 
         // --- WISHLIST ---
         const wishlistBtn = card.querySelector(".wishlist-btn i");
