@@ -54,7 +54,7 @@
   </div>
   <nav>
     <ul class="nav-links">
-      <li><a href="mainpage.html"><i class="fa fa-house-chimney"></i></a></li>
+      <li><a href="index.html"><i class="fa fa-house-chimney"></i></a></li>
       <li><a href="about.html"><i class="fa fa-circle-info"></i></a></li>
       <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
       <li><a href="mainpage.html"><i class="fa fa-envelope"></i></a></li>
@@ -67,7 +67,6 @@
 <main class="bag-section">
   <h2>CLUTCHES</h2>
 
-  <!-- VIEW TOGGLE BUTTONS -->
   <div class="view-toggle">
     <button class="view-btn" data-columns="1" title="1 per row">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -108,7 +107,6 @@ window.addEventListener("scroll", function() {
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
   import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
-  // ✅ Firebase config
   const firebaseConfig = {
     apiKey: "AIzaSyB_8hb_E4zqF9sbv8sSx31ZcLXGC5SvSAM",
     authDomain: "studio-1046644394-281ce.firebaseapp.com",
@@ -126,8 +124,7 @@ window.addEventListener("scroll", function() {
     container.innerHTML = "<p>Loading products...</p>";
 
     try {
-      // ✅ Firestore path: Vlady → Clutches  → Products
-      const productsRef = collection(db, "Vlady", "Clutches ", "Products ");
+      const productsRef = collection(db, "Vlady", "Clutches ", "Products");
       const snapshot = await getDocs(productsRef);
 
       container.innerHTML = "";
@@ -137,7 +134,7 @@ window.addEventListener("scroll", function() {
         return;
       }
 
-      snapshot.forEach((doc) => {
+      snapshot.forEach(doc => {
         const data = doc.data();
         const name = data["Name "] || data["Name"] || "Unnamed Product";
         const price = data["Price "] || data["Price"] || 0;
@@ -146,9 +143,7 @@ window.addEventListener("scroll", function() {
         const images = data["Images "] || data["Images"] || [];
 
         let imageUrl = "placeholder.jpg";
-        if (Array.isArray(images) && images.length > 0) {
-          imageUrl = `./${images[0]}`;
-        }
+        if (Array.isArray(images) && images.length > 0) imageUrl = `./${images[0]}`;
 
         const card = document.createElement("div");
         card.classList.add("wrapper");
@@ -172,8 +167,8 @@ window.addEventListener("scroll", function() {
           </div>
         `;
 
-        // ✅ Product data
         const productData = {
+          id: `clutches-${doc.id}`,
           name,
           price,
           mrp,
@@ -184,21 +179,18 @@ window.addEventListener("scroll", function() {
           quantity: 1
         };
 
-        // ✅ Highlight wishlist on load
-        const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-        const inWishlist = wishlist.find(p => p.id === doc.id);
+        // --- WISHLIST ---
         const wishlistBtn = card.querySelector(".wishlist-btn i");
-        if (inWishlist) {
+        let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+        if (wishlist.find(p => p.id === productData.id)) {
           wishlistBtn.classList.remove("fa-regular");
           wishlistBtn.classList.add("fa-solid");
           wishlistBtn.style.color = "#ff4d6d";
         }
 
-        // --- WISHLIST ---
         wishlistBtn.addEventListener("click", () => {
           let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
           const exists = wishlist.find(p => p.id === productData.id);
-
           if (exists) {
             wishlist = wishlist.filter(p => p.id !== productData.id);
             wishlistBtn.classList.remove("fa-solid");
@@ -210,8 +202,8 @@ window.addEventListener("scroll", function() {
             wishlistBtn.classList.add("fa-solid");
             wishlistBtn.style.color = "#ff4d6d";
           }
-
           localStorage.setItem("wishlist", JSON.stringify(wishlist));
+          alert(`${productData.name} updated in Wishlist ❤️`);
         });
 
         // --- ADD TO CART ---
@@ -243,9 +235,18 @@ window.addEventListener("scroll", function() {
         });
 
         container.appendChild(card);
+
+        // ✅ Keep wishlist button red if product already in wishlist
+        let wishlistCheck = JSON.parse(localStorage.getItem("wishlist")) || [];
+        if (wishlistCheck.some(p => p.id === productData.id)) {
+          const wishlistBtn = card.querySelector(".wishlist-btn i");
+          wishlistBtn.classList.remove("fa-regular");
+          wishlistBtn.classList.add("fa-solid");
+          wishlistBtn.style.color = "#ff4d6d";
+        }
       });
 
-      // ✅ View toggle buttons
+      // ✅ View toggle logic
       const viewBtns = document.querySelectorAll(".view-toggle .view-btn");
       const productContainer = document.querySelector(".product-container");
 
