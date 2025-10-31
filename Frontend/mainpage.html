@@ -19,6 +19,13 @@
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
   />
 </head>
+<style>
+@media (max-width: 768px) {
+  .under-999-section .product-container .wrapper:first-of-type {
+    margin-left: 410px;
+  }
+}
+</style>
 <body>
   <header>
     <div class="logo">
@@ -111,7 +118,7 @@
     </div>
 
     <div class="product-card">
-      <img src="candy.JPG" alt="PIE Bag">
+      <img src="pinkc1.JPG" alt="PIE Bag">
       <p class="price">TRENDY</p>
       <p class="name"></p>
     </div>
@@ -225,7 +232,7 @@
     </a>
 
     <a href="Candy_Bags.html" class="category-tab">
-      <img src="candy.JPG" alt="Candy Bags" />
+      <img src="pinkc1.JPG" alt="Candy Bags" />
       <span>CANDY BAGS &gt;</span>
     </a>
 
@@ -235,7 +242,7 @@
     </a>
 
     <a href="Clutches.html" class="category-tab">
-      <img src="clutch.png.jpg" alt="Clutches" />
+      <img src="clutch1.JPG" alt="Clutches" />
       <span>CLUTCHES &gt;</span>
     </a>
 
@@ -618,8 +625,33 @@ document.getElementById("iconForm").addEventListener("submit", function (e) {
   <!-- Return Policy -->
   <button class="collapsible">Return Policy</button>
   <div class="content">
-    <p>We accept returns within 7 days of delivery. Items must be unused, in original packaging, and with the receipt. Refunds will be processed to the original payment method within 5–7 business days after we receive the returned item. Some items may be non-returnable as mentioned in the product description.</p>
-    <p>For more details, please contact our support via WhatsApp or email.</p>
+    <p>At V Lady, we strive to provide our customers with the best quality products and a smooth shopping experience. However, in the unlikely event that you receive a damaged, defective, or incorrect product, we are happy to assist you with a return or replacement.</p>
+
+<p>Eligibility for Return<br>
+
+Returns are accepted only in case of damage or defect.<br>
+
+A clear unboxing video showing the issue is mandatory.<br>
+
+The return request must be raised within 48 hours of receiving the order.<br>
+
+The product must be unused, unwashed, and in its original packaging with all tags intact.</p>
+    <p><strong>Return Process</strong><br>
+
+1. Contact our support team within 48 hours with your order details and unboxing video.<br>
+
+
+2. Once your request is approved, we’ll share the return shipping instructions.<br>
+
+
+3. After the product is received and verified by our quality team, a refund or replacement will be processed.<br>
+
+
+4. The refund will be initiated once the returned item is delivered back to us and verified.<br>
+
+
+
+Note: Returns without an unboxing video or those reported after 48 hours of delivery will not be accepted.</p>
   </div>
 
   <!-- FAQ -->
@@ -640,7 +672,6 @@ document.getElementById("iconForm").addEventListener("submit", function (e) {
 
 </section>
 
-
    <!-- 📨 CONTACT US SECTION -->
 <section id="contact-section" class="contact-section">
   <h2>GET IN TOUCH</h2>
@@ -648,7 +679,8 @@ document.getElementById("iconForm").addEventListener("submit", function (e) {
     For any queries or support, please fill out the form below.
   </p>
 
-  <form class="contact-form" action="https://formspree.io/f/your_form_id" method="POST">
+      <form action="https://api.web3forms.com/submit" method="POST" target="_blank">
+      <input type="hidden" name="access_key" value="f158bca7-550a-4070-b1e9-480a5eb4e90b"> 
     <div class="form-group">
       <label for="name">Name</label>
       <input type="text" id="name" name="name" placeholder="Enter your name" required />
@@ -674,7 +706,7 @@ document.getElementById("iconForm").addEventListener("submit", function (e) {
   
 
 
-    <!-- 🌐 FOLLOW US SECTION -->
+  <!-- 🌐 FOLLOW US SECTION -->
   <div class="follow-us">
     <h3>FOLLOW US</h3>
     <div class="social-links">
@@ -691,108 +723,6 @@ document.getElementById("iconForm").addEventListener("submit", function (e) {
 <!-- Font Awesome (if not already included) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
 
-  <!-- Only the modified parts are important, the rest of your HTML/CSS remains unchanged -->
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const productsContainer = document.getElementById('featured-products-container');
-
-    fetch('/api/seed-products')
-        .then(response => response.json())
-        .then(products => {
-            const featuredProducts = products.filter(p => p.featured);
-            featuredProducts.forEach(product => {
-                const productElement = document.createElement('div');
-                productElement.classList.add('wrapper');
-                const productId = product._id || `seed_${product.name.replace(/\s/g, '_')}`;
-                productElement.dataset.productId = productId;
-
-                productElement.innerHTML = `
-                    <div class="wishlist-btn">
-                        <i class="material-icons">favorite_border</i>
-                    </div>
-                    <div class="container">
-                        <div class="top">
-                            <a href="productdetails.html">
-                                <img src="${product.images[0]}" alt="${product.name}"/>
-                            </a>
-                        </div>
-                        <div class="bottom">
-                            <div class="left">
-                                <div class="details">
-                                    <h1>${product.name}</h1>
-                                    <p class="discounted-price">₹${product.price}</p>
-                                    <p class="mrp">MRP: <span>₹${product.MRP}</span></p>
-                                </div>
-                                <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-
-                const productForStorage = {
-                    id: productId,
-                    name: product.name,
-                    price: `₹${product.price}`,
-                    mrp: `₹${product.MRP}`,
-                    image: product.images[0],
-                    quantity: 1
-                };
-
-                // ----- Wishlist -----
-                const wishlistBtn = productElement.querySelector(".wishlist-btn i");
-                let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-
-                if (wishlist.find(p => p.id === productId)) {
-                    wishlistBtn.textContent = "favorite";
-                    wishlistBtn.style.color = "#ff4d6d";
-                }
-
-                wishlistBtn.addEventListener("click", () => {
-                    let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-                    const exists = wishlist.find(p => p.id === productId);
-
-                    if (exists) {
-                        wishlist = wishlist.filter(p => p.id !== productId);
-                        wishlistBtn.textContent = "favorite_border";
-                        wishlistBtn.style.color = "white";
-                    } else {
-                        wishlist.push(productForStorage);
-                        wishlistBtn.textContent = "favorite";
-                        wishlistBtn.style.color = "#ff4d6d";
-                    }
-                    localStorage.setItem("wishlist", JSON.stringify(wishlist));
-                });
-
-                // ----- Add to Cart -----
-                const addToCartBtn = productElement.querySelector(".buy i");
-                addToCartBtn.addEventListener("click", () => {
-                    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-                    const existing = cart.find(p => p.id === productId);
-
-                    if (existing) {
-                        existing.quantity += 1;
-                    } else {
-                        cart.push({ ...productForStorage });
-                    }
-
-                    localStorage.setItem("cart", JSON.stringify(cart));
-                    alert(`${product.name} added to cart 🛒`);
-                });
-
-                productElement.querySelector('.top a').addEventListener('click', (e) => {
-                    e.preventDefault();
-                    localStorage.setItem('selectedProduct', JSON.stringify(product));
-                    window.location.href = 'productdetails.html';
-                });
-
-                productsContainer.appendChild(productElement);
-            });
-        })
-        .catch(error => {
-            console.error('Error fetching featured products:', error);
-        });
-});
-</script>
 
 
 <script>
@@ -841,16 +771,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const productImage = wrapper.querySelector(".top img").src;
     const soldOutStatus = wrapper.dataset.soldOut === "true";
 
-    const product = {
-      id: productId,
-      name: productName,
-      price: productPrice,
-      mrp: productMRP,
-      image: productImage,
-      quantity: 1,
-      soldOut: soldOutStatus,
-      category: "candy-bags" // ✅ Important: identifies the category
-    };
+     const productData = {
+  uniqueKey: `${product.category}-${product.id}`, // 🔑 consistent unique key
+  id: product.id,
+  name: product.name.trim(),
+  price: product.price,
+  mrp: product.mrp,
+  description: product.description,
+  images: product.images,
+  image: imgSrc,
+  category: product.category,
+  quantity: 1
+};
 
     // LINK TO PRODUCT DETAILS
     wrapper.querySelector(".top a").addEventListener("click", (e) => {
@@ -907,27 +839,159 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 </script>
 <!--firebase-connection-->
+<!-- ✅ FIXED & SYNCED FIREBASE UNDER ₹999 SCRIPT -->
 <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyB_8hb_E4zqF9sbv8sSx31ZcLXGC5SvSAM",
-    authDomain: "studio-1046644394-281ce.firebaseapp.com",
-    projectId: "studio-1046644394-281ce",
-    storageBucket: "studio-1046644394-281ce.firebasestorage.app",
-    messagingSenderId: "722558821135",
-    appId: "1:722558821135:web:e67939ec381bf1922b547a"
-  };
+// 🔹 Firebase Config
+const firebaseConfig = {
+  apiKey: "AIzaSyB_8hb_E4zqF9sbv8sSx31ZcLXGC5SvSAM",
+  authDomain: "studio-1046644394-281ce.firebaseapp.com",
+  projectId: "studio-1046644394-281ce",
+  storageBucket: "studio-1046644394-281ce.firebasestorage.app",
+  messagingSenderId: "722558821135",
+  appId: "1:722558821135:web:e67939ec381bf1922b547a"
+};
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  console.log("✅ Firebase connected successfully!");
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// ✅ Reusable Add to Cart Function (used by all pages)
+function addToCartUniversal(productData) {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  // Normalize for consistent key
+  const normalizeId = (id) => id ? id.toString().trim().toLowerCase() : "";
+  const normalizeName = (name) => name ? name.toString().trim().toLowerCase().replace(/\s+/g, " ") : "";
+  const normalizeCategory = (cat) => cat ? cat.toString().trim().toLowerCase() : "default";
+
+  const id = normalizeId(productData.id);
+  const name = normalizeName(productData.name);
+  const category = normalizeCategory(productData.category);
+  const price = parseFloat(productData.price) || 0;
+
+  // 🔑 Single, universal unique key for all pages
+  const uniqueKey = `${category}-${id}-${name}-${price}`;
+  productData.uniqueKey = uniqueKey;
+
+  // 🔄 Merge with existing item if same product
+  const existing = cart.find(item => item.uniqueKey === uniqueKey);
+  if (existing) {
+    existing.quantity += 1;
+  } else {
+    productData.quantity = 1;
+    cart.push(productData);
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  alert(`${productData.name} added to cart!`);
+}
+
+async function loadUnder999() {
+  const container = document.querySelector(".under-999-section .product-container");
+  container.innerHTML = "<p>Loading products...</p>";
+
+  const categories = ["CandyBags", "PieBags", "Clutches", "Accessories"];
+  const under999 = [];
+
+  try {
+    for (const category of categories) {
+      const ref = collection(db, "Vlady", category, "Products");
+      const snap = await getDocs(ref);
+
+      snap.forEach(doc => {
+        const data = doc.data();
+        const price = parseFloat(data["Price "] || data["Price"] || 0);
+        const mrp = parseFloat(data["MRP "] || data["MRP"] || 0);
+        const name = data["Name "] || data["Name"] || "Unnamed";
+        const images = data["Images "] || data["Images"] || [];
+        const description = data["Description "] || data["Description"] || "";
+
+        if (price <= 999) {
+          under999.push({
+            id: doc.id,
+            name,
+            price,
+            mrp,
+            images,
+            description,
+            category
+          });
+        }
+      });
+    }
+
+    container.innerHTML = "";
+
+    if (under999.length === 0) {
+      container.innerHTML = `<p style="text-align:center;">No products found under ₹999.</p>`;
+      return;
+    }
+
+    // 🧩 Render each product
+    under999.forEach(product => {
+      const imgSrc = Array.isArray(product.images) && product.images.length > 0
+        ? product.images[0]
+        : "placeholder.jpg";
+
+      const productData = {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        mrp: product.mrp,
+        description: product.description,
+        images: product.images,
+        image: imgSrc,
+        category: product.category
+      };
+
+      const card = document.createElement("div");
+      card.classList.add("wrapper");
+      card.innerHTML = `
+        <div class="wishlist-btn">
+          <i class="material-icons">favorite_border</i>
+        </div>
+        <div class="container">
+          <div class="top">
+            <a href="#" class="product-link">
+              <img src="${imgSrc}" alt="${product.name}" />
+            </a>
+          </div>
+          <div class="bottom">
+            <div class="left">
+              <div class="details">
+                <h1>${product.name}</h1>
+                <p class="discounted-price">₹${product.price}</p>
+                <p class="mrp">MRP: <span>₹${product.mrp}</span></p>
+              </div>
+              <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // 🛍️ Product details click
+      card.querySelector(".product-link").addEventListener("click", (e) => {
+        e.preventDefault();
+        localStorage.setItem("selectedProduct", JSON.stringify(productData));
+        window.location.href = "productdetails.html";
+      });
+
+      // 🛒 Add to Cart
+      card.querySelector(".buy").addEventListener("click", () => addToCartUniversal(productData));
+
+      container.appendChild(card);
+    });
+
+  } catch (error) {
+    console.error("❌ Error loading Under ₹999 products:", error);
+    container.innerHTML = `<p style="color:red;">Error loading products.</p>`;
+  }
+}
+
+document.addEventListener("DOMContentLoaded", loadUnder999);
 </script>
-
-
 </body>
 </html>
+  
