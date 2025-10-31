@@ -184,7 +184,7 @@ window.addEventListener("scroll", function() {
 
         // ✅ Add wishlist, cart, and buy-now functionality
         const productData = {
-          id: doc.id,
+          id: `${doc.ref.path}`, // ✅ full Firestore path makes each product unique
           name,
           price,
           mrp,
