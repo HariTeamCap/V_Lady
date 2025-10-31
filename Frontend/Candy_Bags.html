@@ -48,7 +48,7 @@
     font-size: 29px;
   }
   </style>
-  
+
 </head>
 <body>
 <header>
@@ -187,15 +187,17 @@ window.addEventListener("scroll", function() {
           </div>
         `;
         // ✅ Add wishlist, cart, and buy-now functionality
+const uniqueId = `CandyBags-${doc.id}`;
+
 const productData = {
-  id: doc.id,
+  id: uniqueId, // unique across all categories
   name,
   price,
   mrp,
   description,
   images,
   image: imageUrl,
-  category: "candy-bags",
+  category: "CandyBags",
   quantity: 1
 };
 
@@ -265,7 +267,7 @@ buyNowBtn.addEventListener("click", () => {
       });
 
       console.log("✅ Products loaded and clickable for details page!");
-      
+
       // ✅ Reattach view toggle buttons after products are loaded
 const viewBtns = document.querySelectorAll(".view-toggle .view-btn");
 const productContainer = document.querySelector(".product-container");
