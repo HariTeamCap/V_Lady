@@ -7,54 +7,28 @@
   <link rel="stylesheet" href="accessories.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
   <style>
-    .sold-out-badge {
-      display: none;
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background:linear-gradient(90deg, #ff4d6d, #ffb347);
-      color: white;
-      padding: 5px 10px;
-      font-weight: bold;
-      border-radius: 5px;
-      z-index: 10;
-    }
-    .wrapper.sold-out {
-      opacity: 0.6;
-      
-    }
-    .wrapper.sold-out .buy-now::after {
-      content: "SOLD OUT";
-      display: block;
-      text-align: center;
-      color: white;
-      font-weight: bold;
-    }
-        /* ===========================
-       FOOTER
-    ============================ */
     footer.site-footer {
       width: 100%;
       padding: 20px;
       text-align: center;
-      background:white;
-      color:black;
-      margin-top: 50px;
+      background: white;
+      color: black;
+      margin-top: 100px;
     }
-        /* Bigger text on desktop */
-   @media (min-width: 768px) {
-  footer.site-footer {
-    font-size: 29px;
-  }
+    @media (min-width: 768px) {
+      footer.site-footer { font-size: 29px; }
+    }
   </style>
 </head>
+
 <body>
 <header>
   <div class="logo">V LADY<div class="tagline">Versatile Lady</div></div>
   <nav>
     <ul class="nav-links">
-      <li><a href="mainpage.html"><i class="fa fa-house-chimney"></i></a></li>
+      <li><a href="index.html"><i class="fa fa-house-chimney"></i></a></li>
       <li><a href="about.html"><i class="fa fa-circle-info"></i></a></li>
       <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
       <li><a href="mainpage.html"><i class="fa fa-envelope"></i></a></li>
@@ -67,13 +41,14 @@
 <main class="bag-section">
   <h2>ALL HANDBAGS</h2>
 
+  <!-- ✅ View Toggle Buttons -->
   <div class="view-toggle">
     <button class="view-btn" data-columns="1" title="1 per row">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <rect x="3" y="3" width="18" height="18" rx="2" />
       </svg>
     </button>
-    <button class="view-btn" data-columns="2" title="2 per row">
+    <button class="view-btn active" data-columns="2" title="2 per row">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <rect x="3" y="3" width="18" height="18" rx="2" />
@@ -81,152 +56,202 @@
         <line x1="12" y1="3" x2="12" y2="21" />
       </svg>
     </button>
-    
     <button class="view-btn wishlist-btn-toggle" title="View Wishlist" 
             onclick="window.location.href='wishlist.html'" 
-            style="font-size:22px; color:#ff4d6d;">❤️</button>
+            style="font-size:22px; color:#ff4d6d;">
+      ❤️
+    </button>
   </div>
 
-  <div class="product-container">
-    <!-- Products will be dynamically inserted here -->
-  </div>
+  <div class="product-container view-2"></div>
 </main>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const container = document.querySelector(".product-container");
-  const allProducts = JSON.parse(localStorage.getItem("allProducts")) || [];
-
-  if (allProducts.length === 0) {
-    container.innerHTML = "<p style='text-align:center; width:100%; padding:50px;'>No products available.</p>";
-  }
-
-  allProducts.forEach(product => {
-    const wrapper = document.createElement("div");
-    wrapper.className = "wrapper";
-    wrapper.dataset.productId = product.id;
-    wrapper.dataset.soldOut = product.soldOut;
-
-    wrapper.innerHTML = `
-      <div class="sold-out-badge">SOLD OUT</div>
-      <div class="wishlist-btn"><i class="material-icons">favorite_border</i></div>
-      <div class="container">
-        <div class="top">
-          <a href="#"><img src="${product.image}" alt="${product.name}" /></a>
-        </div>
-        <div class="bottom">
-          <div class="left">
-            <div class="details">
-              <h1>${product.name}</h1>
-              <p class="discounted-price">${product.price}</p>
-              <p class="mrp">MRP: <span>${product.mrp}</span></p>
-            </div>
-            <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
-            <div class="buy-now">BUY<br>NOW</div>
-          </div>
-        </div>
-      </div>
-    `;
-
-    // SOLD OUT handling
-    if (product.soldOut) {
-      wrapper.classList.add("sold-out");
-      wrapper.querySelector(".sold-out-badge").style.display = "block";
-      const addBtn = wrapper.querySelector(".buy i");
-      const buyNowBtn = wrapper.querySelector(".buy-now");
-      addBtn.style.pointerEvents = "none";
-      addBtn.style.opacity = "0.5";
-      buyNowBtn.style.pointerEvents = "none";
-      buyNowBtn.style.background = "gray";
-      buyNowBtn.textContent = "";
-    }
-
-    // Wishlist
-    const wishlistBtn = wrapper.querySelector(".wishlist-btn i");
-    let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-    if (wishlist.find(p => p.id === product.id)) {
-      wishlistBtn.textContent = "favorite";
-      wishlistBtn.style.color = "#ff4d6d";
-    }
-    wishlistBtn.addEventListener("click", () => {
-      let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-      const exists = wishlist.find(p => p.id === product.id);
-      if (exists) { 
-        wishlist = wishlist.filter(p => p.id !== product.id); 
-        wishlistBtn.textContent = "favorite_border"; 
-        wishlistBtn.style.color = "white"; 
-      } else { 
-        wishlist.push(product); 
-        wishlistBtn.textContent = "favorite"; 
-        wishlistBtn.style.color = "#ff4d6d"; 
-      }
-      localStorage.setItem("wishlist", JSON.stringify(wishlist));
-      alert(`${product.name} updated in Wishlist!`);
-    });
-
-    // Add to Cart
-    const addToCartBtn = wrapper.querySelector(".buy i");
-    if (!product.soldOut) {
-      addToCartBtn.addEventListener("click", () => {
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-        const existing = cart.find(p => p.id === product.id);
-        if (existing) existing.quantity += 1;
-        else cart.push({ ...product });
-        localStorage.setItem("cart", JSON.stringify(cart));
-        alert(`${product.name} added to Cart 🛒`);
-      });
-    }
-
-    // Buy Now
-    const buyNowBtn = wrapper.querySelector(".buy-now");
-    if (!product.soldOut) {
-      buyNowBtn.addEventListener("click", () => {
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-        const existing = cart.find(p => p.id === product.id);
-        if (!existing) cart.push({ ...product });
-        localStorage.setItem("cart", JSON.stringify(cart));
-        window.location.href = "cart.html";
-      });
-    }
-
-    // Product details link
-    wrapper.querySelector(".top a").addEventListener("click", e => {
-      e.preventDefault();
-      localStorage.setItem("selectedProduct", JSON.stringify(product));
-      window.location.href = "productdetails.html";
-    });
-
-    container.appendChild(wrapper);
-  });
-
-  // Grid view toggle
-  const viewBtns = document.querySelectorAll(".view-toggle .view-btn");
-  container.classList.add("view-2"); // default
-  viewBtns.forEach(btn => {
-    btn.addEventListener("click", () => {
-      const cols = btn.dataset.columns;
-      container.classList.remove("view-1","view-2","view-4");
-      container.classList.add(`view-${cols}`);
-    });
-  });
-});
-</script>
-<script>
-window.addEventListener("scroll", function() {
-  const text = document.getElementById("bannerText");
-  if (window.scrollY > 100) {
-    text.classList.add("hide");
-  } else {
-    text.classList.remove("hide");
-  }
-});
-
-</script>
-
-
 
 <footer class="site-footer">
   <p>© 2025 V Lady. All rights reserved.</p>
 </footer>
+
+<!-- ✅ FIREBASE SCRIPT -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+
+// 🔹 Firebase Config
+const firebaseConfig = {
+  apiKey: "AIzaSyB_8hb_E4zqF9sbv8sSx31ZcLXGC5SvSAM",
+  authDomain: "studio-1046644394-281ce.firebaseapp.com",
+  projectId: "studio-1046644394-281ce",
+  storageBucket: "studio-1046644394-281ce.firebasestorage.app",
+  messagingSenderId: "722558821135",
+  appId: "1:722558821135:web:e67939ec381bf1922b547a"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// ✅ Add to Cart (Universal)
+function addToCartUniversal(product) {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const normalize = (val) => val ? val.toString().trim().toLowerCase() : "";
+  const uniqueKey = `${normalize(product.id)}-${normalize(product.name)}-${normalize(product.category)}-${product.price}`;
+  product.uniqueKey = uniqueKey;
+
+  const existing = cart.find(item => item.uniqueKey === uniqueKey);
+  if (existing) existing.quantity += 1;
+  else {
+    product.quantity = 1;
+    cart.push(product);
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  alert(`${product.name} added to cart 🛒`);
+}
+
+// ✅ Load All Handbags
+async function loadAllHandbags() {
+  const container = document.querySelector(".product-container");
+  container.innerHTML = "<p>Loading products...</p>";
+
+  // 👜 Includes categories with & without spaces
+  const categories = [
+    "PieBags", "PieBags ",
+    "CandyBags", "CandyBags ",
+    "Clutches", "Clutches ",
+    "Accessories", "Accessories "
+  ];
+
+  const allProducts = [];
+
+  try {
+    for (const category of categories) {
+      const ref = collection(db, "Vlady", category, "Products");
+      const snap = await getDocs(ref);
+
+      snap.forEach(doc => {
+        const data = doc.data();
+        const name = data["Name "] || data["Name"] || "Unnamed Product";
+        const price = parseFloat(data["Price "] || data["Price"] || 0);
+        const mrp = parseFloat(data["MRP "] || data["MRP"] || 0);
+        const description = data["Description "] || data["Description"] || "";
+        const images = data["Images "] || data["Images"] || [];
+        const imageUrl = Array.isArray(images) && images.length > 0 ? images[0] : "placeholder.jpg";
+
+        allProducts.push({
+  id: `${category.trim()}-${doc.id}`, // unique ID for every product
+  name,
+  price,
+  mrp,
+  description,
+  images,
+  image: imageUrl,
+  category: category.trim()
+});
+      });
+    }
+
+    container.innerHTML = "";
+
+    if (allProducts.length === 0) {
+      container.innerHTML = "<p>No products found in database.</p>";
+      return;
+    }
+
+    // 🧩 Render products
+    allProducts.forEach(p => {
+      const card = document.createElement("div");
+      card.classList.add("wrapper");
+      card.innerHTML = `
+        <div class="container">
+          <div class="top">
+            <a href="#"><img src="${p.image}" alt="${p.name}" /></a>
+            <div class="wishlist-btn"><i class="fa-regular fa-heart"></i></div>
+          </div>
+          <div class="bottom">
+            <div class="left">
+              <div class="details">
+                <h1>${p.name}</h1>
+                <p>₹${p.price}</p>
+                <p class="mrp">MRP: ₹${p.mrp}</p>
+              </div>
+              <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
+              <div class="buy-now">BUY<br>NOW</div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      const productData = { ...p };
+
+      // ❤️ Wishlist toggle
+      const wBtn = card.querySelector(".wishlist-btn i");
+      wBtn.addEventListener("click", () => {
+        let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+        const uniqueKey = `${p.id}-${p.name}-${p.category}`.toLowerCase();
+        const exists = wishlist.find(item => item.uniqueKey === uniqueKey);
+
+        if (exists) {
+          wishlist = wishlist.filter(item => item.uniqueKey !== uniqueKey);
+          wBtn.classList.replace("fa-solid", "fa-regular");
+          wBtn.style.color = "white";
+        } else {
+          productData.uniqueKey = uniqueKey;
+          wishlist.push(productData);
+          wBtn.classList.replace("fa-regular", "fa-solid");
+          wBtn.style.color = "#ff4d6d";
+        }
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+      });
+
+      // 🛒 Add to cart
+      card.querySelector(".buy i").addEventListener("click", () => addToCartUniversal(productData));
+
+      // ⚡ Buy now
+      card.querySelector(".buy-now").addEventListener("click", () => {
+        addToCartUniversal(productData);
+        window.location.href = "cart.html";
+      });
+
+      // 🔍 Product details
+      card.querySelector(".top a").addEventListener("click", e => {
+        e.preventDefault();
+        localStorage.setItem("selectedProduct", JSON.stringify(productData));
+        window.location.href = "productdetails.html";
+      });
+
+      container.appendChild(card);
+    });
+
+    // ✅ View Toggle
+    const viewBtns = document.querySelectorAll(".view-toggle .view-btn");
+    const productContainer = document.querySelector(".product-container");
+
+    // Default view = 2 columns
+    productContainer.classList.add("view-2");
+    productContainer.classList.remove("view-1", "view-4");
+
+    viewBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const columns = btn.dataset.columns;
+        viewBtns.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        productContainer.classList.remove("view-1", "view-2", "view-4");
+        productContainer.classList.add(`view-${columns}`);
+      });
+    });
+
+  } catch (err) {
+    console.error("❌ Error loading products:", err);
+    container.innerHTML = `<p style="color:red;">Error loading products: ${err.message}</p>`;
+  }
+}
+
+document.addEventListener("DOMContentLoaded", loadAllHandbags);
+</script>
+<script>
+window.addEventListener("scroll", function() {
+  const text = document.getElementById("bannerText");
+  if (window.scrollY > 100) text.classList.add("hide");
+  else text.classList.remove("hide");
+});
+</script>
 </body>
 </html>
