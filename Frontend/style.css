@@ -213,7 +213,8 @@ header {
 .photo-banner {
   position: relative;
   width: 100%;
-  height: 40vh;
+  min-height:700px;
+  height: 45vh;
   overflow: hidden;
   margin-top: 10px; /* ✅ pushes below fixed banners */
 }
@@ -289,6 +290,7 @@ header {
 .video-banner {
   position: relative;
   width: 100%;
+  min-height:600px;
   height: 40vh; /* same height as desktop photo banner */
   overflow: hidden;
   
@@ -491,7 +493,7 @@ header {
   display: flex;
   flex-wrap: nowrap;
   gap: 15px;
-  padding-left: 70px;
+  padding-left: 50px;
   overflow-x: auto;
   overflow-y: hidden;
   scroll-behavior: smooth;
@@ -874,7 +876,7 @@ header {
 /* ===== Floating "Under ₹999" Button ===== */
 .floating-under999-btn {
   position: fixed;
-  right: 20px;
+  right: 17px;
   bottom: 90px; /* sits above wishlist button */
   z-index: 999;
   width: 55px;
@@ -985,7 +987,6 @@ header {
   flex-shrink: 0;
 }
 
-
 /* ===== Tab Text ===== */
 .category-tab span {
   margin-left: 15px;       /* space between image and text */
@@ -1020,6 +1021,7 @@ header {
     margin-bottom: 20px;
   }
 }
+
 
 /* Floating Wishlist Button (desktop + mobile) */
 .floating-wishlist {
@@ -1106,6 +1108,7 @@ header {
 }
 
 .form-group label {
+  text-align:left;
   display: block;
   font-size: 14px;
   color: #333;
@@ -1233,7 +1236,9 @@ header {
     .spacer {
     flex: 0 0 399px; /* adjust width of spacer to show full first card */
   }
-
+.under-999-section .spacer {
+  width: 100px;
+}
 
 
 }
